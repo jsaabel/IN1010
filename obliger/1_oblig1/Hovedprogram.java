@@ -1,17 +1,29 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Hovedprogram {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         
         Dataklynge saga = new Dataklynge("saga");
-        
         saga.opprettRack();
-        for (int i = 0; i < 450; i++) {
-            Node node = new Node(4, 512);
-            saga.leggInnNode(node); 
-        }
-  
-        for (int i = 0; i < 16; i++) {
-            Node node = new Node(8, 1024);
-            saga.leggInnNode(node); 
+
+        File inputFile = new File(args[0]);
+
+        Scanner in = new Scanner(inputFile);
+
+        while (in.hasNextLine()) {
+            String line = in.nextLine();
+            String[] parts = line.split(" ");
+
+            int antallNoder = Integer.parseInt(parts[0]);
+            int antallProsessorer = Integer.parseInt(parts[1]);
+            int minne = Integer.parseInt(parts[2]);
+         
+            for (int i = 0; i < antallNoder; i++) {
+                Node node = new Node(antallProsessorer, minne);
+                saga.leggInnNode(node); 
+            }
         }
 
         int noder128 = saga.noderMedNokMinne(128);
@@ -29,8 +41,7 @@ public class Hovedprogram {
         int antallRack = saga.antallRacks();
 
         System.out.println("Antall racks: " + antallRack);
-
-
+        
 
     }
 }    
