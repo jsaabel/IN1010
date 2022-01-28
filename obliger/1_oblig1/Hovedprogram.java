@@ -19,6 +19,12 @@ public class Hovedprogram {
             int antallNoder = Integer.parseInt(parts[0]);
             int antallProsessorer = Integer.parseInt(parts[1]);
             int minne = Integer.parseInt(parts[2]);
+
+            if (antallProsessorer > 16 || minne > 4096) {
+                System.out.println("Programmet avsluttes pga feil i oppgitt fil. "
+                        + "Vaer obs paa at maks antall prosessorer er 16, og maks minne er 4096GB.");
+                throw new IllegalArgumentException("Se feilmelding ovenfor.");
+            }
          
             for (int i = 0; i < antallNoder; i++) {
                 Node node = new Node(antallProsessorer, minne);
