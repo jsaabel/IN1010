@@ -17,15 +17,15 @@ public class Dataklynge {
 
     public void leggInnNode(Node enNode) {
         
-        boolean alleRagsErFyltOpp = true;
+        boolean alleRacksErFyltOpp = true;
         
         for (Rack r: racks) {
             if (r.harPlassTilFlere()) {
-                alleRagsErFyltOpp = false;
+                alleRacksErFyltOpp = false;
             }
         }
 
-        if (alleRagsErFyltOpp) {
+        if (alleRacksErFyltOpp) {
             opprettRack();
         }
 
