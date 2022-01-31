@@ -7,7 +7,7 @@ public class Dataklynge {
 
     public Dataklynge(String navnPaaDataklynge) {
         navnPaaDataklynge = navn;
-        racks = new ArrayList<Rack>();
+        racks = new ArrayList<Rack>(); // oppretter datastrukturen (ArrayList) for aa holde paa racksene.
     }
 
     public void opprettRack() { // opprett og legg til et nytt rack
@@ -16,7 +16,8 @@ public class Dataklynge {
     }
 
     public void leggInnNode(Node enNode) {
-        
+       
+       // sjekk om det finnes et rack med plass til noden ... 
         boolean alleRacksErFyltOpp = true;
         
         for (Rack r: racks) {
@@ -25,10 +26,12 @@ public class Dataklynge {
             }
         }
 
+        // ... hvis ikke: opprett et nytt rack
         if (alleRacksErFyltOpp) {
             opprettRack();
         }
 
+        // legg inn noden
         boolean lagtInn = false;
         while (!lagtInn) {
             for (Rack r : racks) {

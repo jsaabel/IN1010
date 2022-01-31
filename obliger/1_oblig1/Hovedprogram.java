@@ -4,12 +4,28 @@ import java.util.Scanner;
 
 public class Hovedprogram {
     public static void main(String[] args) throws FileNotFoundException {
-        
+
+        // oppretter ny dataklynge og et foerste rack        
         Dataklynge saga = new Dataklynge("saga");
         saga.opprettRack();
 
-        File inputFile = new File(args[0]);
+        /*
+        Her sjekker jeg om et filnavn er oppgitt i kommandolinjen naar programmet kjoeres.
+        Hvis ikke, blir brukeren bedt om aa oppgi et filnavn, som programmet saa er kjort paa.
+        */
 
+        String navnPaaInputFile = new String();
+
+        if (args.length > 0) {
+        navnPaaInputFile = args[0];
+        }
+        else {
+        System.out.print("Oppgi filnavn: ");
+        Scanner userInput = new Scanner(System.in);
+        navnPaaInputFile = userInput.nextLine();
+        }
+
+        File inputFile = new File(navnPaaInputFile);
         Scanner in = new Scanner(inputFile);
 
         while (in.hasNextLine()) {
@@ -20,18 +36,21 @@ public class Hovedprogram {
             int antallProsessorer = Integer.parseInt(parts[1]);
             int minne = Integer.parseInt(parts[2]);
 
+            // feilmelding for illegale verdier
             if (antallProsessorer > 16 || minne > 4096) {
                 System.out.println("Programmet avsluttes pga feil i oppgitt fil. "
                         + "Vaer obs paa at maks antall prosessorer er 16, og maks minne er 4096GB.");
                 throw new IllegalArgumentException("Se feilmelding ovenfor.");
             }
          
+            // legg til noder
             for (int i = 0; i < antallNoder; i++) {
                 Node node = new Node(antallProsessorer, minne);
                 saga.leggInnNode(node); 
             }
         }
 
+        // hent og skriv ut informasjo om dataklyngen
         int noder128 = saga.noderMedNokMinne(128);
         int noder512 = saga.noderMedNokMinne(512);
         int noder1024 = saga.noderMedNokMinne(1024);

@@ -34,15 +34,15 @@ public class Rack {
     }
 
     public int noderMedNokMinne(int paakrevdMinne) {
-        int antallMedNokMinne = 0;
+        int antall = 0;
         for (int i = 0; i < MAKSNODER; i++) {
             if (noder[i] != null) {
                 if (noder[i].minne() >= paakrevdMinne) {
-                    antallMedNokMinne++;
+                    antall++;
                 }
             }
         }
-        return antallMedNokMinne;
+        return antall;
 
     }
 
