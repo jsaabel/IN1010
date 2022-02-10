@@ -1,11 +1,18 @@
+import java.io.FileNotFoundException;
 public class Main{
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
      
-        // OPPRETT DATASTRUKTUR
+        StudentSystem studentsystem = new StudentSystem();
+        studentsystem.lesFraFil("emnestudenter.txt");
 
-        // Les inn fil
-        
-        // MENY
+        // Tester
+        studentsystem.skrivUt();
+        studentsystem.mestPopulaertFag();
+        studentsystem.mestAktivStudent();
+
+        studentsystem.visMeny();
+        studentsystem.brukerValg();
+    
     }
 
 }    

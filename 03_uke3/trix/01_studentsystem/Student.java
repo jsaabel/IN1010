@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class Student{
 
     private String navn;
-    private HashMap<String, Fag> fag = new HashMap<String, Fag>;
+    private HashMap<String, Fag> fag = new HashMap<String, Fag>();
 
     // Konstruktoer
     public Student(String navn){
@@ -17,7 +17,7 @@ public class Student{
 
     // oppgi antall fag 
     public int antallFag(){
-        return 0;
+        return fag.size();
     }
 
     // legg til fag
@@ -32,7 +32,7 @@ public class Student{
     
     // fjern fag
     public void fjernFag(Fag etFag){
-        if (!fagFinnes){
+        if (!fagFinnes(etFag)){
             System.out.println(this.toString() + " tar ikke dette faget.");
         }
         else {

@@ -1,9 +1,9 @@
-import java.util.Hashmap
+import java.util.HashMap;
 
 public class Fag{
    
     private String fagkode;
-    private HashMap<String, Student> studenter = new HashMap<String, Student>;
+    private HashMap<String, Student> studenter = new HashMap<String, Student>();
         
     // Konstruktoer
     public Fag(String fagkode){
@@ -17,12 +17,12 @@ public class Fag{
 
     // (t) oppgi antall studenter 
     public int antStudenter(){
-    return 0;
+        return studenter.size();
     }
 
     // (t) skriv ut studenter
     public void skrivUtStudenter(){
-        System.out.println("Disse studenter tar faget: ...");
+        System.out.println("Disse studentene tar " + this.fagkode + ":");
         for (Student s : studenter.values()){
             System.out.println(s.toString());
         }
@@ -39,13 +39,14 @@ public class Fag{
         studenter.put(student.toString(), student);
         }
     }
+    
     // (t) fjern student
     public void fjernStudent(Student student){
         if (!studentFinnes(student)){
             System.out.println("Denne studenten tar ikke faget.");
         }
         else {
-            studenter.remove(student);
+            studenter.remove(student.toString());
         }
 
     }
