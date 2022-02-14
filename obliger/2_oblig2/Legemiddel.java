@@ -31,7 +31,10 @@ public abstract class Legemiddel{
     }
 
     /**
-     * (Test) Konstruktoer
+     * Konstruktoer.
+     * Naar et nytt legemiddel blir opprettet (...) blir sisteId
+     * inkrementert, slik at vi faar en ny unik id som kan gis til
+     * legemiddelet.
      */
     public Legemiddel(String navn, int pris, double virkestoff) {
     
@@ -56,9 +59,42 @@ class Vanlig extends Legemiddel {
     }
 
     public String toString(){
-        return "Jeg er et vanlig legemiddel med id "+ this.hentId();
+        return ""+ this.hentNavn()
+            + " (id " + this.hentId() + ")"
+            +": vanlig legemiddel.";
     }
     
+}
+
+/**
+ * Klasse for et vanedannende legemiddel.
+ */
+class Vanedannende extends Legemiddel {
+
+    private int styrke;
+
+    // Konstruktoer
+    public Vanedannende(String navn, int pris, double virkestoff, int styrke){
+
+        super(navn, pris, virkestoff);
+        this.styrke = styrke;
+    }
+
+    /**
+     * Henter legemiddelets vanedannende styrke
+     * @return styrken
+     */
+    public int hentVanedannendeStyrke(){
+        return this.styrke;
+    }
+
+    public String toString(){
+        return "" + this.hentNavn()
+            + " (id " + this.hentId() + ")"
+            +": vanedannende legemiddel med styrke "
+            + this.hentVanedannendeStyrke()
+            + ".";
+    }
 }
 
 

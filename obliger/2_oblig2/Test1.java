@@ -7,6 +7,10 @@ public class Test1{
         Vanlig ibux = new Vanlig("Ibux", 10, 5);
         String test2 = ibux.toString();
         System.out.println(test2);
+
+        Vanedannende morfium = new Vanedannende("Morfium", 100, 50, 10);
+        String test3 = morfium.toString();
+        System.out.println(test3);
     }
 
 }    
