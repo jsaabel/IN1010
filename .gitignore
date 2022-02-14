@@ -1,2 +1,5 @@
-*.class
-*.swp
+*/*
+!*/*.java
+!*/*.pdf
+!*/*.txt
+!.gitignore
