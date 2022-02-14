@@ -23,15 +23,29 @@ public abstract class Legemiddel{
         return this.navn;
     }
 
-    /** Setter en ny pris for legemiddelet.
+    /** Metode for aa sette en ny pris for legemiddelet.
      * @param nyPris Leggemiddelets nye pris.
      */
     public void settNyPris(int nyPris){
-        pris = nyPris;
+        this.pris = nyPris;
     }
 
     /**
-     * Konstruktoer.
+     * Metode for aa hente ut prisen til legemiddelet. 
+     */
+    public int hentPris(){
+        return this.pris;
+    }
+
+    /**
+     * Metode for aa hente ut virkestoffet til legemiddelet. 
+     */
+    public double hentVirkestoff(){
+        return virkestoff;
+    }
+
+    /**
+     * KONSTRUKTOER.
      * Naar et nytt legemiddel blir opprettet (...) blir sisteId
      * inkrementert, slik at vi faar en ny unik id som kan gis til
      * legemiddelet.
@@ -81,7 +95,7 @@ class Vanedannende extends Legemiddel {
     }
 
     /**
-     * Henter legemiddelets vanedannende styrke
+     * Henter legemiddelets vanedannende styrke.
      * @return styrken
      */
     public int hentVanedannendeStyrke(){
@@ -93,6 +107,37 @@ class Vanedannende extends Legemiddel {
             + " (id " + this.hentId() + ")"
             +": vanedannende legemiddel med styrke "
             + this.hentVanedannendeStyrke()
+            + ".";
+    }
+}
+
+/**
+ * Klasse for et narkotisk legemiddel.
+ */
+class Narkotisk extends Legemiddel {
+
+    private int styrke;
+
+    // Konstruktoer
+    public Narkotisk(String navn, int pris, double virkestoff, int styrke){
+
+        super(navn, pris, virkestoff);
+        this.styrke = styrke;
+    }
+
+    /**
+     * Henter legemiddelets narkotiske styrke.
+     * @return styrken
+     */
+    public int hentNarkotiskStyrke(){
+        return this.styrke;
+    }
+
+    public String toString(){
+        return "" + this.hentNavn()
+            + " (id " + this.hentId() + ")"
+            +": narkotisk legemiddel med styrke "
+            + this.hentNarkotiskStyrke()
             + ".";
     }
 }
