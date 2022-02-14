@@ -1,5 +1,6 @@
-*/*
-!*/*.java
-!*/*.pdf
-!*/*.txt
 !.gitignore
+*.class
+*.html
+*.js
+*.php
+*.css
