@@ -85,10 +85,12 @@ public abstract class Resept{
  */
 class HvitResept extends Resept{
 
+    @Override
     public String farge(){
         return "hvit";
     }
 
+    @Override
     public int prisAaBetale(){
         return 0;
     }
@@ -110,6 +112,7 @@ class MilResept extends HvitResept{
         super(legemiddel, utskrivendeLege, pasientId, 3);
     }
 
+    @Override
     public int prisAaBetale(){
         return 0;
     }
@@ -127,6 +130,7 @@ class PResept extends HvitResept{
         super(legemiddel, utskrivendeLege, pasientId, reit);
     }
 
+    @Override
     public int prisAaBetale(){
         
         int justertPris = this.legemiddel.hentPris() - RABATT; 
@@ -149,10 +153,12 @@ class BlaaResept extends Resept{
         super(legemiddel, utskrivendeLege, pasientId, reit);
     }
 
+    @Override
     public String farge(){
         return "blaa";
     }
 
+    @Override
     public int prisAaBetale(){
         return ( (int)(this.legemiddel.hentPris() * RABATTFAKTOR));
     }

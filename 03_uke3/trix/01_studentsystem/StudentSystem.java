@@ -92,7 +92,10 @@ public class StudentSystem{
         }
 
         else if (valg == 4){
-            ;
+            System.out.print("Oppgi student: ");
+            String student = userPrompt();
+            Student valgtStudent = studentliste.get(student);
+            valgtStudent.skrivUtFag();
         }
 
         else if (valg == 5){
