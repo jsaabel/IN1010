@@ -12,7 +12,7 @@ public class TestResepter{
         /**
          * OPPRETTER LEGE
          */
-        Lege minLege = new Lege();
+        Lege minLege = new Lege("Dr. Acula");
 
         /**
          * OPPRETTER RESEPTER
