@@ -27,8 +27,13 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // Hvis ikke: Start med foerste noden i listen.
             Node aktuellNode = this.start;
 
-            // Haanter spesialtilfelle 2: Elementet skal legges til sist i listen
-            if (pos == this.stoerrelse()){
+            // Haanter spesialtilfelle: Elementet skal legges foerst i listen
+            if (pos == 0){
+                nyNode.neste = aktuellNode.neste;
+                this.start = nyNode;
+            }
+            // Haanter spesialtilfelle: Elementet skal legges til sist i listen
+            else if (pos == this.stoerrelse()){
 
                 while (aktuellNode.neste != null){
                     aktuellNode = aktuellNode.neste;
@@ -38,17 +43,19 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             }
               
             // Ellers: Gaar oppover gjennom nodene til node n-1
-            int aktuellPos = 0;
-            while (aktuellPos < pos -1){
-                aktuellNode = aktuellNode.neste;
-                aktuellPos ++;
-            }
+            else{
+                int aktuellPos = 0;
+                while (aktuellPos < pos -1){
+                    aktuellNode = aktuellNode.neste;
+                    aktuellPos ++;
+                }
             
-            // Den nye noden faar node n som neste. 
-            nyNode.neste = aktuellNode.neste;
+                // Den nye noden faar node n som neste. 
+                nyNode.neste = aktuellNode.neste;
 
-            // Node n-1 faar den nye noden som neste 
-            aktuellNode.neste = nyNode;
+                // Node n-1 faar den nye noden som neste 
+                aktuellNode.neste = nyNode;
+            }
         } 
 
     super.antallNoder ++;

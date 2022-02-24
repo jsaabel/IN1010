@@ -86,16 +86,19 @@ abstract class Lenkeliste<T> implements Liste<T> {
     public String toString(){
 
         String res = "";
+        int indeks = 0;
 
         if (this.start == null){
             res = "(Tom liste.)";
         }
 
         else {
-            Node aktuellNode = start;
+            Node aktuellNode = this.start;
+            res += "Indeks " + indeks + ": " + aktuellNode.data + "\n";
             while (aktuellNode.neste != null){
-                res += aktuellNode.data.toString() + "\n";
                 aktuellNode = aktuellNode.neste;
+                indeks ++;
+                res += "Indeks " + indeks + ": " + aktuellNode.data + "\n";
             }
         }
 
