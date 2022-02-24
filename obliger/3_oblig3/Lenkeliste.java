@@ -50,7 +50,7 @@ abstract class Lenkeliste<T> implements Liste<T> {
     public T hent(){
 
         if (this.start == null){
-            return null; // temp
+            throw new UgyldigListeindeks(-1);
         }
         
         else{
@@ -63,11 +63,12 @@ abstract class Lenkeliste<T> implements Liste<T> {
      * Denne metoden fjerner det foerste elementet i listen og returnerer
      * det.
      */
-    public T fjern(){
+    public T fjern() throws UgyldigListeindeks{
         
         // Hvis listen er tom...
         if (this.start == null){
-            return null; // temp
+            throw new UgyldigListeindeks(0);
+            //return null; // temp
         }
 
         // Hvis ikke listen er tom...
