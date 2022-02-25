@@ -7,18 +7,33 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     }
 
     
-    // Test method overloading --- not working so far
+    /**
+     * Denne metoden utfoeres hvis ingen pos blir spesifisert,
+     * og legger til den nye noden sist i lista.
+     */
     public void leggTil(T x){
+        
         Node nyNode = new Node(x);
-        Node siste = hentNode(this.stoerrelse() - 1);
-        siste.neste = nyNode;
+        
+        // Spesialtilfelle: Listen er tom
+        if (this.start== null){
+            this.start = nyNode;
+        }
+
+        // Listen er ikke tom
+        else{
+        Node sisteNode = hentNode(this.stoerrelse() - 1);
+        sisteNode.neste = nyNode;
+        }
+
         super.antallNoder ++;
+        
     }
 
     /**
      * Denne metoden setter inn x i posisjon pos.
      */
-    public void leggTil(int pos, T x){
+    public void leggTil(int pos, T x) throws UgyldigListeindeks{
 
         // Sjekker om pos er en gyldig indeks.
         if (!gyldigIndeks(pos, "leggTil")){
@@ -46,7 +61,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // pos == stoerrelse() (ingen noder bak ny node)
             // --> siste noden i lista faar nyNode som neste
             else if (pos == this.stoerrelse()){
-                Node sisteNode = hentNode(pos);
+                Node sisteNode = hentNode(pos -1);
                 sisteNode.neste = nyNode;
             }
 

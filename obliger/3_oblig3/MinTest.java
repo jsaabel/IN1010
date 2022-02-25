@@ -42,6 +42,10 @@ public class MinTest{
         minListe = new IndeksertListe<>();
         // working until here
         minListe.leggTil(0, 0);
+        minListe.leggTil(12);
+        System.out.println(minListe.toString());
+
+
     }
 
 
