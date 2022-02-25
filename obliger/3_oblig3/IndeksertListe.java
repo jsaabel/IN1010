@@ -17,47 +17,40 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
 
         Node nyNode = new Node(x);
 
-        // Haandter spesialtilfelle 1: Listen er tom
+        // Haandter spesialtilfelle: Listen er tom
+        // --> Legg til noden som ny start og avslutt der
         if (this.start == null){
             this.start = nyNode;
         }
 
         else{
-
-            // Hvis ikke: Start med foerste noden i listen.
-            Node aktuellNode = this.start;
-
-            // Haanter spesialtilfelle: Elementet skal legges foerst i listen
+            
+            // pos = 0 (ingen noder foran ny node)
+            // --> nyNode faar "gamle" start som neste og blir nye start
             if (pos == 0){
-                nyNode.neste = aktuellNode.neste;
+                nyNode.neste = this.start;
                 this.start = nyNode;
             }
-            // Haanter spesialtilfelle: Elementet skal legges til sist i listen
+             
+            // pos == stoerrelse() (ingen noder bak ny node)
+            // --> siste noden i lista faar nyNode som neste
             else if (pos == this.stoerrelse()){
-
-                while (aktuellNode.neste != null){
-                    aktuellNode = aktuellNode.neste;
-                }
-
-                aktuellNode.neste = nyNode;
+                Node sisteNode = hentNode(pos);
+                sisteNode.neste = nyNode;
             }
-              
-            // Ellers: Gaar oppover gjennom nodene til node n-1
-            else{
-                int aktuellPos = 0;
-                while (aktuellPos < pos -1){
-                    aktuellNode = aktuellNode.neste;
-                    aktuellPos ++;
-                }
-            
-                // Den nye noden faar node n som neste. 
-                nyNode.neste = aktuellNode.neste;
 
-                // Node n-1 faar den nye noden som neste 
-                aktuellNode.neste = nyNode;
+            // pos > 0 && pos < stoerrelse (node foran og bak ny node)
+            // --> nyNode faar node i posisjon pos som neste
+            // --> node i posisjon pos-1 faar nyNode som neste
+            else if (pos < this.stoerrelse()){
+                Node bak = hentNode(pos);
+                nyNode.neste = bak;
+                Node foran = hentNode(pos - 1);
+                foran.neste = nyNode;
             }
         } 
 
+    // inkrementer antallNoder
     super.antallNoder ++;
     }
 
@@ -211,5 +204,23 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         else{
             return (0 <= indeks && indeks < stoerrelse());
         }
+    }
+
+    /**
+     * Dette er en hjelpemetode som returnerer noden paa angitt posisjon
+     * (ikke bare dens data.)
+     */
+    public Node hentNode(int pos){
+
+        // Begynner paa start og gaar oppover
+        Node aktuellNode = this.start;
+        int aktuellPos = 0;
+
+        while (aktuellPos < pos){
+            aktuellNode = aktuellNode.neste;
+            aktuellPos ++;
+        }
+
+        return aktuellNode;
     }
 }

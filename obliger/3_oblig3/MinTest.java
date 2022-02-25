@@ -18,7 +18,7 @@ public class MinTest{
         System.out.println(minListe.stoerrelse());
 
         
-        System.out.println("Legger til tallet 1 paa indeks 1 ");
+        System.out.println("Legger til tallet 5 paa indeks 1 ");
         minListe.leggTil(1, 5);
         System.out.println("Sjekker stoerrelse...");
         System.out.println(minListe.stoerrelse());
@@ -28,6 +28,7 @@ public class MinTest{
         System.out.println("Legger til tallet 7 paa indeks 0 ");
         minListe.leggTil(0, 7);
         System.out.println(minListe.toString());
+
 
     }
 
