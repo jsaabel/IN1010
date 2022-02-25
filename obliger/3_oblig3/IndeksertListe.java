@@ -21,11 +21,13 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         }
 
         // Listen er ikke tom
+        // --> sett nyNode som neste til siste noden i lista
         else{
         Node sisteNode = hentNode(this.stoerrelse() - 1);
         sisteNode.neste = nyNode;
         }
 
+        // Inkrementer antallNoder
         super.antallNoder ++;
         
     }
@@ -44,7 +46,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         Node nyNode = new Node(x);
 
         // Haandter spesialtilfelle: Listen er tom
-        // --> Legg til noden som ny start og avslutt der
+        // --> Legg til noden som ny start 
         if (this.start == null){
             this.start = nyNode;
         }
