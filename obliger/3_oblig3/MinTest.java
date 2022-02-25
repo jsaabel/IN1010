@@ -9,7 +9,7 @@ public class MinTest{
 
 
 
-        IndeksertListe<Integer> minListe = new IndeksertListe<Integer>();
+        IndeksertListe<Integer> minListe = new IndeksertListe<>();
 
         minListe.leggTil(0, 1);
         minListe.leggTil(0, 1);
@@ -29,8 +29,21 @@ public class MinTest{
         minListe.leggTil(0, 7);
         System.out.println(minListe.toString());
 
+        minListe.sett(2, 10);
+        System.out.println("Tallet paa indeks 2 buerde naa vaere 10.");
+        System.out.println(minListe.toString());
 
+
+        System.out.println("Sletter tallet paa indeks 1...");
+        int tall = minListe.fjern(1);
+        System.out.println("Tallet var " + tall);
+        System.out.println(minListe.toString());
+
+        minListe = new IndeksertListe<>();
+        // working until here
+        minListe.leggTil(0, 0);
     }
+
 
 }    
 

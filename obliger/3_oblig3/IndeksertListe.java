@@ -5,6 +5,16 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     public int stoerrelse (){
         return super.stoerrelse();
     }
+
+    
+    // Test method overloading --- not working so far
+    public void leggTil(T x){
+        Node nyNode = new Node(x);
+        Node siste = hentNode(this.stoerrelse() - 1);
+        siste.neste = nyNode;
+        super.antallNoder ++;
+    }
+
     /**
      * Denne metoden setter inn x i posisjon pos.
      */
@@ -15,6 +25,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         throw new UgyldigListeindeks(pos);
         }
 
+        // Hvis ja: Oppretter nyNode
         Node nyNode = new Node(x);
 
         // Haandter spesialtilfelle: Listen er tom
@@ -50,8 +61,8 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             }
         } 
 
-    // inkrementer antallNoder
-    super.antallNoder ++;
+        // inkrementer antallNoder
+        super.antallNoder ++;
     }
 
     /**
@@ -67,47 +78,41 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         // Hvis ja: Oppretter ny node
         Node nyNode = new Node(x);
 
-        // Haandter spesialtilfelle 1: Listen er tom
+        // Haandter spesialtilfelle: Listen er tom
+        // --> sett nyNode som start og inkrementer stoerrelse
         if (this.start == null){
             this.start = nyNode;
+            super.antallNoder ++;
         }
 
+
         else{
-
-            // Hvis ikke: Start med foerste noden i listen.
-            Node aktuellNode = this.start;
-
-            // Haandter spesieltilfelle 2: nyNode skal erstatte start
+            
+            // pos = 0 
+            // --> nyNode faar element i pos 1 som neste og blir nye start
             if (pos == 0){
-                nyNode.neste = aktuellNode.neste;
+                Node bak = hentNode(1);
+                nyNode.neste = bak;
                 this.start = nyNode;
             }
-            // Haandter spesialtilfelle 2: Elementet skal legges til sist i listen
-            if (pos == this.stoerrelse()){
-
-                // gaa til nest-siste element i listen og overskriv dens neste
-                int aktuellPos = 0;
-                while (aktuellPos < pos -1){
-                    aktuellNode = aktuellNode.neste;}
-                aktuellNode.neste = nyNode;
+             
+            // pos == stoerrelse() (ingen noder bak ny node)
+            // --> nest-siste noden i lista faar nyNode som neste
+            else if (pos == this.stoerrelse()){
+                Node foran = hentNode(pos - 1);
+                foran.neste = nyNode;
             }
-              
-            // Ellers: Gaar oppover gjennom nodene til node n-1
-            int aktuellPos = 0;
-            while (aktuellPos < pos -1){
-                aktuellNode = aktuellNode.neste;
-                aktuellPos ++;
+
+            // pos > 0 && pos < stoerrelse (node foran og bak ny node)
+            // --> nyNode faar node i posisjon pos + 1 som neste
+            // --> node i posisjon pos-1 faar nyNode som neste
+            else if (pos < this.stoerrelse()){
+                Node bak = hentNode(pos + 1);
+                nyNode.neste = bak;
+                Node foran = hentNode(pos - 1);
+                foran.neste = nyNode;
             }
-            
-            // Den nye noden faar node n + 1 som neste. 
-            nyNode.neste = aktuellNode.neste.neste;
-
-            // Node n-1 faar den nye noden som neste 
-            aktuellNode.neste = nyNode;
-        } 
-
-    super.antallNoder ++;
-
+        }
 
     }
 
@@ -121,16 +126,10 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         throw new UgyldigListeindeks(pos);
         }
 
-        T res;
-        // Gaa gjennom nodene til posisjon X
-        Node aktuellNode = this.start;
-        int aktuellPos = 0;
-        while (aktuellPos < pos){
-            aktuellNode = aktuellNode.neste;
-            aktuellPos ++;
-        }
+        // Hent node og data paa posisjon pos
+        Node aktuellNode = hentNode(pos);
 
-        res = aktuellNode.data;
+        T res = aktuellNode.data;
         return res;
     }
 
@@ -139,57 +138,56 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
      */
     public T fjern(int pos) throws UgyldigListeindeks{
         
+        T res = null;
+
         // Sjekker om pos er en gyldig indeks.
         if (!gyldigIndeks(pos, "fjern")){
         throw new UgyldigListeindeks(pos);
         }
 
-        T res;
-        Node aktuellNode = this.start;
 
         // Spesialtilfelle: Elementet er det eneste i listen
-        if (pos == 0 && this.stoerrelse() == 1){
-            res = aktuellNode.data;
+        // --> hent data fra start og sett start til null
+        if (this.start.neste == null){
+            res = this.start.data;
             this.start = null;
         }
-        // Spesialtilfelle: Elementet er det foerste i listen (legge begge sammen?)
-        else if (pos == 0 && this.stoerrelse() > 1){
-            res = aktuellNode.data;
-            this.start = aktuellNode.neste;
-        }
 
-        // Spesialtilfelle: Elementet er det siste i listen
+        // pos = 0 
+        // --> hent data fra pos 0 og sett node i pos 1 som ny start
+        else if (pos == 0){
+            res = hentNode(pos).data;
+            this.start = hentNode(1);
+        }
+         
+        // pos == stoerrelse() (ingen noder bak noden som skal fjernes)
+        // --> returner data fra noden i posisjon pos
+        // --> nest-siste noden i lista faar neste = null
         else if (pos == this.stoerrelse()){
-            // gaa oppover gjennom nodene til node n-1, lagrer data fra 
-            // node n og setter node n-1s neste til null
-            int aktuellPos = 0;
-            while (aktuellPos < pos -1){
-                aktuellNode = aktuellNode.neste;
-            }
-            res = aktuellNode.neste.data;
-            aktuellNode.neste = null;
 
+            res = hentNode(pos).data;
+            Node foran = hentNode(pos - 1);
+            foran.neste = null;
         }
-        // "Vanlig tilfelle" (Elementet ligger mellom andre)
-        else{
 
-            // Gaar oppover gjennom nodene til node n-1
-            int aktuellPos = 0;
-            while (aktuellPos < pos -1){
-                aktuellNode = aktuellNode.neste;
-                aktuellPos ++;
-            }
-            
-            // Lagre dataen i noden n
-            res = aktuellNode.neste.data;
+        // pos > 0 && pos < stoerrelse (node foran og bak den som skal slettes)
+        // --> returner data fra noden i posisjon pos
+        // --> node i posisjon pos-1 faar node i posisjon pos+1 som neste
+        else if (pos < this.stoerrelse()){
+            res = hentNode(pos).data;
+            Node bak = hentNode(pos + 1);
+            Node foran = hentNode(pos - 1);
+            foran.neste = bak;
+        }
 
-            // Node n-1 faar node n+1 som neste 
-            aktuellNode.neste = aktuellNode.neste.neste;
-        } 
-        // Clean up
+        // oppdater antall noder
         super.antallNoder --;
+
+        // returner data
         return res;
+
     }
+
 
     /**
      * Dette er en hjelpemetode som sjekker om argumentet pos er en 
