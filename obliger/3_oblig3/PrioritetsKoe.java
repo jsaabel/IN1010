@@ -1,5 +1,6 @@
 public class PrioritetsKoe<T extends Comparable<T>> extends Lenkeliste<T>{
 
+
     public int stoerrelse(){
         int res = super.stoerrelse();
         return res;
