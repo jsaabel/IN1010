@@ -34,5 +34,3 @@ public class Stabel<T> extends Lenkeliste<T> implements Liste<T>{
        return res;
     }
 }
-    //T hent ();
-    //T fjern ();
