@@ -1,3 +1,4 @@
+
 public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
 
     @Override
@@ -22,7 +23,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         // Listen er ikke tom
         // --> sett nyNode som neste til siste noden i lista
         else{
-        Node sisteNode = super.hentNode(this.stoerrelse() - 1);
+        Node sisteNode = hentNode(this.stoerrelse() - 1);
         sisteNode.neste = nyNode;
         }
 
@@ -37,7 +38,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     public void leggTil(int pos, T x) throws UgyldigListeindeks{
 
         // Sjekker om pos er en gyldig indeks.
-        if (!super.gyldigIndeks(pos, "leggTil")){
+        if (!gyldigIndeks(pos, "leggTil")){
         throw new UgyldigListeindeks(pos);
         }
 
@@ -62,7 +63,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // pos == stoerrelse() (ingen noder bak ny node)
             // --> siste noden i lista faar nyNode som neste
             else if (pos == this.stoerrelse()){
-                Node sisteNode = super.hentNode(pos -1);
+                Node sisteNode = hentNode(pos -1);
                 sisteNode.neste = nyNode;
             }
 
@@ -70,9 +71,9 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // --> nyNode faar node i posisjon pos som neste
             // --> node i posisjon pos-1 faar nyNode som neste
             else if (pos < this.stoerrelse()){
-                Node bak = super.hentNode(pos);
+                Node bak = hentNode(pos);
                 nyNode.neste = bak;
-                Node foran = super.hentNode(pos - 1);
+                Node foran = hentNode(pos - 1);
                 foran.neste = nyNode;
             }
         } 
@@ -87,7 +88,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     public void sett(int pos, T x) throws UgyldigListeindeks{
         //
         // Sjekker om pos er en gyldig indeks.
-        if (!super.gyldigIndeks(pos, "sett")){
+        if (!gyldigIndeks(pos, "sett")){
         throw new UgyldigListeindeks(pos);
         }
         
@@ -107,7 +108,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // pos = 0 
             // --> nyNode faar element i pos 1 som neste og blir nye start
             if (pos == 0){
-                Node bak = super.hentNode(1);
+                Node bak = hentNode(1);
                 nyNode.neste = bak;
                 this.start = nyNode;
             }
@@ -115,7 +116,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // pos == stoerrelse() (ingen noder bak ny node)
             // --> nest-siste noden i lista faar nyNode som neste
             else if (pos == this.stoerrelse()){
-                Node foran = super.hentNode(pos - 1);
+                Node foran = hentNode(pos - 1);
                 foran.neste = nyNode;
             }
 
@@ -123,9 +124,9 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
             // --> nyNode faar node i posisjon pos + 1 som neste
             // --> node i posisjon pos-1 faar nyNode som neste
             else if (pos < this.stoerrelse()){
-                Node bak = super.hentNode(pos + 1);
+                Node bak = hentNode(pos + 1);
                 nyNode.neste = bak;
-                Node foran = super.hentNode(pos - 1);
+                Node foran = hentNode(pos - 1);
                 foran.neste = nyNode;
             }
         }
@@ -138,12 +139,12 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     public T hent(int pos) throws UgyldigListeindeks{
         
         // Sjekker om pos er en gyldig indeks.
-        if (!super.gyldigIndeks(pos, "hent")){
+        if (!gyldigIndeks(pos, "hent")){
         throw new UgyldigListeindeks(pos);
         }
 
         // Hent node og data paa posisjon pos
-        Node aktuellNode = super.hentNode(pos);
+        Node aktuellNode = hentNode(pos);
 
         T res = aktuellNode.data;
         return res;
@@ -157,7 +158,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         T res = null;
 
         // Sjekker om pos er en gyldig indeks.
-        if (!super.gyldigIndeks(pos, "fjern")){
+        if (!gyldigIndeks(pos, "fjern")){
         throw new UgyldigListeindeks(pos);
         }
 
@@ -172,8 +173,8 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         // pos = 0 
         // --> hent data fra pos 0 og sett node i pos 1 som ny start
         else if (pos == 0){
-            res = super.hentNode(pos).data;
-            this.start = super.hentNode(1);
+            res = hentNode(pos).data;
+            this.start = hentNode(1);
         }
          
         // pos == stoerrelse() (ingen noder bak noden som skal fjernes)
@@ -181,8 +182,8 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         // --> nest-siste noden i lista faar neste = null
         else if (pos == this.stoerrelse()){
 
-            res = super.hentNode(pos).data;
-            Node foran = super.hentNode(pos - 1);
+            res = hentNode(pos).data;
+            Node foran = hentNode(pos - 1);
             foran.neste = null;
         }
 
@@ -190,9 +191,9 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
         // --> returner data fra noden i posisjon pos
         // --> node i posisjon pos-1 faar node i posisjon pos+1 som neste
         else if (pos < this.stoerrelse()){
-            res = super.hentNode(pos).data;
-            Node bak = super.hentNode(pos + 1);
-            Node foran = super.hentNode(pos - 1);
+            res = hentNode(pos).data;
+            Node bak = hentNode(pos + 1);
+            Node foran = hentNode(pos - 1);
             foran.neste = bak;
         }
 
@@ -205,36 +206,36 @@ public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
     }
 
 
-//    /**
-//     * Dette er en hjelpemetode som sjekker om argumentet pos er en 
-//     * gyldig indeks gitt metoden som skal utfoeres og listens aktuelle tilstand.
-//     */
-//    public boolean gyldigIndeks(int indeks, String metode){
-//
-//        if (metode == "leggTil"){
-//            return (0 <= indeks && indeks <= stoerrelse());
-//        }
-//
-//        else{
-//            return (0 <= indeks && indeks < stoerrelse());
-//        }
-//    }
-//
-//    /**
-//     * Dette er en hjelpemetode som returnerer noden paa angitt posisjon
-//     * (ikke bare dens data.)
-//     */
-//    public Node hentNode(int pos){
-//
-//        // Begynner paa start og gaar oppover
-//        Node aktuellNode = this.start;
-//        int aktuellPos = 0;
-//
-//        while (aktuellPos < pos){
-//            aktuellNode = aktuellNode.neste;
-//            aktuellPos ++;
-//        }
-//
-//        return aktuellNode;
-//    }
+    /**
+     * Dette er en hjelpemetode som sjekker om argumentet pos er en 
+     * gyldig indeks gitt metoden som skal utfoeres og listens aktuelle tilstand.
+     */
+    public boolean gyldigIndeks(int indeks, String metode){
+
+        if (metode == "leggTil"){
+            return (0 <= indeks && indeks <= stoerrelse());
+        }
+
+        else{
+            return (0 <= indeks && indeks < stoerrelse());
+        }
+    }
+
+    /**
+     * Dette er en hjelpemetode som returnerer noden paa angitt posisjon
+     * (ikke bare dens data.)
+     */
+    public Node hentNode(int pos){
+
+        // Begynner paa start og gaar oppover
+        Node aktuellNode = this.start;
+        int aktuellPos = 0;
+
+        while (aktuellPos < pos){
+            aktuellNode = aktuellNode.neste;
+            aktuellPos ++;
+        }
+
+        return aktuellNode;
+    }
 }

@@ -104,5 +104,38 @@ abstract class Lenkeliste<T> implements Liste<T> {
 
         return res;
     }
+        
+    /**
+     * Dette er en hjelpemetode som sjekker om argumentet pos er en 
+     * gyldig indeks gitt metoden som skal utfoeres og listens aktuelle tilstand.
+     */
+    public boolean gyldigIndeks(int indeks, String metode){
+
+        if (metode == "leggTil"){
+            return (0 <= indeks && indeks <= stoerrelse());
+        }
+
+        else{
+            return (0 <= indeks && indeks < stoerrelse());
+        }
+    }
+
+    /**
+     * Dette er en hjelpemetode som returnerer noden paa angitt posisjon
+     * (ikke bare dens data.)
+     */
+    public Node hentNode(int pos){
+
+        // Begynner paa start og gaar oppover
+        Node aktuellNode = this.start;
+        int aktuellPos = 0;
+
+        while (aktuellPos < pos){
+            aktuellNode = aktuellNode.neste;
+            aktuellPos ++;
+        }
+
+        return aktuellNode;
+    }
 
 }
