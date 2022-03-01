@@ -1,8 +1,35 @@
 abstract class Lenkeliste<T> implements Liste<T> {
 
-    class Node{
+    class Node implements Comparable<Node>{
         Node neste = null;
         T data;
+
+        @Override
+        public int compareTo(Node annen){
+        
+            if (annen.data instanceof Integer){
+
+                if ((int) data > (int) annen.data){
+                    return 1;}
+                else if ((int) data < (int) annen.data){
+                    return -1;}
+                return 0;
+            }
+
+            else if (annen.data instanceof String){
+
+
+                String foerste = (String) data;
+                String andre = (String) annen.data;
+                
+                return foerste.compareToIgnoreCase(andre);
+                
+                
+            }
+
+            return 0;
+        }
+
         Node(T x){
             data = x;
         }
