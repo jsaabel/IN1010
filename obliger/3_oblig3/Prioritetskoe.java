@@ -1,27 +1,23 @@
 public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
 
-
-    public int stoerrelse(){
-        int res = super.stoerrelse();
-        return res;
-    }
-
     @Override
     public void leggTil(T x){
 
-        // ...
+        // Hvis listen er tom kan vi bruke den "vanlige" leggTil-metoden.
         if (this.start == null){
             super.leggTil(x);
             return;
         }
 
-        // Opprett nyNode
+        // Hvis ikke listen er tom ...
+       
+        // Oppretter nyNode.
         Node nyNode = new Node(x);
 
-        // ...
+        // Sjekker om det finnes en "stoerre" node.
         boolean stoerreFunnet = false;
         int stoerreFunnetIndeks = 0;
-        // Gaa gjennom nodene
+
         for (int i=0; i < this.stoerrelse(); i++){
         
             Node aktuellNode = super.hentNode(i);
@@ -32,12 +28,16 @@ public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
                 break;
             }
         }
+            
+        // Hvis ingen stoerre node ble funnet, blir den nye den siste i listen.
         if (!stoerreFunnet){
         
             Node sisteNode = super.hentNode(this.stoerrelse() - 1);
             sisteNode.neste = nyNode;
         }
 
+        // Hvis det finnes "stoerre" noder ble den nye noden enten lagt til
+        // foerst i listen eller mellom to andre noder.
         else {
         
             if (stoerreFunnetIndeks == 0){
@@ -54,6 +54,7 @@ public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
             }
         }
 
+        // Til slutt inkrementerer vi antallNoder.
         super.antallNoder++;
     }
 
@@ -82,14 +83,18 @@ public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
 
             T res = this.start.data;
 
+            // Hvis det ligger mer enn ett element i listen, maa dens "start"
+            // tilpasses.
             if (this.stoerrelse() >= 2){
                 this.start = this.start.neste;
             }
 
+            // Hvis ikke setter vi bare "start" til null.
             else { 
                 this.start = null;
             }
 
+            // Til slutt tilpasser vi antallNoder.
             super.antallNoder--;
             return res;
         }

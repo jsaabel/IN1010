@@ -1,10 +1,5 @@
 public class Stabel<T> extends Lenkeliste<T> implements Liste<T>{
     
-    public int stoerrelse (){
-        int res = super.stoerrelse();
-        return res;
-    }
-
     @Override
     public void leggTil (T x){
         
@@ -22,15 +17,5 @@ public class Stabel<T> extends Lenkeliste<T> implements Liste<T>{
         }
 
         super.antallNoder ++;
-    }
-
-    public T hent(){
-        T res = super.hent();
-        return res;
-    }
-
-    public T fjern(){
-       T res = super.fjern();
-       return res;
     }
 }
