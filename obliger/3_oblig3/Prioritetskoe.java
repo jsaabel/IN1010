@@ -1,4 +1,4 @@
-public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
+public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T> {
 
     @Override
     public void leggTil(T x){

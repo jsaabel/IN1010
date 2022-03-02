@@ -1,4 +1,4 @@
-public class Stabel<T> extends Lenkeliste<T> implements Liste<T>{
+public class Stabel<T> extends Lenkeliste<T> {
     
     @Override
     public void leggTil (T x){

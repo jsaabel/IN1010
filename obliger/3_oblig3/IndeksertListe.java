@@ -1,4 +1,4 @@
-public class IndeksertListe<T> extends Lenkeliste<T> implements Liste<T>{
+public class IndeksertListe<T> extends Lenkeliste<T> {
 
     /**
      * Denne metoden utfoeres hvis ingen pos blir spesifisert,

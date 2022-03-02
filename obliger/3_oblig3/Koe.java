@@ -1,4 +1,4 @@
-public class Koe<T> extends Lenkeliste<T> implements Liste<T>{
+public class Koe<T> extends Lenkeliste<T> {
     
     // hent-Metoden skal returnere det foerste elementet i koen.
     @Override
