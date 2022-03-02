@@ -1,4 +1,4 @@
-public class PrioritetsKoe<T extends Comparable<T>> extends Lenkeliste<T>{
+public class Prioritetskoe<T extends Comparable<T>> extends Lenkeliste<T>{
 
 
     public int stoerrelse(){
@@ -22,15 +22,14 @@ public class PrioritetsKoe<T extends Comparable<T>> extends Lenkeliste<T>{
         boolean stoerreFunnet = false;
         int stoerreFunnetIndeks = 0;
         // Gaa gjennom nodene
-        while (!stoerreFunnet){
-            for (int i=0; i < this.stoerrelse(); i++){
-            
-                Node aktuellNode = super.hentNode(i);
+        for (int i=0; i < this.stoerrelse(); i++){
+        
+            Node aktuellNode = super.hentNode(i);
 
-                if (aktuellNode.data >= nyNode.data){
-                    stoerreFunnetIndeks = i;
-                    stoerreFunnet = true;
-                }
+            if (aktuellNode.compareTo(nyNode) >= 0){
+                stoerreFunnetIndeks = i;
+                stoerreFunnet = true;
+                break;
             }
         }
         if (!stoerreFunnet){
@@ -59,13 +58,41 @@ public class PrioritetsKoe<T extends Comparable<T>> extends Lenkeliste<T>{
     }
 
     @Override
-    public T hent(){
-        return null;
+    public T hent() throws UgyldigListeindeks{
+
+        
+        if (!super.gyldigIndeks(0, "hent")){
+            throw new UgyldigListeindeks(0);
+        }
+
+        else {
+            T res = this.start.data;
+            return res;
+        }
     }
 
     @Override
     public T fjern(){
-        return null;
+
+        if (!super.gyldigIndeks(0, "fjern")){
+            throw new UgyldigListeindeks(0);
+        }
+
+        else {
+
+            T res = this.start.data;
+
+            if (this.stoerrelse() >= 2){
+                this.start = this.start.neste;
+            }
+
+            else { 
+                this.start = null;
+            }
+
+            super.antallNoder--;
+            return res;
+        }
     }
 
 }
