@@ -41,7 +41,7 @@ abstract class Lenkeliste<T> implements Liste<T> {
             aktuellNode.neste = nyNode;
         }
 
-        // Til slutt inkrementer vi antallNoder
+        // Til slutt inkrementer vi antallNoder.
         antallNoder ++;
     }
 
