@@ -1,0 +1,8 @@
+!.gitignore
+*.class
+*.html
+*.js
+*.php
+*.css
+*.swp
+*.swo
