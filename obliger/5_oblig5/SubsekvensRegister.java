@@ -59,17 +59,34 @@ public class SubsekvensRegister{
                         Subsekvens sk = new Subsekvens(ss);
                         hm.put(ss, sk);
                     }
-                    else { // temp/test (ikke spurt om i Oppgave 3!)
-                        Subsekvens test = hm.get(ss);
-                        test.endreForekomster(1);
-                    }
+                    // else { // temp/test (ikke spurt om i Oppgave 3!)
+                    //     Subsekvens test = hm.get(ss);
+                    //     test.endreForekomster(1);
+                    // }
                 }
             }
             settInn(hm);
 
             return hm;
         }
-        
+
+        public static HashMap<String, Subsekvens> slaaSammen(
+                HashMap<String, Subsekvens> en, 
+                HashMap<String, Subsekvens> to){
+
+            for (Subsekvens subsek : en.values()){
+                if (!to.containsKey(subsek.subsekvens)){
+                    to.put(subsek.subsekvens, subsek);
+                }
+                else {
+                    Subsekvens aktSubsek = to.get(subsek.subsekvens);
+                    aktSubsek.endreForekomster(subsek.hentForekomster());
+                }
+            }
+
+            return to;
+
+        }
 
 }    
 

@@ -38,7 +38,29 @@ public class Testprogram{
             System.out.println(subsek);
         }
 
+        System.out.println("\nTester Oppgave 4 ...");
 
+        
+        SubsekvensRegister reg2 = new SubsekvensRegister();
+
+        try{
+            reg2.lesInnImmunrepertoar("fil1.csv");
+            reg2.lesInnImmunrepertoar("fil2.csv");
+        }
+
+        catch(FileNotFoundException e){
+            System.out.println("Fil ikke funnet.");
+        }
+
+        HashMap<String, Subsekvens> hm1 = reg2.taUt();
+        HashMap<String, Subsekvens> hm2 = reg2.taUt();
+
+        HashMap<String, Subsekvens> hm3 = reg2.slaaSammen(hm1, hm2);
+
+        for (Subsekvens subsek: hm3.values()){
+        
+            System.out.println(subsek);
+        }
      
 
     }
