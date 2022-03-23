@@ -1,4 +1,5 @@
 import java.io.FileNotFoundException;
+import java.util.HashMap;
 
 public class Testprogram{
     public static void main(String[] args){
@@ -23,6 +24,21 @@ public class Testprogram{
         catch(FileNotFoundException e){
             System.out.println("Fil ikke funnet.");
         }
+
+        int count = reg.hentAntall();
+        System.out.println("Antall i hashBeholder: " + count);
+
+        System.out.println("Tester aa hente fra Subsekvensregister...");
+
+
+        HashMap<String, Subsekvens> hm = reg.taUt();
+
+        for (String strIhm: hm.keySet()){
+        
+            System.out.println(strIhm);
+        }
+
+
      
 
     }

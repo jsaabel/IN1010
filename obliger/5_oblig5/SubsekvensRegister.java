@@ -38,9 +38,10 @@ public class SubsekvensRegister{
         //HashMap<String, Subsekvens> lesInnImmunrepertoar(
         // Lese inn immunrepertoar (Oppgave 3)
         // Ta med NoSuchElementException, IOException?
-        public void lesInnImmunrepertoar(String filnavn)
+        public HashMap<String, Subsekvens> lesInnImmunrepertoar(String filnavn)
             throws FileNotFoundException{
         
+            HashMap<String, Subsekvens> hm = new HashMap<String, Subsekvens>();
             File innFil = new File(filnavn);
             Scanner inn = new Scanner(innFil);
 
@@ -49,9 +50,16 @@ public class SubsekvensRegister{
                 String linje = inn.nextLine();
                 for (int i=0; i < linje.length() - 2; i++){
                     String ss = linje.substring(i, i + 3);
-                    System.out.println(ss);
+                    System.out.println(ss); // TEMP
+                    if (!hm.containsKey(ss)){
+                        Subsekvens sk = new Subsekvens(ss);
+                        hm.put(ss, sk);
+                    }
                 }
             }
+            settInn(hm);
+
+            return hm;
         }
         
 
