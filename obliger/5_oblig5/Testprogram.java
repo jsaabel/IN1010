@@ -27,22 +27,32 @@ public class Testprogram{
             }
         }
 
-        System.out.println("Antall i hashBeholder: " + reg.hentAntall());
+        //System.out.println("Antall i hashBeholder: " + reg.hentAntall());
 
         // Fletting
         while (reg.hentAntall() > 1){
             HashMap<String, Subsekvens> hm = reg.slaaSammen(reg.taUt(), reg.taUt());
             reg.settInn(hm);
-            System.out.println("Antall i hashBeholder: " + reg.hentAntall());
+            //System.out.println("Antall i hashBeholder: " + reg.hentAntall());
 
         }
 
         HashMap<String, Subsekvens> res = reg.taUt();
 
+        int flest = 0;
+        String flest_sekv = null;
         for (Subsekvens subsek: res.values()){
         
-            System.out.println(subsek);
+            if (subsek.hentForekomster() > flest){
+                flest = subsek.hentForekomster();
+                flest_sekv = subsek.subsekvens;
+            
+            }
         }
+
+        System.out.println("Sekvensen med flest forekomster var "+ flest_sekv
+                + " (" + flest + ")");
+
 
         
 
