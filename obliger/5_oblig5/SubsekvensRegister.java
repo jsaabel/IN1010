@@ -54,7 +54,7 @@ public class SubsekvensRegister{
                 }
                 for (int i=0; i < linje.length() - 2; i++){
                     String ss = linje.substring(i, i + 3);
-                    System.out.println(ss); // TEMP
+                    //System.out.println(ss); // TEMP
                     if (!hm.containsKey(ss)){
                         Subsekvens sk = new Subsekvens(ss);
                         hm.put(ss, sk);
@@ -79,8 +79,10 @@ public class SubsekvensRegister{
                     to.put(subsek.subsekvens, subsek);
                 }
                 else {
+                    //System.out.println("Hei" + subsek.subsekvens);
                     Subsekvens aktSubsek = to.get(subsek.subsekvens);
                     aktSubsek.endreForekomster(subsek.hentForekomster());
+                    //System.out.println(to.get(subsek.subsekvens));
                 }
             }
 
