@@ -19,7 +19,12 @@ public class SubsekvensRegister{
         public HashMap<String, Subsekvens> taUt(){
             return hashBeholder.remove(0); // foerste element
         }
+        
         // Returnere antall HashMaps
+        public int hentAntall(){
+            return hashBeholder.size();
+        }
+        
 
 }    
 
