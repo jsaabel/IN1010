@@ -48,12 +48,20 @@ public class SubsekvensRegister{
             while (inn.hasNextLine()){
 
                 String linje = inn.nextLine();
+                // Stopper hvis linjen er kortere enn 3 tegn
+                if (linje.length() < 3){
+                    break; // implementer IOException her?
+                }
                 for (int i=0; i < linje.length() - 2; i++){
                     String ss = linje.substring(i, i + 3);
                     System.out.println(ss); // TEMP
                     if (!hm.containsKey(ss)){
                         Subsekvens sk = new Subsekvens(ss);
                         hm.put(ss, sk);
+                    }
+                    else { // temp/test (ikke spurt om i Oppgave 3!)
+                        Subsekvens test = hm.get(ss);
+                        test.endreForekomster(1);
                     }
                 }
             }

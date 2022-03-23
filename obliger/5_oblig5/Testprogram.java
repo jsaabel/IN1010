@@ -33,9 +33,9 @@ public class Testprogram{
 
         HashMap<String, Subsekvens> hm = reg.taUt();
 
-        for (String strIhm: hm.keySet()){
+        for (Subsekvens subsek: hm.values()){
         
-            System.out.println(strIhm);
+            System.out.println(subsek);
         }
 
 

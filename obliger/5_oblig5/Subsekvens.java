@@ -9,6 +9,7 @@ public class Subsekvens{
 
     public Subsekvens(String ss){
         subsekvens = ss; // forekomster 0 eller 1?
+        forekomster = 1;
     }
 
     public int hentForekomster(){
