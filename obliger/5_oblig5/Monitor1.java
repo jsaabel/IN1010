@@ -1,21 +1,48 @@
-import java.util.concurrent.* // mer spesifikt?
+import java.util.concurrent.locks.Lock; 
+import java.util.concurrent.locks.ReentrantLock; 
+import java.util.HashMap;
+import java.io.FileNotFoundException;
 
 public class Monitor1{
 
-    SubsekvensRegister reg = new SubsekvensRegister();
-    private Lock laas;
+    private SubsekvensRegister reg;
+    private Lock laas;  
 
+    // Konstruktoer
+    public Monitor1(){
+
+        reg = new SubsekvensRegister();
+        laas = new ReentrantLock(); // TEMP true?
+
+    }
+    
     // Sett inn HashMap
     public void settInn(HashMap<String, Subsekvens> hm){
         
-        reg.settInn(hm);
+        laas.lock();
+        try{
+            reg.settInn(hm);
+        }
+
+        finally{
+            laas.unlock();
+        }
+
 
     }
     
     // Ta ut HashMap 
     public HashMap<String, Subsekvens> taUt(){
 
-        return reg.taUt(); // foerste element
+        laas.lock();
+
+        try{
+            return reg.taUt(); // foerste element
+        }
+
+        finally{
+            laas.unlock();
+        }
     }
     
     // Returnere antall HashMaps
@@ -27,16 +54,30 @@ public class Monitor1{
     public HashMap<String, Subsekvens> lesInnImmunrepertoar(String filnavn)
         throws FileNotFoundException{
 
-        return reg.lesInnImmunrepertoar(filnavn);
-    
+        laas.lock();
+
+        try{
+            return reg.lesInnImmunrepertoar(filnavn);
+        }
+
+        finally{
+            laas.unlock();
+        }
     }
 
-    public static HashMap<String, Subsekvens> slaaSammen(
+    public HashMap<String, Subsekvens> slaaSammen(
             HashMap<String, Subsekvens> en, HashMap<String, Subsekvens> to){
 
-        return reg.slaaSammen(en, to);
-    }
+        laas.lock();
 
+        try{
+            return reg.slaaSammen(en, to);
+        }
+
+        finally{
+            laas.unlock();
+        }
+    }
 
 }    
 
