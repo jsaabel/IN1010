@@ -8,7 +8,7 @@ public class Subsekvens{
     public final String subsekvens;
 
     public Subsekvens(String ss){
-        subsekvens = ss; // forekomster 0 eller 1?
+        subsekvens = ss; 
         forekomster = 1;
     }
 
@@ -16,7 +16,6 @@ public class Subsekvens{
         return forekomster;
     }
 
-    // (Temp - se naermere paa implementasjonen paa et senere tidspunkt)
     public void endreForekomster(int tall){
         forekomster += tall;
     }
@@ -25,10 +24,5 @@ public class Subsekvens{
     public String toString(){
         return subsekvens + "," + forekomster;
     }
-
-
-
-
-
 }    
 

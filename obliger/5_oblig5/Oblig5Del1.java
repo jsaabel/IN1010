@@ -2,7 +2,7 @@ import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.HashMap;
 
-public class Testprogram{
+public class Oblig5Del1{
     public static void main(String[] args){
         
         String navnPaaMappe = args[0];
@@ -15,7 +15,7 @@ public class Testprogram{
         for (String fil : filer){
 
             if (fil.equals("metadata.csv")){
-                continue;
+                continue; // Gjoer det enkelt her. Forandres senere.
             }
 
             try{
@@ -31,8 +31,6 @@ public class Testprogram{
         while (reg.hentAntall() > 1){
             HashMap<String, Subsekvens> hm = reg.slaaSammen(reg.taUt(), reg.taUt());
             reg.settInn(hm);
-            //System.out.println("Antall i hashBeholder: " + reg.hentAntall());
-
         }
 
         HashMap<String, Subsekvens> res = reg.taUt();
@@ -51,12 +49,6 @@ public class Testprogram{
         System.out.println("Sekvensen med flest forekomster i mappen "
                 + navnPaaMappe + " var "+ flest_sekv
                 + " (" + flest + ").");
-
-
-        
-
-     
-
     }
 
 }    
