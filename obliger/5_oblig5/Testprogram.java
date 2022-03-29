@@ -11,11 +11,11 @@ public class Testprogram{
 
         File f = new File(navnPaaMappe);
         String[] filer = f.list();
-        
+
         for (String fil : filer){
 
             if (fil.equals("metadata.csv")){
-                break;
+                continue;
             }
 
             try{
@@ -26,8 +26,6 @@ public class Testprogram{
                 System.out.println("Fil ikke funnet.");
             }
         }
-
-        //System.out.println("Antall i hashBeholder: " + reg.hentAntall());
 
         // Fletting
         while (reg.hentAntall() > 1){
@@ -50,8 +48,9 @@ public class Testprogram{
             }
         }
 
-        System.out.println("Sekvensen med flest forekomster var "+ flest_sekv
-                + " (" + flest + ")");
+        System.out.println("Sekvensen med flest forekomster i mappen "
+                + navnPaaMappe + " var "+ flest_sekv
+                + " (" + flest + ").");
 
 
         

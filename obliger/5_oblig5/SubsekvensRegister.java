@@ -65,6 +65,7 @@ public class SubsekvensRegister{
                     // }
                 }
             }
+
             settInn(hm);
 
             return hm;
