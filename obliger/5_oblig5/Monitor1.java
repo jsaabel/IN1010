@@ -51,6 +51,7 @@ public class Monitor1{
         return reg.hentAntall();
     }
 
+    // TEMP OBS Tror kanskje ikke denne trengs, siden HMs blir lest inn av traad?
     public HashMap<String, Subsekvens> lesInnImmunrepertoar(String filnavn)
         throws FileNotFoundException{
 
