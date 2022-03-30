@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 public class LeseTrad implements Runnable{
     
     private Monitor1 monitor;
@@ -12,11 +13,11 @@ public class LeseTrad implements Runnable{
     @Override
     public void run(){
         try{
-            monitor.lesInnImmunrepertoar(filnavn);
+            monitor.settInn(monitor.lesInnImmunrepertoar(filnavn));
         }
 
-        catch (InterruptedException e){
-            ; // fortsett her
+        catch (FileNotFoundException e){
+            System.out.println("Fil ikke funnet");
         }
     }
 }    
