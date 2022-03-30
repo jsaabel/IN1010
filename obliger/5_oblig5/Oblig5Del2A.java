@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 
-public class Hovedprogram{
+public class Oblig5Del2A{
     public static void main(String[] args) throws InterruptedException{
         
         String navnPaaMappe = args[0];
