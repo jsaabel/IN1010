@@ -68,6 +68,7 @@ public class SubsekvensRegister{
 
             //settInn(hm);
 
+            //System.out.println("Subsekvensregister: Returning hm");
             return hm;
         }
 

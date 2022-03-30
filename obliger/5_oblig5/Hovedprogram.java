@@ -1,9 +1,9 @@
-import java.io.FileNotFoundException;
 import java.io.File;
 import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
 
 public class Hovedprogram{
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
         
         String navnPaaMappe = args[0];
         
@@ -12,6 +12,7 @@ public class Hovedprogram{
         File f = new File(navnPaaMappe);
         String[] filer = f.list();
 
+        CountDownLatch latch = new CountDownLatch(filer.length - 1);
         for (String fil : filer){
 
             if (fil.equals("metadata.csv")){
@@ -19,7 +20,8 @@ public class Hovedprogram{
             }
 
             try{
-                LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor);
+                LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor,
+                        latch);
                 new Thread(trad).start();
             }
 
@@ -28,8 +30,13 @@ public class Hovedprogram{
             }
         }
 
+        // Barriere: Venter paa alle lesetrad foer fletting
+        latch.await();
+          
+
         // Fletting
         while (monitor.hentAntall() > 1){
+
             HashMap<String, Subsekvens> hm = monitor.slaaSammen(monitor.taUt(), monitor.taUt());
             monitor.settInn(hm);
         }

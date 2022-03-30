@@ -1,24 +1,32 @@
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.concurrent.CountDownLatch;
+
 public class LeseTrad implements Runnable{
     
     private Monitor1 monitor;
     private String filnavn;
+    private CountDownLatch latch;
     
     // Konstruktoer
-    public LeseTrad(String filnavn, Monitor1 monitor){
+    public LeseTrad(String filnavn, Monitor1 monitor, CountDownLatch latch){
         this.filnavn = filnavn;
         this.monitor = monitor;
+        this.latch = latch;
     }
 
     @Override
     public void run(){
         try{
-            monitor.settInn(monitor.lesInnImmunrepertoar(filnavn));
+            HashMap<String, Subsekvens> hm = monitor.lesInnImmunrepertoar(filnavn);
+            monitor.settInn(hm);
+            latch.countDown();
         }
 
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         }
+
     }
 }    
 

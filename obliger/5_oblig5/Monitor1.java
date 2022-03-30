@@ -27,8 +27,6 @@ public class Monitor1{
         finally{
             laas.unlock();
         }
-
-
     }
     
     // Ta ut HashMap 
