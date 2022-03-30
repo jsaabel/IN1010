@@ -12,6 +12,7 @@ public class Oblig5Del2A{
         File f = new File(navnPaaMappe);
         String[] filer = f.list();
 
+        // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
         CountDownLatch latch = new CountDownLatch(filer.length);
         for (String fil : filer){
 
