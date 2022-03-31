@@ -39,13 +39,18 @@ public class Oblig5Del2B{
         // Fletting
         // Fortsett her, bli kvitt CountDownLatch.
         // Fix logikk (hvordan vaere sikker paa at det ikke er flere?)
+        // Traad run metode: ikke bare en iterasjon?
+        // (while condition i try-blokk)
+        // Hva med lese-traadene?
         FletteTrad fletteTrad = new FletteTrad(monitor);
         new Thread(fletteTrad).start();
         new Thread(fletteTrad).start();
 
         Thread.sleep(10000);
 
+        System.out.println(monitor.hentAntall());
         HashMap<String, Subsekvens> res = monitor.taUt();
+
 
         int flest = 0;
         String flest_sekv = null;
