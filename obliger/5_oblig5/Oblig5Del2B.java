@@ -14,6 +14,7 @@ public class Oblig5Del2B{
 
         // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
         CountDownLatch latch = new CountDownLatch(filer.length);
+        int antFiler = 0; // TEMP
         for (String fil : filer){
 
             if (fil.equals("metadata.csv")){
@@ -21,16 +22,23 @@ public class Oblig5Del2B{
                 continue; // Gjoer det enkelt her. Forandres senere.
             }
 
+            antFiler++; // TEMP
+
             try{
                 LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor,
                         latch);
                 new Thread(trad).start();
+                
             }
 
             catch(Exception e){
                 System.out.println(e);
             }
         }
+
+        // TEMP
+        monitor.settAntSkalFlettes(antFiler - 1);
+        System.out.println("AntSkalFlettes: " + monitor.hentAntSkalFlettes());
 
         // Barriere: Venter paa alle lesetrad foer fletting
         latch.await();
@@ -42,12 +50,14 @@ public class Oblig5Del2B{
         // Traad run metode: ikke bare en iterasjon?
         // (while condition i try-blokk)
         // Hva med lese-traadene?
-        FletteTrad fletteTrad = new FletteTrad(monitor);
-        new Thread(fletteTrad).start();
-        new Thread(fletteTrad).start();
+        //FletteTrad fletteTrad = new FletteTrad(monitor);
+        Runnable fletting = new FletteTrad(monitor);
+        new Thread(fletting).start();
 
-        Thread.sleep(10000);
 
+        // Barriere (tbi): Vent til fletting er ferdig
+        // Thread.sleep(10000);
+        // monitor.flettingFerdig.await();
         System.out.println(monitor.hentAntall());
         HashMap<String, Subsekvens> res = monitor.taUt();
 

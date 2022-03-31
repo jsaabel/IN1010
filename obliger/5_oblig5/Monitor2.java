@@ -9,20 +9,64 @@ public class Monitor2{
 
     private SubsekvensRegister reg;
     private Lock laas;  
+    public Condition flettingFerdig;
     private Condition minstTo;
+
+    // NY / TEST
+    private int antFlettet;
+    private int antSkalFlettes;
 
     // Konstruktoer
     public Monitor2(){
 
         reg = new SubsekvensRegister();
         laas = new ReentrantLock(); // TEMP true?
-        minstTo = laas.newCondition();
+        flettingFerdig = laas.newCondition();
 
     }
     
+    public void settAntSkalFlettes(int ant){
+        this.antSkalFlettes = ant;
+    }
+
+    public int hentAntFlettet(){
+        return this.antFlettet;
+    }
+
+    public int hentAntSkalFlettes(){
+        return this.antSkalFlettes;
+    }
+
+    public void inkrementerAntFlettet(){
+        laas.lock();
+        try{
+            antFlettet++;
+            if (antFlettet == antSkalFlettes){
+                flettingFerdig.signalAll();
+            }
+        }
+        finally{
+            laas.unlock();}
+    }
+
+
     // Sett inn HashMap
     public void settInn(HashMap<String, Subsekvens> hm){
         
+        laas.lock();
+        try{
+            reg.settInn(hm);
+        }
+
+        finally{
+            laas.unlock();
+        }
+    }
+
+    // Sett inn flettet HashMap
+    // foreloepig samme som "vanlig" settInn .. hvorfor trengs denne?
+    public void settInnFlettet(HashMap<String, Subsekvens> hm){
+
         laas.lock();
         try{
             reg.settInn(hm);
@@ -39,7 +83,8 @@ public class Monitor2{
         laas.lock();
 
         try{
-            return reg.taUt(); // foerste element
+            HashMap<String, Subsekvens> res = reg.taUt();
+            return res; // foerste element
         }
 
         finally{
@@ -53,9 +98,9 @@ public class Monitor2{
         laas.lock();
 
         try{
-            while (hentAntall() < 2){
-                minstTo.await();
-            }
+            //while (hentAntall() < 2){
+            //    minstTo.await();
+            //}
             ArrayList<HashMap<String, Subsekvens>> hms = 
                 new ArrayList<HashMap<String, Subsekvens>>();
             hms.add(taUt());

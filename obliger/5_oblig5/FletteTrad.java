@@ -20,11 +20,16 @@ public class FletteTrad implements Runnable{
     @Override
     public void run(){
         try{
-            ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
-            HashMap<String, Subsekvens> hm = 
-                monitor.slaaSammen(hms.get(0), hms.get(1));
-            monitor.settInn(hm);
+            while (monitor.hentAntSkalFlettes() > monitor.hentAntFlettet()){
+                System.out.println(this + ": Fletter");
+                ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
+                HashMap<String, Subsekvens> hm = 
+                    monitor.slaaSammen(hms.get(0), hms.get(1));
+                monitor.settInnFlettet(hm);
+                monitor.inkrementerAntFlettet();
+            }
         }
+
         catch (InterruptedException e){
             System.out.println("FletteTrad avbrutt.");
         }
