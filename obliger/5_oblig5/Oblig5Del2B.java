@@ -37,11 +37,13 @@ public class Oblig5Del2B{
           
 
         // Fletting
+        // Fortsett her, bli kvitt CountDownLatch.
+        // Fix logikk (hvordan vaere sikker paa at det ikke er flere?)
         FletteTrad fletteTrad = new FletteTrad(monitor);
         new Thread(fletteTrad).start();
         new Thread(fletteTrad).start();
 
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
         HashMap<String, Subsekvens> res = monitor.taUt();
 
