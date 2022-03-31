@@ -4,12 +4,12 @@ import java.util.concurrent.CountDownLatch;
 
 public class LeseTrad implements Runnable{
     
-    private Monitor1 monitor;
+    private Monitor2 monitor;
     private String filnavn;
     private CountDownLatch latch;
     
     // Konstruktoer
-    public LeseTrad(String filnavn, Monitor1 monitor, CountDownLatch latch){
+    public LeseTrad(String filnavn, Monitor2 monitor, CountDownLatch latch){
         this.filnavn = filnavn;
         this.monitor = monitor;
         this.latch = latch;

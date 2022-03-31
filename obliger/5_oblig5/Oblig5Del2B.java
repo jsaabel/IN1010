@@ -7,7 +7,7 @@ public class Oblig5Del2B{
         
         String navnPaaMappe = args[0];
         
-        Monitor1 monitor = new Monitor1();
+        Monitor2 monitor = new Monitor2();
 
         File f = new File(navnPaaMappe);
         String[] filer = f.list();
@@ -37,11 +37,11 @@ public class Oblig5Del2B{
           
 
         // Fletting
-        while (monitor.hentAntall() > 1){
+        FletteTrad fletteTrad = new FletteTrad(monitor);
+        new Thread(fletteTrad).start();
+        new Thread(fletteTrad).start();
 
-            HashMap<String, Subsekvens> hm = monitor.slaaSammen(monitor.taUt(), monitor.taUt());
-            monitor.settInn(hm);
-        }
+        Thread.sleep(5000);
 
         HashMap<String, Subsekvens> res = monitor.taUt();
 

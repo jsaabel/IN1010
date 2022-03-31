@@ -11,8 +11,8 @@ public class FletteTrad implements Runnable{
     //private CountDownLatch latch;
     
     // Konstruktoer
-    public FletteTrad(String filnavn, Monitor2 monitor){
-        this.filnavn = filnavn;
+    public FletteTrad(Monitor2 monitor){
+        //this.filnavn = filnavn;
         this.monitor = monitor;
         //this.latch = latch;
     }
@@ -21,7 +21,8 @@ public class FletteTrad implements Runnable{
     public void run(){
         try{
             ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
-            HashMap<String, Subsekvens> hm = monitor.slaaSammen(hms.get(0), hms.get(1));
+            HashMap<String, Subsekvens> hm = 
+                monitor.slaaSammen(hms.get(0), hms.get(1));
             monitor.settInn(hm);
         }
         catch (InterruptedException e){

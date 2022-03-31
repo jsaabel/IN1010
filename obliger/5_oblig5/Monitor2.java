@@ -47,7 +47,8 @@ public class Monitor2{
         }
     }
 
-    public ArrayList<HashMap<String, Subsekvens>> hentUtTo() throws InterruptedException{
+    public ArrayList<HashMap<String, Subsekvens>> hentUtTo() 
+            throws InterruptedException{
 
         laas.lock();
 
@@ -55,7 +56,8 @@ public class Monitor2{
             while (hentAntall() < 2){
                 minstTo.await();
             }
-            ArrayList<HashMap<String, Subsekvens>> hms = new ArrayList<HashMap<String, Subsekvens>>();
+            ArrayList<HashMap<String, Subsekvens>> hms = 
+                new ArrayList<HashMap<String, Subsekvens>>();
             hms.add(taUt());
             hms.add(taUt());
             return hms;
