@@ -1,5 +1,6 @@
 import java.util.concurrent.locks.Lock; 
 import java.util.concurrent.locks.ReentrantLock; 
+import java.util.concurrent.locks.Condition;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
@@ -8,12 +9,14 @@ public class Monitor2{
 
     private SubsekvensRegister reg;
     private Lock laas;  
+    private Condition minstTo;
 
     // Konstruktoer
     public Monitor2(){
 
         reg = new SubsekvensRegister();
         laas = new ReentrantLock(); // TEMP true?
+        minstTo = laas.newCondition();
 
     }
     
@@ -44,18 +47,37 @@ public class Monitor2{
         }
     }
 
-    public ArrayList<HashMap> hentUtTo(){
+    public ArrayList<HashMap<String, Subsekvens>> hentUtTo() throws InterruptedException{
 
-        ArrayList<HashMap> hms = new ArrayList<HashMap>();
-        hms.add(taUt());
-        hms.add(taUt());
-        return hms;
+        laas.lock();
+
+        try{
+            while (hentAntall() < 2){
+                minstTo.await();
+            }
+            ArrayList<HashMap<String, Subsekvens>> hms = new ArrayList<HashMap<String, Subsekvens>>();
+            hms.add(taUt());
+            hms.add(taUt());
+            return hms;
+        }
+
+        finally{
+            laas.unlock();
+        }
     }
     
     // Returnere antall HashMaps
+    // OBS TEMP trenger man lock her??
     public int hentAntall(){
 
-        return reg.hentAntall();
+        laas.lock();
+
+        try{
+            return reg.hentAntall();
+        }
+        finally{
+            laas.unlock();
+        }
     }
 
     // TEMP OBS Tror kanskje ikke denne trengs, siden HMs blir lest inn av traad?

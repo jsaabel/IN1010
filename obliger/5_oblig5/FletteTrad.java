@@ -1,6 +1,7 @@
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.concurrent.CountDownLatch;
 
 public class FletteTrad implements Runnable{
@@ -18,10 +19,14 @@ public class FletteTrad implements Runnable{
 
     @Override
     public void run(){
-        HashMap<String, Subsekvens> hm1 = monitor.taUt();
-        HashMap<String, Subsekvens> hm2 = monitor.taUt();
-        HashMap<String, Subsekvens> hm = monitor.slaaSammen(hm1, hm2);
-        monitor.settInn(hm);
+        try{
+            ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
+            HashMap<String, Subsekvens> hm = monitor.slaaSammen(hms.get(0), hms.get(1));
+            monitor.settInn(hm);
+        }
+        catch (InterruptedException e){
+            System.out.println("FletteTrad avbrutt.");
+        }
         //latch.countDown();
     }
 
