@@ -1,41 +1,58 @@
 import java.io.File;
 import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
+import java.util.Scanner;
+import java.io.FileNotFoundException;
 
 public class Oblig5Del2B{
-    public static void main(String[] args) throws InterruptedException{
-        
-        String navnPaaMappe = args[0];
+    public static void main(String[] args) throws InterruptedException,
+           FileNotFoundException{
         
         Monitor2 monitor = new Monitor2();
 
         int antFletteTrader = 4;
-        File f = new File(navnPaaMappe);
-        String[] filer = f.list();
+        CountDownLatch fletteLatch = new CountDownLatch(antFletteTrader);
+
+
+        String navnPaaMappe = args[0];
+        
+
+        //File f = new File(navnPaaMappe);
+        File f = new File(navnPaaMappe + "/" + "metadata.csv");
+        Scanner inn = new Scanner(f);
+        while (inn.hasNextLine()){
+            String[] biter = inn.nextLine().split(",");
+            String filnavn = biter[0];
+            LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + filnavn, monitor);
+            new Thread(trad).start();
+        }
+
+        Runnable fletting = new FletteTrad(monitor, fletteLatch);
+        for (int i=0; i < antFletteTrader; i++){
+            new Thread(fletting).start();
+        }
 
         // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
-        CountDownLatch fletteLatch = new CountDownLatch(antFletteTrader);
-        int antFiler = 0; // TEMP
-        for (String fil : filer){
+        //for (String fil : filer){
 
-            if (fil.equals("metadata.csv")){
-                continue; // Gjoer det enkelt her. Forandres senere.
-            }
+        //    if (fil.equals("metadata.csv")){
+        //        continue; // Gjoer det enkelt her. Forandres senere.
+        //    }
 
-            try{
-                LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor);
-                new Thread(trad).start();
-            }
+        //    try{
+        //        LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor);
+        //        new Thread(trad).start();
+        //    }
 
-            catch(Exception e){
-                System.out.println(e);
-            }
-        }
+        //    catch(Exception e){
+        //        System.out.println(e);
+        //    }
+        //}
 
 
         // Barriere: Venter paa alle lesetrad foer fletting
         //latch.await();
-        System.out.println("Innlesing ferdig");
+        //System.out.println("Innlesing ferdig");
           
 
         // Fletting
@@ -45,10 +62,6 @@ public class Oblig5Del2B{
         // (while condition i try-blokk)
         // Hva med lese-traadene?
         //FletteTrad fletteTrad = new FletteTrad(monitor);
-        Runnable fletting = new FletteTrad(monitor, fletteLatch);
-        for (int i=0; i < antFletteTrader; i++){
-            new Thread(fletting).start();
-        }
 
 
         fletteLatch.await();

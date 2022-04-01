@@ -18,7 +18,7 @@ public class Monitor2{
     public Monitor2(){
 
         register = new ArrayList<HashMap<String, Subsekvens>>();
-        laas = new ReentrantLock(); // TEMP true?
+        laas = new ReentrantLock(); 
 
     }
 
@@ -148,7 +148,6 @@ public class Monitor2{
 
 
     }
-
 
 }    
 
