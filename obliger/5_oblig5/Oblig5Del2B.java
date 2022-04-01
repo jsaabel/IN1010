@@ -36,9 +36,6 @@ public class Oblig5Del2B{
             }
         }
 
-        // TEMP
-        monitor.settAntSkalFlettes(antFiler - 1);
-        System.out.println("AntSkalFlettes: " + monitor.hentAntSkalFlettes());
 
         // Barriere: Venter paa alle lesetrad foer fletting
         latch.await();
@@ -53,10 +50,11 @@ public class Oblig5Del2B{
         //FletteTrad fletteTrad = new FletteTrad(monitor);
         Runnable fletting = new FletteTrad(monitor);
         new Thread(fletting).start();
+        new Thread(fletting).start();
 
 
         // Barriere (tbi): Vent til fletting er ferdig
-        // Thread.sleep(10000);
+        Thread.sleep(5000);
         // monitor.flettingFerdig.await();
         System.out.println(monitor.hentAntall());
         HashMap<String, Subsekvens> res = monitor.taUt();

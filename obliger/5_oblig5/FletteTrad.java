@@ -1,4 +1,3 @@
-
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -20,13 +19,13 @@ public class FletteTrad implements Runnable{
     @Override
     public void run(){
         try{
-            while (monitor.hentAntSkalFlettes() > monitor.hentAntFlettet()){
-                System.out.println(this + ": Fletter");
-                ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
+            System.out.println(this + ": Fletter");
+            ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
+            while (hms!=null){
                 HashMap<String, Subsekvens> hm = 
                     monitor.slaaSammen(hms.get(0), hms.get(1));
                 monitor.settInnFlettet(hm);
-                monitor.inkrementerAntFlettet();
+                hms = monitor.hentUtTo();
             }
         }
 

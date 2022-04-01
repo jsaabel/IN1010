@@ -4,12 +4,15 @@ import java.util.concurrent.locks.Condition;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.io.FileNotFoundException;
+import java.io.File; 
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.NoSuchElementException;
 
 public class Monitor2{
 
-    private SubsekvensRegister reg;
+    private ArrayList<HashMap<String, Subsekvens>> register;
     private Lock laas;  
-    public Condition flettingFerdig;
     private Condition minstTo;
 
     // NY / TEST
@@ -19,43 +22,18 @@ public class Monitor2{
     // Konstruktoer
     public Monitor2(){
 
-        reg = new SubsekvensRegister();
+        register = new ArrayList<HashMap<String, Subsekvens>>();
         laas = new ReentrantLock(); // TEMP true?
-        flettingFerdig = laas.newCondition();
 
     }
-    
-    public void settAntSkalFlettes(int ant){
-        this.antSkalFlettes = ant;
-    }
-
-    public int hentAntFlettet(){
-        return this.antFlettet;
-    }
-
-    public int hentAntSkalFlettes(){
-        return this.antSkalFlettes;
-    }
-
-    public void inkrementerAntFlettet(){
-        laas.lock();
-        try{
-            antFlettet++;
-            if (antFlettet == antSkalFlettes){
-                flettingFerdig.signalAll();
-            }
-        }
-        finally{
-            laas.unlock();}
-    }
-
 
     // Sett inn HashMap
     public void settInn(HashMap<String, Subsekvens> hm){
         
         laas.lock();
+        System.out.println("Utfoerer settInn");
         try{
-            reg.settInn(hm);
+            register.add(hm);
         }
 
         finally{
@@ -65,26 +43,28 @@ public class Monitor2{
 
     // Sett inn flettet HashMap
     // foreloepig samme som "vanlig" settInn .. hvorfor trengs denne?
-    public void settInnFlettet(HashMap<String, Subsekvens> hm){
-
-        laas.lock();
-        try{
-            reg.settInn(hm);
-        }
-
-        finally{
-            laas.unlock();
-        }
-    }
+     public void settInnFlettet(HashMap<String, Subsekvens> hm){
+ 
+         laas.lock();
+        System.out.println("Utfoerer settInnFlettet");
+         try{
+             settInn(hm);
+             antFlettet++;
+         }
+ 
+         finally{
+             laas.unlock();
+         }
+     }
     
     // Ta ut HashMap 
     public HashMap<String, Subsekvens> taUt(){
 
         laas.lock();
+        System.out.println("Utfoerer taUt");
 
         try{
-            HashMap<String, Subsekvens> res = reg.taUt();
-            return res; // foerste element
+            return register.remove(0); // foerste element
         }
 
         finally{
@@ -96,11 +76,16 @@ public class Monitor2{
             throws InterruptedException{
 
         laas.lock();
+        System.out.println("Utfoerer hentUtTo");
+        System.out.println(antFlettet + "/" + antSkalFlettes);
 
         try{
-            //while (hentAntall() < 2){
-            //    minstTo.await();
-            //}
+            if (antFlettet == antSkalFlettes - 1){
+                return null;
+            }
+            while (hentAntall() < 2){
+                minstTo.await();
+            }
             ArrayList<HashMap<String, Subsekvens>> hms = 
                 new ArrayList<HashMap<String, Subsekvens>>();
             hms.add(taUt());
@@ -116,45 +101,64 @@ public class Monitor2{
     // Returnere antall HashMaps
     // OBS TEMP trenger man lock her??
     public int hentAntall(){
-
-        laas.lock();
-
-        try{
-            return reg.hentAntall();
-        }
-        finally{
-            laas.unlock();
-        }
+        return register.size();
     }
 
-    // TEMP OBS Tror kanskje ikke denne trengs, siden HMs blir lest inn av traad?
     public HashMap<String, Subsekvens> lesInnImmunrepertoar(String filnavn)
         throws FileNotFoundException{
+            HashMap<String, Subsekvens> hm = new HashMap<String, Subsekvens>();
+            File innFil = new File(filnavn);
+            Scanner inn = new Scanner(innFil);
 
-        laas.lock();
+            laas.lock();
+            try{
+                antSkalFlettes++;
+                while (inn.hasNextLine()){
 
-        try{
-            return reg.lesInnImmunrepertoar(filnavn);
+                    String linje = inn.nextLine();
+                    
+                    // Stopper hvis linjen er kortere enn 3 tegn
+                    if (linje.length() < 3){
+                        break; // implementer IOException her?
+                    }
+
+                    for (int i=0; i < linje.length() - 2; i++){
+                        String ss = linje.substring(i, i + 3);
+
+                        if (!hm.containsKey(ss)){
+                            Subsekvens sk = new Subsekvens(ss);
+                            hm.put(ss, sk);
+                        }
+                    }
+                }
+                return hm;
+            }
+            finally{
+                laas.unlock();
+            }
+ 
+    }
+    public static HashMap<String, Subsekvens> slaaSammen(
+            HashMap<String, Subsekvens> en, 
+            HashMap<String, Subsekvens> to){
+
+
+        System.out.println("Utfoerer slaaSammen");
+        for (Subsekvens subsek : en.values()){
+            if (!to.containsKey(subsek.subsekvens)){
+                to.put(subsek.subsekvens, subsek);
+            }
+            else {
+                Subsekvens aktSubsek = to.get(subsek.subsekvens);
+                aktSubsek.endreForekomster(subsek.hentForekomster());
+            }
         }
 
-        finally{
-            laas.unlock();
-        }
+        return to;
+
+
     }
 
-    public HashMap<String, Subsekvens> slaaSammen(
-            HashMap<String, Subsekvens> en, HashMap<String, Subsekvens> to){
-
-        laas.lock();
-
-        try{
-            return reg.slaaSammen(en, to);
-        }
-
-        finally{
-            laas.unlock();
-        }
-    }
 
 }    
 
