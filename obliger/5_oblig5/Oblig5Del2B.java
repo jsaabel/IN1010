@@ -9,11 +9,13 @@ public class Oblig5Del2B{
         
         Monitor2 monitor = new Monitor2();
 
+        int antFletteTrader = 4;
         File f = new File(navnPaaMappe);
         String[] filer = f.list();
 
         // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
         CountDownLatch latch = new CountDownLatch(filer.length);
+        CountDownLatch fletteLatch = new CountDownLatch(antFletteTrader);
         int antFiler = 0; // TEMP
         for (String fil : filer){
 
@@ -39,6 +41,7 @@ public class Oblig5Del2B{
 
         // Barriere: Venter paa alle lesetrad foer fletting
         latch.await();
+        System.out.println("Innlesing ferdig");
           
 
         // Fletting
@@ -48,13 +51,14 @@ public class Oblig5Del2B{
         // (while condition i try-blokk)
         // Hva med lese-traadene?
         //FletteTrad fletteTrad = new FletteTrad(monitor);
-        Runnable fletting = new FletteTrad(monitor);
-        new Thread(fletting).start();
-        new Thread(fletting).start();
+        Runnable fletting = new FletteTrad(monitor, fletteLatch);
+        for (int i=0; i < antFletteTrader; i++){
+            new Thread(fletting).start();
+        }
 
 
+        fletteLatch.await();
         // Barriere (tbi): Vent til fletting er ferdig
-        Thread.sleep(5000);
         // monitor.flettingFerdig.await();
         System.out.println(monitor.hentAntall());
         HashMap<String, Subsekvens> res = monitor.taUt();

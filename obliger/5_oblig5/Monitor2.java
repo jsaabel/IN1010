@@ -13,11 +13,6 @@ public class Monitor2{
 
     private ArrayList<HashMap<String, Subsekvens>> register;
     private Lock laas;  
-    private Condition minstTo;
-
-    // NY / TEST
-    private int antFlettet;
-    private int antSkalFlettes;
 
     // Konstruktoer
     public Monitor2(){
@@ -31,9 +26,9 @@ public class Monitor2{
     public void settInn(HashMap<String, Subsekvens> hm){
         
         laas.lock();
-        System.out.println("Utfoerer settInn");
         try{
             register.add(hm);
+            System.out.println("Utfoert settInn");
         }
 
         finally{
@@ -45,16 +40,15 @@ public class Monitor2{
     // foreloepig samme som "vanlig" settInn .. hvorfor trengs denne?
      public void settInnFlettet(HashMap<String, Subsekvens> hm){
  
-         laas.lock();
-        System.out.println("Utfoerer settInnFlettet");
-         try{
-             settInn(hm);
-             antFlettet++;
-         }
+        laas.lock();
+        try{
+            settInn(hm);
+            System.out.println("Utfoerer settInnFlettet");
+        }
  
-         finally{
+        finally{
              laas.unlock();
-         }
+        }
      }
     
     // Ta ut HashMap 
@@ -77,14 +71,11 @@ public class Monitor2{
 
         laas.lock();
         System.out.println("Utfoerer hentUtTo");
-        System.out.println(antFlettet + "/" + antSkalFlettes);
 
         try{
-            if (antFlettet == antSkalFlettes - 1){
-                return null;
-            }
             while (hentAntall() < 2){
-                minstTo.await();
+                    System.out.println("hentUtTo: null");
+                    return null;
             }
             ArrayList<HashMap<String, Subsekvens>> hms = 
                 new ArrayList<HashMap<String, Subsekvens>>();
@@ -112,7 +103,6 @@ public class Monitor2{
 
             laas.lock();
             try{
-                antSkalFlettes++;
                 while (inn.hasNextLine()){
 
                     String linje = inn.nextLine();
