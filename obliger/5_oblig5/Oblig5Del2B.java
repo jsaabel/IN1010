@@ -14,23 +14,17 @@ public class Oblig5Del2B{
         String[] filer = f.list();
 
         // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
-        CountDownLatch latch = new CountDownLatch(filer.length);
         CountDownLatch fletteLatch = new CountDownLatch(antFletteTrader);
         int antFiler = 0; // TEMP
         for (String fil : filer){
 
             if (fil.equals("metadata.csv")){
-                latch.countDown();
                 continue; // Gjoer det enkelt her. Forandres senere.
             }
 
-            antFiler++; // TEMP
-
             try{
-                LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor,
-                        latch);
+                LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor);
                 new Thread(trad).start();
-                
             }
 
             catch(Exception e){
@@ -40,7 +34,7 @@ public class Oblig5Del2B{
 
 
         // Barriere: Venter paa alle lesetrad foer fletting
-        latch.await();
+        //latch.await();
         System.out.println("Innlesing ferdig");
           
 
