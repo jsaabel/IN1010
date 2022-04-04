@@ -13,12 +13,14 @@ public class Monitor2{
 
     private ArrayList<HashMap<String, Subsekvens>> register;
     private Lock laas;  
+    private Condition sattInnNy;
 
     // Konstruktoer
     public Monitor2(){
 
         register = new ArrayList<HashMap<String, Subsekvens>>();
         laas = new ReentrantLock(); 
+        sattInnNy = laas.newCondition();
 
     }
 
@@ -29,6 +31,7 @@ public class Monitor2{
         try{
             register.add(hm);
             System.out.println("Utfoert settInn");
+            sattInnNy.notifyAll();
         }
 
         finally{
@@ -43,7 +46,8 @@ public class Monitor2{
         laas.lock();
         try{
             settInn(hm);
-            System.out.println("Utfoerer settInnFlettet");
+            System.out.println("Utfoert settInnFlettet");
+            sattInnNy.notifyAll();
         }
  
         finally{
@@ -58,35 +62,38 @@ public class Monitor2{
         System.out.println("Utfoerer taUt");
 
         try{
+            while (hentAntall() == 0){
+                System.out.println("taUt venter");
+                sattInnNy.await();
+            }
+            System.out.println("taUt returnerer");
             return register.remove(0); // foerste element
         }
 
+        catch (InterruptedException e){
+            System.out.println("taUtto interrupted");}
         finally{
             laas.unlock();
+            return null;
         }
+
     }
 
     public ArrayList<HashMap<String, Subsekvens>> hentUtTo() 
             throws InterruptedException{
 
-        laas.lock();
+        //laas.lock();
         System.out.println("Utfoerer hentUtTo");
 
-        try{
-            if (hentAntall() < 2){
-                    System.out.println("hentUtTo: null");
-                    return null;
-            }
-            ArrayList<HashMap<String, Subsekvens>> hms = 
-                new ArrayList<HashMap<String, Subsekvens>>();
-            hms.add(taUt());
-            hms.add(taUt());
-            return hms;
-        }
+        ArrayList<HashMap<String, Subsekvens>> hms = 
+            new ArrayList<HashMap<String, Subsekvens>>();
+        hms.add(taUt());
+        hms.add(taUt());
+        return hms;
 
-        finally{
-            laas.unlock();
-        }
+        // finally{
+        //     laas.unlock();
+        // }
     }
     
     // Returnere antall HashMaps

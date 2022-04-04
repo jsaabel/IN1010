@@ -27,41 +27,19 @@ public class Oblig5Del2B{
             new Thread(trad).start();
         }
 
-        Runnable fletting = new FletteTrad(monitor, fletteLatch);
-        for (int i=0; i < antFletteTrader; i++){
-            new Thread(fletting).start();
-        }
-
-        // Burde latchen og innlesingen flyttes inn i Monitor-klassen?
-        //for (String fil : filer){
-
-        //    if (fil.equals("metadata.csv")){
-        //        continue; // Gjoer det enkelt her. Forandres senere.
-        //    }
-
-        //    try{
-        //        LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + fil, monitor);
-        //        new Thread(trad).start();
-        //    }
-
-        //    catch(Exception e){
-        //        System.out.println(e);
-        //    }
-        //}
-
-
-        // Barriere: Venter paa alle lesetrad foer fletting
-        //latch.await();
-        //System.out.println("Innlesing ferdig");
-          
-
-        // Fletting
-        // Fortsett her, bli kvitt CountDownLatch.
-        // Fix logikk (hvordan vaere sikker paa at det ikke er flere?)
-        // Traad run metode: ikke bare en iterasjon?
-        // (while condition i try-blokk)
-        // Hva med lese-traadene?
-        //FletteTrad fletteTrad = new FletteTrad(monitor);
+        // Runnable fletting = new FletteTrad(monitor, fletteLatch);
+        // for (int i=0; i < antFletteTrader; i++){
+        //     new Thread(fletting).start();
+        // }
+        FletteTrad trad1 = new FletteTrad(monitor, fletteLatch);
+        new Thread(trad1).start();
+        FletteTrad trad2 = new FletteTrad(monitor, fletteLatch);
+        new Thread(trad2).start();
+        FletteTrad trad3 = new FletteTrad(monitor, fletteLatch);
+        new Thread(trad3).start();
+        FletteTrad trad4 = new FletteTrad(monitor, fletteLatch);
+        new Thread(trad4).start();
+            
 
 
         fletteLatch.await();

@@ -18,16 +18,12 @@ public class LeseTrad implements Runnable{
         try{
             HashMap<String, Subsekvens> hm = monitor.lesInnImmunrepertoar(filnavn);
             monitor.settInn(hm); 
-            Thread.sleep(50);
         }
 
         catch (FileNotFoundException e){
             System.out.println("Fil ikke funnet");
         }
 
-        catch (InterruptedException e){ // temp
-            System.out.println("Interrupted");
-        }
 
     }
 }    

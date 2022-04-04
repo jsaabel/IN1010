@@ -21,13 +21,10 @@ public class FletteTrad implements Runnable{
         try{
             System.out.println(Thread.currentThread().getName() + ": Starter");
             ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
-            while (hms!=null){
-                System.out.println(Thread.currentThread().getName() + ": Fletter");
-                HashMap<String, Subsekvens> hm = 
-                    monitor.slaaSammen(hms.get(0), hms.get(1));
-                monitor.settInnFlettet(hm);
-                hms = monitor.hentUtTo();
-            }
+            System.out.println(Thread.currentThread().getName() + ": Fletter");
+            HashMap<String, Subsekvens> hm = 
+                monitor.slaaSammen(hms.get(0), hms.get(1));
+            monitor.settInnFlettet(hm);
             latch.countDown();
         }
 
