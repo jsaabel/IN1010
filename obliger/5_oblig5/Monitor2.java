@@ -73,7 +73,7 @@ public class Monitor2{
         System.out.println("Utfoerer hentUtTo");
 
         try{
-            while (hentAntall() < 2){
+            if (hentAntall() < 2){
                     System.out.println("hentUtTo: null");
                     return null;
             }
