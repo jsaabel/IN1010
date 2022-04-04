@@ -19,10 +19,10 @@ public class FletteTrad implements Runnable{
     @Override
     public void run(){
         try{
-            System.out.println(this + ": Starter");
+            System.out.println(Thread.currentThread().getName() + ": Starter");
             ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
             while (hms!=null){
-                System.out.println(this + ": Fletter");
+                System.out.println(Thread.currentThread().getName() + ": Fletter");
                 HashMap<String, Subsekvens> hm = 
                     monitor.slaaSammen(hms.get(0), hms.get(1));
                 monitor.settInnFlettet(hm);
