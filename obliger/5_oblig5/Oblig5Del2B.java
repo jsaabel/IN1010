@@ -24,13 +24,18 @@ public class Oblig5Del2B{
             String[] biter = inn.nextLine().split(",");
             String filnavn = biter[0];
             LeseTrad trad = new LeseTrad(navnPaaMappe + "/" + filnavn, monitor);
-            new Thread(trad).start();
+            monitor.lagreLeseTrad(trad);
         }
 
         // Runnable fletting = new FletteTrad(monitor, fletteLatch);
         // for (int i=0; i < antFletteTrader; i++){
         //     new Thread(fletting).start();
         // }
+        for (LeseTrad t:monitor.getLeseTrader()){
+            new Thread(t).start();
+            Thread.sleep(100);
+        }
+
         FletteTrad trad1 = new FletteTrad(monitor, fletteLatch);
         new Thread(trad1).start();
         FletteTrad trad2 = new FletteTrad(monitor, fletteLatch);

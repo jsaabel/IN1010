@@ -12,6 +12,7 @@ import java.util.NoSuchElementException;
 public class Monitor2{
 
     private ArrayList<HashMap<String, Subsekvens>> register;
+    private ArrayList<LeseTrad> leseTrader;
     private Lock laas;  
     private Condition sattInnNy;
 
@@ -21,9 +22,22 @@ public class Monitor2{
         register = new ArrayList<HashMap<String, Subsekvens>>();
         laas = new ReentrantLock(); 
         sattInnNy = laas.newCondition();
+        leseTrader = new ArrayList<LeseTrad>();
 
     }
 
+    // Lagre lesetrader
+    public void lagreLeseTrad(LeseTrad trad){
+
+        leseTrader.add(trad);
+
+    }
+
+    // Hente lesetrader
+    public ArrayList<LeseTrad> getLeseTrader(){
+    
+        return leseTrader;
+    }
     // Sett inn HashMap
     public void settInn(HashMap<String, Subsekvens> hm){
         

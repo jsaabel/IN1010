@@ -16,6 +16,7 @@ public class LeseTrad implements Runnable{
     @Override
     public void run(){
         try{
+            System.out.println("Starter LeseTrad");
             HashMap<String, Subsekvens> hm = monitor.lesInnImmunrepertoar(filnavn);
             monitor.settInn(hm); 
         }
