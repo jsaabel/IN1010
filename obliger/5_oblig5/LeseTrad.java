@@ -19,6 +19,7 @@ public class LeseTrad implements Runnable{
             System.out.println("Starter LeseTrad");
             HashMap<String, Subsekvens> hm = monitor.lesInnImmunrepertoar(filnavn);
             monitor.settInn(hm); 
+            return;
         }
 
         catch (FileNotFoundException e){

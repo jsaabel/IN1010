@@ -26,7 +26,9 @@ public class Oblig5Del2B{
             monitor.lagreLeseTrad(trad);
         }
 
+        monitor.settAntallGangerAaSetteInnTo(monitor.getLeseTrader().size() - 1);
         CountDownLatch fletteLatch = new CountDownLatch(monitor.getLeseTrader().size() -1);
+        
         for (LeseTrad t:monitor.getLeseTrader()){
             new Thread(t).start();
         }
@@ -42,6 +44,7 @@ public class Oblig5Del2B{
         new Thread(trad4).start();
 
         fletteLatch.await();
+        System.out.println("FletteLatch avsluttet");
         // Barriere (tbi): Vent til fletting er ferdig
         // monitor.flettingFerdig.await();
         System.out.println(monitor.hentAntall());
@@ -62,6 +65,9 @@ public class Oblig5Del2B{
         System.out.println("Sekvensen med flest forekomster i mappen "
                 + navnPaaMappe + " var "+ flest_sekv
                 + " (" + flest + ").");
+
+        System.exit(1);
+
     }
 
 }    

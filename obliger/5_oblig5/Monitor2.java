@@ -14,6 +14,8 @@ public class Monitor2{
     private ArrayList<HashMap<String, Subsekvens>> register;
     private ArrayList<LeseTrad> leseTrader;
     private Lock laas;  
+    private Lock fletteAntallLaas;  
+    private int antallGangerAaSetteInnTo;
     private Condition sattInnNy;
 
     // Konstruktoer
@@ -23,7 +25,28 @@ public class Monitor2{
         laas = new ReentrantLock(); 
         sattInnNy = laas.newCondition();
         leseTrader = new ArrayList<LeseTrad>();
+        fletteAntallLaas = new ReentrantLock();
+        antallGangerAaSetteInnTo = 0;
 
+    }
+
+    public void settAntallGangerAaSetteInnTo(int antall){
+        this.antallGangerAaSetteInnTo = antall;
+
+    }
+
+    public void tellNedAntallGangerAaSetteInnTo(){
+        fletteAntallLaas.lock();
+        try{
+            antallGangerAaSetteInnTo--;
+        }
+        finally{
+            fletteAntallLaas.unlock();
+        }
+    }
+
+    public int hentAntallGangerAaSetteInnTo(){
+        return antallGangerAaSetteInnTo;
     }
 
     // Lagre lesetrader
