@@ -27,7 +27,7 @@ public class FletteTrad implements Runnable{
             System.out.println(Thread.currentThread().getName() + ": Fletter");
             HashMap<String, Subsekvens> hm = 
                 monitor.slaaSammen(hms.get(0), hms.get(1));
-            monitor.settInnFlettet(hm);
+            monitor.settInn(hm);
             monitor.tellNedAntallGangerAaSetteInnTo();
             latch.countDown();
             }
