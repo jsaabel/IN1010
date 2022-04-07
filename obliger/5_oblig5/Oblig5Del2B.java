@@ -11,7 +11,6 @@ public class Oblig5Del2B{
         Monitor2 monitor = new Monitor2();
 
         int antFletteTrader = 4;
-        CountDownLatch fletteLatch = new CountDownLatch(antFletteTrader);
 
 
         String navnPaaMappe = args[0];
@@ -27,15 +26,12 @@ public class Oblig5Del2B{
             monitor.lagreLeseTrad(trad);
         }
 
-        // Runnable fletting = new FletteTrad(monitor, fletteLatch);
-        // for (int i=0; i < antFletteTrader; i++){
-        //     new Thread(fletting).start();
-        // }
+        CountDownLatch fletteLatch = new CountDownLatch(monitor.getLeseTrader().size() -1);
         for (LeseTrad t:monitor.getLeseTrader()){
             new Thread(t).start();
-            Thread.sleep(100);
         }
 
+        // Starter flettetraader
         FletteTrad trad1 = new FletteTrad(monitor, fletteLatch);
         new Thread(trad1).start();
         FletteTrad trad2 = new FletteTrad(monitor, fletteLatch);
@@ -44,8 +40,6 @@ public class Oblig5Del2B{
         new Thread(trad3).start();
         FletteTrad trad4 = new FletteTrad(monitor, fletteLatch);
         new Thread(trad4).start();
-            
-
 
         fletteLatch.await();
         // Barriere (tbi): Vent til fletting er ferdig

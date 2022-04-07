@@ -45,7 +45,7 @@ public class Monitor2{
         try{
             register.add(hm);
             System.out.println("Utfoert settInn");
-            sattInnNy.notifyAll();
+            sattInnNy.signalAll();
         }
 
         finally{
@@ -61,7 +61,7 @@ public class Monitor2{
         try{
             settInn(hm);
             System.out.println("Utfoert settInnFlettet");
-            sattInnNy.notifyAll();
+            sattInnNy.signalAll();
         }
  
         finally{
@@ -75,39 +75,46 @@ public class Monitor2{
         laas.lock();
         System.out.println("Utfoerer taUt");
 
+        HashMap<String, Subsekvens> hm = null;
         try{
             while (hentAntall() == 0){
                 System.out.println("taUt venter");
                 sattInnNy.await();
             }
             System.out.println("taUt returnerer");
-            return register.remove(0); // foerste element
         }
 
         catch (InterruptedException e){
-            System.out.println("taUtto interrupted");}
+            System.out.println("taUt interrupted");}
         finally{
             laas.unlock();
-            return null;
         }
+
+        return register.remove(0); // foerste element
 
     }
 
     public ArrayList<HashMap<String, Subsekvens>> hentUtTo() 
             throws InterruptedException{
 
-        //laas.lock();
-        System.out.println("Utfoerer hentUtTo");
+        laas.lock();
+        try{
+            while(hentAntall() < 2){
+                sattInnNy.await();
+            }
+            System.out.println("Utfoerer hentUtTo");
 
-        ArrayList<HashMap<String, Subsekvens>> hms = 
-            new ArrayList<HashMap<String, Subsekvens>>();
-        hms.add(taUt());
-        hms.add(taUt());
-        return hms;
+            ArrayList<HashMap<String, Subsekvens>> hms = 
+                new ArrayList<HashMap<String, Subsekvens>>();
+            hms.add(taUt());
+            hms.add(taUt());
 
-        // finally{
-        //     laas.unlock();
-        // }
+            return hms;
+        }
+
+        finally{
+             laas.unlock();
+        }
     }
     
     // Returnere antall HashMaps
@@ -122,33 +129,27 @@ public class Monitor2{
             File innFil = new File(filnavn);
             Scanner inn = new Scanner(innFil);
 
-            laas.lock();
-            try{
-                while (inn.hasNextLine()){
+            while (inn.hasNextLine()){
 
-                    String linje = inn.nextLine();
-                    
-                    // Stopper hvis linjen er kortere enn 3 tegn
-                    if (linje.length() < 3){
-                        break; // implementer IOException her?
-                    }
+                String linje = inn.nextLine();
+                
+                // Stopper hvis linjen er kortere enn 3 tegn
+                if (linje.length() < 3){
+                    break; // implementer IOException her?
+                }
 
-                    for (int i=0; i < linje.length() - 2; i++){
-                        String ss = linje.substring(i, i + 3);
+                for (int i=0; i < linje.length() - 2; i++){
+                    String ss = linje.substring(i, i + 3);
 
-                        if (!hm.containsKey(ss)){
-                            Subsekvens sk = new Subsekvens(ss);
-                            hm.put(ss, sk);
-                        }
+                    if (!hm.containsKey(ss)){
+                        Subsekvens sk = new Subsekvens(ss);
+                        hm.put(ss, sk);
                     }
                 }
-                return hm;
             }
-            finally{
-                laas.unlock();
-            }
- 
+            return hm;
     }
+
     public static HashMap<String, Subsekvens> slaaSammen(
             HashMap<String, Subsekvens> en, 
             HashMap<String, Subsekvens> to){
