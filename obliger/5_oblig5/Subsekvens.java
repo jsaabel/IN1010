@@ -1,6 +1,5 @@
 /**
  * Klasse som kan ta vare paa en subsekvens og et antall.
- * ...
  */
 public class Subsekvens{
 

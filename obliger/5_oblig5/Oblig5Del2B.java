@@ -10,15 +10,14 @@ public class Oblig5Del2B{
         
         Monitor2 monitor = new Monitor2();
 
-        int antFletteTrader = 4;
+        int ANTFLETTETRADER = 4;
 
-
+        // Innlesing av filer og setup
         String navnPaaMappe = args[0];
-        
-
-        //File f = new File(navnPaaMappe);
         File f = new File(navnPaaMappe + "/" + "metadata.csv");
         Scanner inn = new Scanner(f);
+
+        System.out.println("Leser inn " + navnPaaMappe + "... \n");
         while (inn.hasNextLine()){
             String[] biter = inn.nextLine().split(",");
             String filnavn = biter[0];
@@ -26,49 +25,44 @@ public class Oblig5Del2B{
             monitor.lagreLeseTrad(trad);
         }
 
-        monitor.settAntallGangerAaSetteInnTo(monitor.getLeseTrader().size() - 1);
-        CountDownLatch fletteLatch = new CountDownLatch(monitor.getLeseTrader().size() -1);
+        int antallFileriMappen = monitor.hentLeseTrader().size();
+
+        monitor.settAntallGangerAaSetteInnTo(antallFileriMappen - 1);
+        CountDownLatch fletteLatch = new CountDownLatch(antallFileriMappen - 1);
         
-        for (LeseTrad t:monitor.getLeseTrader()){
+        for (LeseTrad t:monitor.hentLeseTrader()){
             new Thread(t).start();
         }
 
         // Starter flettetraader
-        FletteTrad trad1 = new FletteTrad(monitor, fletteLatch);
-        new Thread(trad1).start();
-        FletteTrad trad2 = new FletteTrad(monitor, fletteLatch);
-        new Thread(trad2).start();
-        FletteTrad trad3 = new FletteTrad(monitor, fletteLatch);
-        new Thread(trad3).start();
-        FletteTrad trad4 = new FletteTrad(monitor, fletteLatch);
-        new Thread(trad4).start();
+        Runnable fletting = new FletteTrad(monitor, fletteLatch);
+        for (int i=0; i < ANTFLETTETRADER; i++){
+            new Thread(fletting).start();
+        }
 
+        // (Venter paa at innlesing, fletting osv avsluttes)
         fletteLatch.await();
-        System.out.println("FletteLatch avsluttet");
-        // Barriere (tbi): Vent til fletting er ferdig
-        // monitor.flettingFerdig.await();
-        System.out.println(monitor.hentAntall());
+        
+        // Henter ut og "analyserer" den siste/gjenstaaende HashMappen
         HashMap<String, Subsekvens> res = monitor.taUt();
-
 
         int flest = 0;
         String flest_sekv = null;
+
         for (Subsekvens subsek: res.values()){
-        
             if (subsek.hentForekomster() > flest){
                 flest = subsek.hentForekomster();
                 flest_sekv = subsek.subsekvens;
-            
             }
         }
 
-        System.out.println("Sekvensen med flest forekomster i mappen "
+        // Skriver ut fasit og avslutter programmet
+        System.out.println("\nFletting avsluttet.\n" 
+                + "\nSekvensen med flest forekomster i mappen "
                 + navnPaaMappe + " var "+ flest_sekv
                 + " (" + flest + ").");
 
         System.exit(1);
-
     }
-
 }    
 

@@ -1,9 +1,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.File; 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.NoSuchElementException;
 import java.io.FileNotFoundException;
 
 /**
@@ -48,7 +46,7 @@ public class SubsekvensRegister{
             Scanner inn = new Scanner(innFil);
 
             while (inn.hasNextLine()){
-
+                
                 String linje = inn.nextLine();
                 
                 // Stopper hvis linjen er kortere enn 3 tegn
@@ -57,6 +55,7 @@ public class SubsekvensRegister{
                 }
 
                 for (int i=0; i < linje.length() - 2; i++){
+
                     String ss = linje.substring(i, i + 3);
 
                     if (!hm.containsKey(ss)){
@@ -66,9 +65,6 @@ public class SubsekvensRegister{
                 }
             }
 
-            //settInn(hm);
-
-            //System.out.println("Subsekvensregister: Returning hm");
             return hm;
         }
 
@@ -79,9 +75,11 @@ public class SubsekvensRegister{
                 HashMap<String, Subsekvens> to){
 
             for (Subsekvens subsek : en.values()){
+
                 if (!to.containsKey(subsek.subsekvens)){
                     to.put(subsek.subsekvens, subsek);
                 }
+
                 else {
                     Subsekvens aktSubsek = to.get(subsek.subsekvens);
                     aktSubsek.endreForekomster(subsek.hentForekomster());
@@ -89,8 +87,5 @@ public class SubsekvensRegister{
             }
 
             return to;
-
         }
-
 }    
-
