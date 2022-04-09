@@ -154,5 +154,30 @@ public class Monitor2{
 
         return register.slaaSammen(en, to);
     }
+
+    // Analyser siste HashMap
+    public String analyserSiste(String navnPaaMappe){
+        // Henter ut og "analyserer" den siste/gjenstaaende HashMappen
+        HashMap<String, Subsekvens> res = taUt();
+
+        int flest = 0;
+        String flest_sekv = null;
+
+        for (Subsekvens subsek: res.values()){
+            if (subsek.hentForekomster() > flest){
+                flest = subsek.hentForekomster();
+                flest_sekv = subsek.subsekvens;
+            }
+        }
+
+        // Skriver ut fasit og avslutter programmet
+        String result = 
+        "\nFletting avsluttet.\n" 
+        + "\nSekvensen med flest forekomster i mappen "
+        + navnPaaMappe + " var "+ flest_sekv
+        + " (" + flest + ").";
+
+        return result;
+    }
 }    
 
