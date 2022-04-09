@@ -156,28 +156,39 @@ public class Monitor2{
     }
 
     // Analyser siste HashMap
-    public String analyserSiste(String navnPaaMappe){
-        // Henter ut og "analyserer" den siste/gjenstaaende HashMappen
-        HashMap<String, Subsekvens> res = taUt();
+    // public String analyserSiste(String navnPaaMappe){
+    //     // Henter ut og "analyserer" den siste/gjenstaaende HashMappen
+    //     HashMap<String, Subsekvens> res = taUt();
 
-        int flest = 0;
-        String flest_sekv = null;
+    //     // Gaa gjennom subsekvensene og utfoer binomial test
+    //     for (String subsek: res.keySet()){
 
-        for (Subsekvens subsek: res.values()){
-            if (subsek.hentForekomster() > flest){
-                flest = subsek.hentForekomster();
-                flest_sekv = subsek.subsekvens;
-            }
-        }
+    //         int antForsok = res.get(subsek).hentForekomsterl)
 
-        // Skriver ut fasit og avslutter programmet
-        String result = 
-        "\nFletting avsluttet.\n" 
-        + "\nSekvensen med flest forekomster i mappen "
-        + navnPaaMappe + " var "+ flest_sekv
-        + " (" + flest + ").";
+    //     }
+    //     
+    //     // int flest = 0;
+    //     // String flest_sekv = null;
 
-        return result;
-    }
+    //     // for (Subsekvens subsek: res.values()){
+    //     //     if (subsek.hentForekomster() > flest){
+    //     //         flest = subsek.hentForekomster();
+    //     //         flest_sekv = subsek.subsekvens;
+    //     //     }
+    //     // }
+
+    //     // Skriver ut fasit og avslutter programmet
+    //     String result = 
+    //     "\nFletting avsluttet.\n" 
+    //     + "\nSekvensen med flest forekomster i mappen "
+    //     + navnPaaMappe + " var "+ flest_sekv
+    //     + " (" + flest + ").\n";
+
+    //     for (Subsekvens subsek: res.values()){
+    //         result += subsek.subsekvens + " " + subsek.hentForekomster() + " ";
+    //     }
+
+    //     return result;
+    // }
 }    
 

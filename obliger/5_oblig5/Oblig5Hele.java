@@ -3,6 +3,8 @@ import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import org.apache.commons.math3.stat.inference.BinomialTest;
+import org.apache.commons.math3.stat.inference.AlternativeHypothesis;
 
 public class Oblig5Hele{
     public static void main(String[] args) throws InterruptedException,
@@ -22,6 +24,9 @@ public class Oblig5Hele{
         while (inn.hasNextLine()){
 
             String[] biter = inn.nextLine().split(",");
+            if (biter.length != 2){
+                continue;
+            }
             String filnavn = biter[0];
             String status = biter[1];
 
@@ -71,11 +76,38 @@ public class Oblig5Hele{
         fletteLatch_true.await();
         fletteLatch_false.await();
         
-        System.out.println(monitor_true.analyserSiste(navnPaaMappe));
-        System.out.println(monitor_false.analyserSiste(navnPaaMappe));
+        // System.out.println(monitor_true.analyserSiste(navnPaaMappe));
+        // System.out.println(monitor_false.analyserSiste(navnPaaMappe));
+
+        kjoerSluttAnalyse(monitor_true, monitor_false);
         
 
         System.exit(1);
+    }
+
+    public void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false){
+
+        hm_true = monitor_true.taUt();
+        hm_false = monitor_false.taUt();
+
+        // Gaa gjennom subsekvensene og utfoer binomial test
+        for (String subsek: hm_true.keySet()){
+
+            int antITrue = hm_true.get(subsek).hentForekomster();
+            int antIFalse = 0;
+
+            if (hm_false.containsKey(subsek)){
+                antIFalse = hm_false.get(subsek).hentForekomster();
+            }
+
+            int antForsok = antITrue + antIFalse;
+            int antSuksesser = antITrue;
+            double sannsynlighet = 0.5;
+            AlternativeHypothesis alt = AlternativeHypothesis.GREATER_THAN;
+
+            double p = BinomialTest(antForsok, antSuksesser, sannsynlighet, alt);
+            System.out.println(p);
+        }
     }
 }    
 
