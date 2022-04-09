@@ -85,10 +85,10 @@ public class Oblig5Hele{
         System.exit(1);
     }
 
-    public void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false){
+    public static void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false){
 
-        hm_true = monitor_true.taUt();
-        hm_false = monitor_false.taUt();
+        HashMap<String, Subsekvens> hm_true = monitor_true.taUt();
+        HashMap<String, Subsekvens> hm_false = monitor_false.taUt();
 
         // Gaa gjennom subsekvensene og utfoer binomial test
         for (String subsek: hm_true.keySet()){
@@ -105,7 +105,8 @@ public class Oblig5Hele{
             double sannsynlighet = 0.5;
             AlternativeHypothesis alt = AlternativeHypothesis.GREATER_THAN;
 
-            double p = BinomialTest(antForsok, antSuksesser, sannsynlighet, alt);
+            BinomialTest test = new BinomialTest();
+            double p = test.binomialTest(antForsok, antSuksesser, sannsynlighet, alt);
             System.out.println(p);
         }
     }
