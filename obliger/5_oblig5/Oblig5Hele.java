@@ -8,6 +8,7 @@ import org.apache.commons.math3.stat.inference.BinomialTest;
 import org.apache.commons.math3.stat.inference.AlternativeHypothesis;
 
 public class Oblig5Hele{
+
     public static void main(String[] args) throws InterruptedException,
            FileNotFoundException{
         
@@ -48,7 +49,6 @@ public class Oblig5Hele{
         int antallFileriMappen_false = monitor_false.hentLeseTrader().size();
         monitor_true.settAntallGangerAaSetteInnTo(antallFileriMappen_true - 1);
         monitor_false.settAntallGangerAaSetteInnTo(antallFileriMappen_false - 1);
-        //OBS
         CountDownLatch fletteLatch_true = new CountDownLatch(
                 antallFileriMappen_true - 1);
         CountDownLatch fletteLatch_false = new CountDownLatch(
@@ -65,10 +65,13 @@ public class Oblig5Hele{
 
         // Starter flettetraader
         Runnable fletting_true = new FletteTrad(monitor_true, fletteLatch_true);
+
         for (int i=0; i < ANTFLETTETRADER; i++){
             new Thread(fletting_true).start();
         }
+
         Runnable fletting_false = new FletteTrad(monitor_false, fletteLatch_false);
+
         for (int i=0; i < ANTFLETTETRADER; i++){
             new Thread(fletting_false).start();
         }
@@ -78,10 +81,8 @@ public class Oblig5Hele{
         fletteLatch_false.await();
 
         System.out.println("Fletting avsluttet.");
-        
-        // System.out.println(monitor_true.analyserSiste(navnPaaMappe));
-        // System.out.println(monitor_false.analyserSiste(navnPaaMappe));
 
+        // Kjoerer sluttanalyse
         kjoerSluttAnalyse(monitor_true, monitor_false, antallFileriMappen_true,
                 antallFileriMappen_false);
         
@@ -89,6 +90,7 @@ public class Oblig5Hele{
         System.exit(1);
     }
 
+    // Metode for sluttanalyse
     public static void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false
             , int antallFileriMappen_true, int antallFileriMappen_false){
 
@@ -125,7 +127,6 @@ public class Oblig5Hele{
                 System.out.println("--> " + Math.round(prosentITrue) 
                         + "% forekomst hos syke vs "
                         + Math.round(prosentIFalse) + "% forekomst hos friske.");
-
             }
         }
     }    
