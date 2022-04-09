@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.concurrent.CountDownLatch;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
+import java.lang.Math;
 import org.apache.commons.math3.stat.inference.BinomialTest;
 import org.apache.commons.math3.stat.inference.AlternativeHypothesis;
 
@@ -75,21 +76,26 @@ public class Oblig5Hele{
         // (Venter paa at innlesing, fletting osv avsluttes)
         fletteLatch_true.await();
         fletteLatch_false.await();
+
+        System.out.println("Fletting avsluttet.");
         
         // System.out.println(monitor_true.analyserSiste(navnPaaMappe));
         // System.out.println(monitor_false.analyserSiste(navnPaaMappe));
 
-        kjoerSluttAnalyse(monitor_true, monitor_false);
+        kjoerSluttAnalyse(monitor_true, monitor_false, antallFileriMappen_true,
+                antallFileriMappen_false);
         
 
         System.exit(1);
     }
 
-    public static void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false){
+    public static void kjoerSluttAnalyse(Monitor2 monitor_true, Monitor2 monitor_false
+            , int antallFileriMappen_true, int antallFileriMappen_false){
 
         HashMap<String, Subsekvens> hm_true = monitor_true.taUt();
         HashMap<String, Subsekvens> hm_false = monitor_false.taUt();
-
+        
+        System.out.println("\n <--|||... ANALYSE ...|||-->\n");
         // Gaa gjennom subsekvensene og utfoer binomial test
         for (String subsek: hm_true.keySet()){
 
@@ -107,8 +113,21 @@ public class Oblig5Hele{
 
             BinomialTest test = new BinomialTest();
             double p = test.binomialTest(antForsok, antSuksesser, sannsynlighet, alt);
-            System.out.println(p);
+
+            // Skriv ut signifikante Subsekvenser
+            if (p < 0.05){
+                System.out.println("Fant dominant subsekvens " + subsek 
+                        + " med p-verdi: " + p +"...");
+                double prosentITrue = (double) antITrue / 
+                    antallFileriMappen_true * 100;
+                double prosentIFalse = (double) antIFalse / 
+                    antallFileriMappen_false *100;
+                System.out.println("--> " + Math.round(prosentITrue) 
+                        + "% forekomst hos syke vs "
+                        + Math.round(prosentIFalse) + "% forekomst hos friske.");
+
+            }
         }
-    }
+    }    
 }    
 

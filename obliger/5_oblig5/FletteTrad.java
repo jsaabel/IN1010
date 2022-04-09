@@ -25,6 +25,7 @@ public class FletteTrad implements Runnable{
 
         try{
 
+            System.out.println("Starter flettetraad...");
             while (monitor.hentAntallGangerAaSetteInnTo() > 0){ 
 
                 ArrayList<HashMap<String, Subsekvens>> hms = monitor.hentUtTo();
@@ -32,8 +33,8 @@ public class FletteTrad implements Runnable{
                     monitor.slaaSammen(hms.get(0), hms.get(1));
                 monitor.settInn(hm);
                 monitor.tellNedAntallGangerAaSetteInnTo();
-                System.out.println("Gjenstaaende fletteprosesser: "
-                        + monitor.hentAntallGangerAaSetteInnTo());
+                //System.out.println("Gjenstaaende fletteprosesser: "
+                        //+ monitor.hentAntallGangerAaSetteInnTo());
                 latch.countDown();
             }
         }
