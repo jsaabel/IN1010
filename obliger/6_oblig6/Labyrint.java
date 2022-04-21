@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 /**
  * Labyrint
@@ -12,7 +13,7 @@ public class Labyrint {
   // Konstruktoer
   public Labyrint() throws FileNotFoundException{ // String filnavn
 
-    File f = new File("./labyrinter/1.in");
+    File f = new File("./labyrinter/2.in");
     Scanner inn = new Scanner(f);
 
     String[] dimensjoner = inn.nextLine().split(" ");
@@ -32,17 +33,17 @@ public class Labyrint {
         // Special case: Aapning
         if (c.equals('.') && (pos[0] == 0 || pos[0] == (dim_x - 1) || pos[1] == 0 || pos[1] == (dim_y - 1))){
           ruter[l][i] = new Aapning(pos);
-          System.out.println("Fant aapning: " + pos[0] + pos[1]);
+          // System.out.println("Fant aapning: " + pos[0] + pos[1]);
         }
 
         else if (c.equals('.')){
           ruter[l][i] = new HvitRute(pos);
-          System.out.println("Fant HvitRute: " + pos[0] + pos[1]);
+          // System.out.println("Fant HvitRute: " + pos[0] + pos[1]);
         }
 
         else {
           ruter[l][i] = new SortRute(pos);
-          System.out.println("Fant SortRute: " + pos[0] + pos[1]);
+          // System.out.println("Fant SortRute: " + pos[0] + pos[1]);
         }
         
       }
@@ -51,8 +52,48 @@ public class Labyrint {
         
       }
     inn.close();
+
+
+    // sett naboer
+    for (int linje = 0; linje < dim_x; linje++){
+      for (int kolonne = 0; kolonne < dim_y; kolonne++){
+        Rute aktuellRute = ruter[linje][kolonne];
+
+        // nicht unbedingt elegant, aber effektiv..
+        try {
+          aktuellRute.addNabo(ruter[linje][kolonne+1]);
+          
+        } catch (IndexOutOfBoundsException e) {
+          ;
+        }
+        try {
+          aktuellRute.addNabo(ruter[linje][kolonne-1]);
+          
+        } catch (IndexOutOfBoundsException e) {
+          ;
+        }
+        try {
+          aktuellRute.addNabo(ruter[linje-1][kolonne]);
+          
+        } catch (IndexOutOfBoundsException e) {
+          ;
+        }
+        try {
+          aktuellRute.addNabo(ruter[linje+1][kolonne]);
+          
+        } catch (IndexOutOfBoundsException e) {
+          ;
+        }
+
+      }
     }
-    // ruter = new Rute[][];
+
+    Rute testRute = ruter[1][0];
+    ArrayList<Rute> list = testRute.getNaboer();
+    for (Rute r:list){
+      System.out.println(r);
+    }
+  }
 }
 
 
