@@ -20,9 +20,9 @@ public class Labyrint {
     int dim_y = Integer.parseInt(dimensjoner[1]);
     ruter = new Rute[dim_x][dim_y]; 
 
+    int l = 0;
     while (inn.hasNextLine()){
       // Loopnivaa 1: Linjer
-      int l = 0;
       String linje = inn.nextLine();
 
       // Loopnivaa 2: Ruter
@@ -46,8 +46,8 @@ public class Labyrint {
         }
         
       }
-
       l++;
+
         
       }
     inn.close();
