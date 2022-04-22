@@ -28,4 +28,12 @@ public abstract class Rute {
     return pos;
   }
 
+  public void finn(Rute fra){ // implementere her eller i s-klasser?
+
+    for (Rute n:naboer){
+      if(!(n == fra)){
+         n.finn(this);
+      }
+    }
+  }
 }

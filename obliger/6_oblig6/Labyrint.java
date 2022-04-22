@@ -25,28 +25,27 @@ public class Labyrint {
 
     int l = 0;
     while (inn.hasNextLine()){
-      // Loopnivaa 1: Linjer
       String linje = inn.nextLine();
 
-      // Loopnivaa 2: Ruter
       for (int i = 0; i < linje.length(); i++) {
         int[] pos = {l, i};
         Character c = linje.charAt(i);
-        // Special case: Aapning
+
         if (c.equals('.') && (pos[0] == 0 || pos[0] == (dim_x - 1) 
               || pos[1] == 0 || pos[1] == (dim_y - 1))){
           ruter[l][i] = new Aapning(this, pos);
-          // System.out.println("Fant aapning: " + pos[0] + pos[1]);
         }
 
         else if (c.equals('.')){
           ruter[l][i] = new HvitRute(this, pos);
-          // System.out.println("Fant HvitRute: " + pos[0] + pos[1]);
+        }
+
+        else if (c.equals('#')){
+          ruter[l][i] = new SortRute(this, pos);
         }
 
         else {
-          ruter[l][i] = new SortRute(this, pos);
-          // System.out.println("Fant SortRute: " + pos[0] + pos[1]);
+          System.out.println("Fant ugyldig tegn: pos " + pos[0] + "," + pos[1]);
         }
         
       }
@@ -91,12 +90,6 @@ public class Labyrint {
       }
     }
 
-    // Test av nabo-funksjonalitet
-    Rute testRute = ruter[1][0];
-    ArrayList<Rute> list = testRute.getNaboer();
-    for (Rute r:list){
-      System.out.println(r);
-    }
   }
 
   @Override
@@ -117,6 +110,11 @@ public class Labyrint {
       res += line;
       }
     return res;
+  }
+
+  public void finnUtveiFra(int rad, int kol){
+    Rute aktuellRute = ruter[rad][kol];
+    aktuellRute.finn(null);
   }
 }
 

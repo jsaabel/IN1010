@@ -12,6 +12,11 @@ public class SortRute extends Rute{
     return ("SortRute (" + pos[0] + ", " + pos[1] + ")");
   }
 
+  @Override
+  public void finn(Rute fra){
+    ;
+  }
+
 
   
 }
