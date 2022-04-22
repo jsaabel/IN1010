@@ -12,6 +12,9 @@ public class Labyrint {
   int dim_x;
   int dim_y;
 
+  // ...
+  boolean utveiFunnet;
+
 
   public void lesInn(String filnavn) throws FileNotFoundException{
 
@@ -110,11 +113,19 @@ public class Labyrint {
 
       else{
         String[] koord = input.split(" ");
-        System.out.println("Aapninger: ");
 
         try{
+          System.out.println("\nAapninger: ");
           finnUtveiFra(Integer.parseInt(koord[0]), Integer.parseInt(koord[1]));
-        } 
+
+          if (!utveiFunnet){
+            System.out.println("Ingen utvei funnet :(");
+          }
+          else{
+            skrivUtRekkefoelge();
+            nullstill();
+          }
+        }
 
         catch (ArrayIndexOutOfBoundsException | NumberFormatException e){
            System.out.println("Ugyldige koordinater! Proev igjen.");
@@ -127,6 +138,8 @@ public class Labyrint {
   }
 
   public void finnUtveiFra(int rad, int kol){
+
+    utveiFunnet = false;
     Rute aktuellRute = ruter[rad][kol];
     aktuellRute.finn(null);
   }
@@ -143,17 +156,63 @@ public class Labyrint {
         Rute aktuellRute = ruter[linje][kolonne];
 
         if (aktuellRute instanceof SortRute){
-          line += "#";
+          line += String.format("%4s", "#");
         } 
 
         else{
-          line += ".";
+          line += String.format("%4s", ".");
         }
       }
       line += "\n";
       res += line;
     }
     return res;
+  }
+
+  public void skrivUtRekkefoelge(){
+
+    String res = "";
+
+    for (int linje = 0; linje < dim_x; linje++){
+      String line = "";
+
+      for (int kolonne = 0; kolonne < dim_y; kolonne++){
+        Rute aktuellRute = ruter[linje][kolonne];
+
+        if (aktuellRute instanceof SortRute){
+          line += String.format("%4s", "#");
+        } 
+
+        else{
+          String rep = String.format("%4d", aktuellRute.getRekkefoelge());
+          line += rep; 
+        }
+      }
+      line += "\n";
+      res += line;
+    }
+    System.out.println("\nHer er labyrinten slik du gikk gjennom den : \n\n"
+        + res);
+
+
+  }
+
+  public void markerSomLoest(){
+    utveiFunnet = true;
+  }
+
+  public boolean loest(){
+    return utveiFunnet;
+  }
+
+  public void nullstill(){
+    
+    for (int linje = 0; linje < dim_x; linje++){
+      for (int kolonne = 0; kolonne < dim_y; kolonne++){
+        Rute aktuellRute = ruter[linje][kolonne];
+        aktuellRute.nullstill();
+      }
+    }
   }
 }
 

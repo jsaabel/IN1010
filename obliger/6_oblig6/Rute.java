@@ -5,10 +5,13 @@ import java.util.ArrayList;
  */
 public abstract class Rute {
 
+  static int teller;
+
   Labyrint lab;
   int[] pos;
   ArrayList<Rute> naboer;
   boolean besoekt;
+  int rekkefoelge;
 
   // KONSTRUKTOER
   public Rute(Labyrint lab, int[] pos){
@@ -36,6 +39,7 @@ public abstract class Rute {
     }
 
     besoekt = true;
+    rekkefoelge = ++teller;
 
     for (Rute n:naboer){
       if(!(n == fra)){
@@ -43,4 +47,15 @@ public abstract class Rute {
       }
     }
   }
+
+  public int getRekkefoelge(){
+
+    return rekkefoelge;
+  }
+
+  public void nullstill(){
+    this.besoekt = false;
+    teller = 0;
+  }
+
 }
