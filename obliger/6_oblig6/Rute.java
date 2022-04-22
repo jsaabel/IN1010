@@ -12,30 +12,31 @@ public abstract class Rute {
 
   // KONSTRUKTOER
   public Rute(Labyrint lab, int[] pos){
+
     this.lab = lab;
     this.pos = pos;
     this.naboer = new ArrayList<Rute>();
     this.besoekt = false;
   }
 
-  public ArrayList<Rute> getNaboer(){
-    return naboer;
-  }
-
   public void addNabo(Rute nabo){
+
     this.naboer.add(nabo);
   }
 
   public int[] getPos(){
+
     return pos;
   }
 
-  public void finn(Rute fra){ // implementere her eller i s-klasser?
+  public void finn(Rute fra){ 
 
     if (besoekt){
       return;
     }
+
     besoekt = true;
+
     for (Rute n:naboer){
       if(!(n == fra)){
          n.finn(this);

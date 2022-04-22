@@ -12,8 +12,8 @@ public class Labyrint {
   int dim_x;
   int dim_y;
 
-  // Konstruktoer
-  public Labyrint(String filnavn) throws FileNotFoundException{ // String filnavn
+
+  public void lesInn(String filnavn) throws FileNotFoundException{
 
     File f = new File(filnavn);
     Scanner inn = new Scanner(f);
@@ -24,6 +24,7 @@ public class Labyrint {
     ruter = new Rute[dim_x][dim_y]; 
 
     int l = 0;
+
     while (inn.hasNextLine()){
       String linje = inn.nextLine();
 
@@ -54,14 +55,16 @@ public class Labyrint {
         
       }
     inn.close();
+  }
 
+  public void settNaboer(){
 
-    // sett naboer
     for (int linje = 0; linje < dim_x; linje++){
       for (int kolonne = 0; kolonne < dim_y; kolonne++){
         Rute aktuellRute = ruter[linje][kolonne];
 
-        // nicht unbedingt elegant, aber effektiv..
+        // Litt "hacky", men enklere enn aa forholde seg til alle
+        // mulige tilfeller... 
         try {
           aktuellRute.addNabo(ruter[linje][kolonne+1]);
           
@@ -86,35 +89,71 @@ public class Labyrint {
         } catch (IndexOutOfBoundsException e) {
           ;
         }
-
       }
     }
 
   }
 
-  @Override
-  public String toString(){
-    String res = "";
-    for (int linje = 0; linje < dim_x; linje++){
-      String line = "";
-      for (int kolonne = 0; kolonne < dim_y; kolonne++){
-        Rute aktuellRute = ruter[linje][kolonne];
+  public void brukerDialog(){
 
-        if (aktuellRute instanceof SortRute){
-          line += "#";
-        } else{
-          line += ".";
+    Scanner inn = new Scanner(System.in);
+    Boolean polling = true;
+
+    while (polling){
+      System.out.println("Skriv inn koordinater <rad> <kolonne>"
+          + "('-1 for aa avslutte)");
+      String input = inn.nextLine();
+
+      if (input.equals("-1")){
+        polling = false;
+      } 
+
+      else{
+        String[] koord = input.split(" ");
+        System.out.println("Aapninger: ");
+
+        try{
+          finnUtveiFra(Integer.parseInt(koord[0]), Integer.parseInt(koord[1]));
+        } 
+
+        catch (ArrayIndexOutOfBoundsException | NumberFormatException e){
+           System.out.println("Ugyldige koordinater! Proev igjen.");
         }
+
       }
-      line += "\n";
-      res += line;
-      }
-    return res;
+    }
+    inn.close();
+
   }
 
   public void finnUtveiFra(int rad, int kol){
     Rute aktuellRute = ruter[rad][kol];
     aktuellRute.finn(null);
+  }
+
+  @Override
+  public String toString(){
+
+    String res = "";
+
+    for (int linje = 0; linje < dim_x; linje++){
+      String line = "";
+
+      for (int kolonne = 0; kolonne < dim_y; kolonne++){
+        Rute aktuellRute = ruter[linje][kolonne];
+
+        if (aktuellRute instanceof SortRute){
+          line += "#";
+        } 
+
+        else{
+          line += ".";
+        }
+      }
+      line += "\n";
+      res += line;
+    }
+    return res;
   }
 }
 
