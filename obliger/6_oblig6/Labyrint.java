@@ -13,9 +13,9 @@ public class Labyrint {
   int dim_y;
 
   // Konstruktoer
-  public Labyrint() throws FileNotFoundException{ // String filnavn
+  public Labyrint(String filnavn) throws FileNotFoundException{ // String filnavn
 
-    File f = new File("./labyrinter/2.in");
+    File f = new File(filnavn);
     Scanner inn = new Scanner(f);
 
     String[] dimensjoner = inn.nextLine().split(" ");
@@ -33,7 +33,8 @@ public class Labyrint {
         int[] pos = {l, i};
         Character c = linje.charAt(i);
         // Special case: Aapning
-        if (c.equals('.') && (pos[0] == 0 || pos[0] == (dim_x - 1) || pos[1] == 0 || pos[1] == (dim_y - 1))){
+        if (c.equals('.') && (pos[0] == 0 || pos[0] == (dim_x - 1) 
+              || pos[1] == 0 || pos[1] == (dim_y - 1))){
           ruter[l][i] = new Aapning(this, pos);
           // System.out.println("Fant aapning: " + pos[0] + pos[1]);
         }

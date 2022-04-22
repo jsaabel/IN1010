@@ -5,11 +5,11 @@ public class Oblig6 {
     
     Labyrint lab = null;
     try {
-      lab = new Labyrint();
+      lab = new Labyrint(args[0]);
     } catch (FileNotFoundException e) {
       //TODO: handle exception
     }
 
-    System.out.println(lab);
+    System.out.println("Slik ser labyrinten ut: \n" +lab);
   }
 }

@@ -7,4 +7,9 @@ public class HvitRute extends Rute{
     super(lab, pos);
   }
 
+  @Override
+  public String toString() {
+    return ("HvitRute (" + pos[0] + ", " + pos[1] + ")");
+  }
+
 }
