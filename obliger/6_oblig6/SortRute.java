@@ -3,8 +3,8 @@
  */
 public class SortRute extends Rute{
 
-  public SortRute(int[] pos){
-    super(pos);
+  public SortRute(Labyrint lab, int[] pos){
+    super(lab, pos);
   }
 
 

@@ -34,17 +34,17 @@ public class Labyrint {
         Character c = linje.charAt(i);
         // Special case: Aapning
         if (c.equals('.') && (pos[0] == 0 || pos[0] == (dim_x - 1) || pos[1] == 0 || pos[1] == (dim_y - 1))){
-          ruter[l][i] = new Aapning(pos);
+          ruter[l][i] = new Aapning(this, pos);
           // System.out.println("Fant aapning: " + pos[0] + pos[1]);
         }
 
         else if (c.equals('.')){
-          ruter[l][i] = new HvitRute(pos);
+          ruter[l][i] = new HvitRute(this, pos);
           // System.out.println("Fant HvitRute: " + pos[0] + pos[1]);
         }
 
         else {
-          ruter[l][i] = new SortRute(pos);
+          ruter[l][i] = new SortRute(this, pos);
           // System.out.println("Fant SortRute: " + pos[0] + pos[1]);
         }
         

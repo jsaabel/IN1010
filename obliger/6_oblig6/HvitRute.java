@@ -3,8 +3,8 @@
  */
 public class HvitRute extends Rute{
 
-  public HvitRute(int[] pos){
-    super(pos);
+  public HvitRute(Labyrint lab, int[] pos){
+    super(lab, pos);
   }
 
 }

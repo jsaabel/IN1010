@@ -5,11 +5,13 @@ import java.util.ArrayList;
  */
 public abstract class Rute {
 
+  Labyrint lab;
   int[] pos;
   ArrayList<Rute> naboer;
 
   // KONSTRUKTOER
-  public Rute(int[] pos){
+  public Rute(Labyrint lab, int[] pos){
+    this.lab = lab;
     this.pos = pos;
     this.naboer = new ArrayList<Rute>();
   }

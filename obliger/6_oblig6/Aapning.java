@@ -3,8 +3,8 @@
  */
 public class Aapning extends HvitRute{
 
-  public Aapning(int[] pos){
-    super(pos);
+  public Aapning(Labyrint lab, int[] pos){
+    super(lab, pos);
   }
 
   
