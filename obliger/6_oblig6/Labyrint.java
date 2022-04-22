@@ -9,6 +9,8 @@ import java.util.ArrayList;
 public class Labyrint {
 
   Rute[][] ruter;
+  int dim_x;
+  int dim_y;
 
   // Konstruktoer
   public Labyrint() throws FileNotFoundException{ // String filnavn
@@ -17,8 +19,8 @@ public class Labyrint {
     Scanner inn = new Scanner(f);
 
     String[] dimensjoner = inn.nextLine().split(" ");
-    int dim_x = Integer.parseInt(dimensjoner[0]);
-    int dim_y = Integer.parseInt(dimensjoner[1]);
+    dim_x = Integer.parseInt(dimensjoner[0]);
+    dim_y = Integer.parseInt(dimensjoner[1]);
     ruter = new Rute[dim_x][dim_y]; 
 
     int l = 0;
@@ -88,11 +90,32 @@ public class Labyrint {
       }
     }
 
+    // Test av nabo-funksjonalitet
     Rute testRute = ruter[1][0];
     ArrayList<Rute> list = testRute.getNaboer();
     for (Rute r:list){
       System.out.println(r);
     }
+  }
+
+  @Override
+  public String toString(){
+    String res = "";
+    for (int linje = 0; linje < dim_x; linje++){
+      String line = "";
+      for (int kolonne = 0; kolonne < dim_y; kolonne++){
+        Rute aktuellRute = ruter[linje][kolonne];
+
+        if (aktuellRute instanceof SortRute){
+          line += "#";
+        } else{
+          line += ".";
+        }
+      }
+      line += "\n";
+      res += line;
+      }
+    return res;
   }
 }
 
