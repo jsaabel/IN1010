@@ -14,6 +14,7 @@ public class Labyrint {
 
   // ...
   boolean utveiFunnet;
+  ArrayList<ArrayList<Tuppel>> utveier = new ArrayList<ArrayList<Tuppel>>();
 
 
   public void lesInn(String filnavn) throws FileNotFoundException{
@@ -103,7 +104,7 @@ public class Labyrint {
     Boolean polling = true;
 
     while (polling){
-      System.out.println("Skriv inn koordinater <rad> <kolonne>"
+      System.out.println("\nSkriv inn koordinater <rad> <kolonne>"
           + "('-1 for aa avslutte)");
       String input = inn.nextLine();
 
@@ -122,7 +123,7 @@ public class Labyrint {
             System.out.println("Ingen utvei funnet :(");
           }
           else{
-            skrivUtRekkefoelge();
+            // skrivUtRekkefoelge();
             nullstill();
           }
         }
@@ -142,6 +143,23 @@ public class Labyrint {
     utveiFunnet = false;
     Rute aktuellRute = ruter[rad][kol];
     aktuellRute.finn(null);
+
+    if (utveiFunnet){
+      System.out.println("\nUtveier:");
+      int index = 0;
+      for (ArrayList<Tuppel> utvei:utveier){
+        System.out.println("\nLoesning nr " + ++index + ":");
+        for (Tuppel t: utvei){
+          System.out.print(t + " ");
+        }
+      System.out.println();
+      }
+    }
+    if (utveiFunnet){
+      System.out.println("\n" + utveier.size() + " loesninger funnet");
+    }
+
+    nullstill();
   }
 
   @Override
@@ -213,6 +231,17 @@ public class Labyrint {
         aktuellRute.nullstill();
       }
     }
+    utveier = new ArrayList<ArrayList<Tuppel>>();
+  }
+
+  public void leggTilutvei(ArrayList<Tuppel> utvei){
+
+    utveier.add(utvei);
+  }
+
+  public ArrayList<ArrayList<Tuppel>> getUtveier(){
+
+    return this.utveier;
   }
 }
 

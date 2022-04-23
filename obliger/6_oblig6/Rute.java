@@ -12,6 +12,7 @@ public abstract class Rute {
   ArrayList<Rute> naboer;
   boolean besoekt;
   int rekkefoelge;
+  ArrayList<Tuppel> sti;
 
   // KONSTRUKTOER
   public Rute(Labyrint lab, int[] pos){
@@ -20,6 +21,7 @@ public abstract class Rute {
     this.pos = pos;
     this.naboer = new ArrayList<Rute>();
     this.besoekt = false;
+    this.sti = new ArrayList<Tuppel>();
   }
 
   public void addNabo(Rute nabo){
@@ -38,8 +40,20 @@ public abstract class Rute {
       return;
     }
 
+    try{
+      this.sti = new ArrayList<>(fra.getSti());
+      // System.out.println(this.sti);
+    }
+
+    catch (NullPointerException e){
+      ;
+    }
+    
     besoekt = true;
     rekkefoelge = ++teller;
+    
+    Tuppel tuppel = new Tuppel(pos[0], pos[1]);
+    this.sti.add(tuppel);
 
     for (Rute n:naboer){
       if(!(n == fra)){
@@ -51,6 +65,11 @@ public abstract class Rute {
   public int getRekkefoelge(){
 
     return rekkefoelge;
+  }
+
+  public ArrayList<Tuppel> getSti(){
+    // System.out.println("utfeoerer getSti");
+    return this.sti;
   }
 
   public void nullstill(){

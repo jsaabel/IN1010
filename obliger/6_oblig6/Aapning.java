@@ -9,9 +9,10 @@ public class Aapning extends HvitRute{
 
   @Override
   public void finn(Rute fra){
-    super.finn(this);
+    super.finn(fra);
     System.out.println("(" + pos[0] + "," + pos[1] + ")");
     lab.markerSomLoest();
+    lab.leggTilutvei(this.sti);
   }
 
   
