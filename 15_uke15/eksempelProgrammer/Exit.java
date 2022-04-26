@@ -8,22 +8,25 @@ class Exit {
             UIManager.setLookAndFeel(
                 UIManager.getCrossPlatformLookAndFeelClassName());
         } catch (Exception e) { System.exit(1); }
+
         JFrame vindu = new JFrame("Exit");
         vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         vindu.add(panel);
 
         JButton exitKnapp = new JButton("Exit");
-	class Stopper implements ActionListener {
-	    @Override
-	    public void actionPerformed (ActionEvent e) {
-		System.exit(0);
-	    }
-	}
-	exitKnapp.addActionListener(new Stopper());
-        panel.add(exitKnapp);
 
-        vindu.pack();
-        vindu.setVisible(true);
+        class Stopper implements ActionListener {
+            @Override
+            public void actionPerformed (ActionEvent e) {
+                System.exit(0);
+            }
+        }
+
+	exitKnapp.addActionListener(new Stopper());
+    panel.add(exitKnapp);
+
+    vindu.pack();
+    vindu.setVisible(true);
     }
 }
