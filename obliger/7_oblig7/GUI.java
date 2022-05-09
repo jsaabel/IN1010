@@ -6,7 +6,9 @@ class GUI {
 
   Kontroll kontroll;
   JFrame vindu;
+  JLabel labelLengde;
   JPanel panel;
+  JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
   GUI (Kontroll k){
     
@@ -22,6 +24,25 @@ class GUI {
 
     panel = new JPanel();
     vindu.add(panel);
+
+    labelLengde = new JLabel("Lengde: x");
+    panel.add(labelLengde);
+
+    // Knapper
+    knappOpp = new JButton("Opp");
+    panel.add(knappOpp);
+
+    knappVenstre = new JButton("Venstre");
+    panel.add(knappVenstre);
+
+    knappHoyre = new JButton("Hoyre");
+    panel.add(knappHoyre);
+
+    knappNed = new JButton("Ned");
+    panel.add(knappNed);
+
+    knappSlutt = new JButton("Slutt");
+    panel.add(knappSlutt);
 
     vindu.pack();
     vindu.setVisible(true);
