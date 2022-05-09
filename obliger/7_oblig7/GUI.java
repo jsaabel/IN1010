@@ -7,7 +7,7 @@ class GUI {
   Kontroll kontroll;
   JFrame vindu;
   JLabel labelLengde;
-  JPanel panel;
+  JPanel kontrollpanel, styring;
   JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
   GUI (Kontroll k){
@@ -22,28 +22,33 @@ class GUI {
     vindu = new JFrame("Slangespillet");
     vindu.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    panel = new JPanel();
-    vindu.add(panel);
+    kontrollpanel = new JPanel();
 
+    // Lengde:
     labelLengde = new JLabel("Lengde: x");
-    panel.add(labelLengde);
+    kontrollpanel.add(labelLengde);
 
-    // Knapper
+    // Styringselementer
+    styring = new JPanel();
+    kontrollpanel.add(styring);
+
     knappOpp = new JButton("Opp");
-    panel.add(knappOpp);
+    styring.add(knappOpp);
 
     knappVenstre = new JButton("Venstre");
-    panel.add(knappVenstre);
+    styring.add(knappVenstre);
 
     knappHoyre = new JButton("Hoyre");
-    panel.add(knappHoyre);
+    styring.add(knappHoyre);
 
     knappNed = new JButton("Ned");
-    panel.add(knappNed);
+    styring.add(knappNed);
 
+    // Slutt-knapp
     knappSlutt = new JButton("Slutt");
-    panel.add(knappSlutt);
+    kontrollpanel.add(knappSlutt);
 
+    vindu.add(kontrollpanel);
     vindu.pack();
     vindu.setVisible(true);
   }
