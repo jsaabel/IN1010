@@ -129,22 +129,7 @@ class GUI {
     vindu.pack();
     vindu.setVisible(true);
   }
-  // draw-Methods
- 
-  // public void plasserSlange(ArrayList<SlangeSegment> slange){
-  //
-  //   for (int i = 1; i < slange.size(); i++){
-  //     int[] segmentKoordinater = slange.get(i).hentKoordinater();
-  //     gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
-  //   }
-  //
-  //   sisteHode = slange.get(0).hentKoordinater();
-  //   gjoerOmRuteLabel(sisteHode, "SlangeHode");
-  //   sisteHale = slange.get(slange.size() - 1).hentKoordinater();
-  //   gjoerOmRuteLabel(sisteHale, "SlangeSegment");
-  //
-  // }
-  //
+
   public void tegnSlange(Slange slange){
 
     nyttHode = slange.hentHode().hentKoordinater(); // OBS 
@@ -159,10 +144,6 @@ class GUI {
       gjoerOmRuteLabel(ss.hentKoordinater(), "SlangeSegment");
     }
     sisteHale = segmenter.get(segmenter.size()-1).hentKoordinater();
-    // gjoerOmRuteLabel(sisteHale, "TomRute");
-    // gjoerOmRuteLabel(nyHale, "SlangeSegment");
-    // sisteHode = nyttHode;
-    // sisteHale = nyHale;
   }
 
   public void gjoerOmRuteLabel(int[] koordinater, String type){
