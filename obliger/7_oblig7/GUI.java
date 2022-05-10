@@ -45,19 +45,64 @@ class GUI {
     kontrollpanel.add(styring);
 
     knappOpp = new JButton("Opp");
+    
+    class KnappOpp implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("o");
+      }
+    }
+
+    knappOpp.addActionListener(new KnappOpp());
     styring.add(knappOpp, BorderLayout.NORTH);
 
     knappVenstre = new JButton("Venstre");
+
+    class KnappVenstre implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("v");
+      }
+    }
+
+    knappVenstre.addActionListener(new KnappVenstre());
     styring.add(knappVenstre, BorderLayout.WEST);
 
     knappHoyre = new JButton("Hoyre");
+    class KnappHoyre implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("h");
+      }
+    }
+
+    knappHoyre.addActionListener(new KnappHoyre());
     styring.add(knappHoyre, BorderLayout.EAST);
 
     knappNed = new JButton("Ned");
+    class KnappNed implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("n");
+      }
+    }
+
+    knappNed.addActionListener(new KnappNed());
     styring.add(knappNed, BorderLayout.SOUTH);
 
     // Slutt-knapp
     knappSlutt = new JButton("Slutt");
+    class KnappSlutt implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent E){
+        kontroll.avslutt();
+      }
+    }
+    knappSlutt.addActionListener(new KnappSlutt());
     kontrollpanel.add(knappSlutt);
 
     // Temp rutenett
@@ -144,6 +189,12 @@ class GUI {
     else{
       System.out.println("TEMP ERROR"); //  TEMP
     }
+  }
+
+  public void visScore(int score){
+
+    labelLengde.setText("Lengde: " + score);
+
   }
 
 }

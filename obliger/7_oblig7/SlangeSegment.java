@@ -3,9 +3,9 @@ class SlangeSegment{
   int[] koordinater;
 
   public SlangeSegment(int r, int k){
-    this.koordinater = new int[2];
-    this.koordinater[0] = r;
-    this.koordinater[1] = k;
+    koordinater = new int[2];
+    koordinater[0] = r;
+    koordinater[1] = k;
   }
 
   public void flytt(String retning){

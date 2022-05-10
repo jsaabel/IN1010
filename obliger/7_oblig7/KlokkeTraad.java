@@ -13,7 +13,7 @@
 
       try{
         while (kontroll.spillErAktiv()){
-          Thread.sleep(2000);
+          Thread.sleep(500);
           kontroll.oppdater();
         }
       }

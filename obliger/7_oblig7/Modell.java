@@ -9,14 +9,6 @@ class Modell {
 
   public Modell(){
 
-    // ruter = new Rute[12][12];
-    // for(int x = 0; x < 12; x++) {
-    //   for (int y = 0; y < 12; y++){
-    //     Rute rute = new TomRute(x, y);
-    //     ruter[x][y] = rute;
-    //   }
-    // }
-
     spillErAktiv = true; // temp
 
     slange = new ArrayList<SlangeSegment>();
@@ -34,6 +26,27 @@ class Modell {
 
   
 
+  public void settRetning(String r){
+
+    if (r.equals(retning)){
+      return;
+    }
+
+    else if ((r.equals("v") && retning.equals("r")) || (r.equals("r") && 
+          retning.equals("v"))){
+      return;
+    }
+
+    else if ((r.equals("o") && retning.equals("n")) || (r.equals("n") && 
+          retning.equals("o"))){
+      return;
+    }
+
+    else{
+      retning = r;
+    }
+  }
+
   public void flyttSlange(){
     SlangeSegment aktuellSegment = null;
     int[] nyeKoordinater = null;
@@ -49,10 +62,9 @@ class Modell {
         nyeKoordinater = gamleKoordinaer;
       }
     }
-    System.out.println("\nSlange: ");
-    for (SlangeSegment s:slange){
-      System.out.println(s);
-    }
+    // System.out.println("\nSlange: ");
+    // for (SlangeSegment s:slange){
+    //   System.out.println(s);
   }
 
   public boolean spillErAktiv(){
@@ -63,8 +75,12 @@ class Modell {
     return slange;
   }
   
-  public ArrayList<Tuppel> getSkatter(){
-    return skatter;
+  // public ArrayList<Tuppel> getSkatter(){
+  //   return skatter;
+  // }
+
+  public int hentScore(){
+    return slange.size();
   }
 
   static int trekk(int a, int b){
@@ -73,10 +89,5 @@ class Modell {
 
   }
   
-
-  // public Rute[][] getRuter(){
-  //   return ruter;
-  // }
-
 
 }
