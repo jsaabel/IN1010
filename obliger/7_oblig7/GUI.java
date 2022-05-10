@@ -10,6 +10,9 @@ class GUI {
   JPanel grunnflate, kontrollpanel, styring, rutenett;
   JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
+  // NEW / TEST
+  Rute[][] ruter;
+
   GUI (Kontroll k){
     
     kontroll = k;
@@ -59,7 +62,7 @@ class GUI {
     rutenett.setLayout(new GridLayout(12, 12));
 
     // Initital draw/assignment (?)
-    Rute[][] ruter = kontroll.getRuter();
+    ruter = kontroll.getRuter();
     for(int x = 0; x < 12; x++) {
       for (int y = 0; y < 12; y++){
         Rute rute = ruter[x][y];
@@ -67,12 +70,22 @@ class GUI {
       }
     }
 
+
     grunnflate.add(rutenett, BorderLayout.SOUTH);
     
 
     vindu.add(grunnflate);
+    // ruter[3][3].setText("O"); // this works...
     vindu.pack();
     vindu.setVisible(true);
+  }
+
+  public void test(){
+    ruter[3][3].setText("0");
+  }
+
+  public void visSkatt(int x, int y){
+    ruter[x][y].setText("X");
   }
 
   // public void tegnRutenett(Rute[][] ruter){
