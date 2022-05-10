@@ -9,6 +9,7 @@ class Kontroll{
 
     modell = new Modell();
     gui = new GUI(this);
+    gui.gjoerOmRuteLabel(5, 5, "SlangeHode");
     // gui.visSkatt(5, 5);
   }
 

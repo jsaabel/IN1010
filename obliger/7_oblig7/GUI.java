@@ -13,6 +13,7 @@ class GUI {
   // NEW / TEST
   RuteLabel[][] ruteLabels;
 
+  // Konstruktoer
   GUI (Kontroll k){
     
     kontroll = k;
@@ -67,6 +68,7 @@ class GUI {
       for (int y = 0; y < 12; y++){
         // Rute rute = ruter[x][y];
         RuteLabel ruteLabel = new RuteLabel();
+        ruteLabels[x][y] = ruteLabel;
         rutenett.add(ruteLabel);
       }
     }
@@ -79,6 +81,38 @@ class GUI {
     // ruter[3][3].setText("O"); // this works...
     vindu.pack();
     vindu.setVisible(true);
+  }
+  // draw-Methods
+  public void gjoerOmRuteLabel(int x, int y, String type){
+
+    RuteLabel r = ruteLabels[x][y];
+
+    if (type.equals("TomRute")){
+      r.setText(" ");
+      r.setBackground(Color.WHITE);
+    }
+
+    else if (type.equals("Skatt")){
+      r.setText("$");
+      r.setBackground(Color.WHITE);
+      r.setForeground(Color.RED);
+    }
+    
+    else if (type.equals("SlangeHode")){
+      r.setText("O");
+      r.setBackground(Color.GREEN);
+      r.setForeground(Color.BLACK);
+    }
+
+    else if (type.equals("SlangeSegment")){
+      r.setText("+");
+      r.setBackground(Color.GREEN);
+      r.setForeground(Color.BLACK);
+    }
+
+    else{
+      return;
+    }
   }
 
 }
