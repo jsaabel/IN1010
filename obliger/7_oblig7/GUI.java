@@ -67,6 +67,7 @@ class GUI {
       for (int y = 0; y < 12; y++){
         Rute rute = ruter[x][y];
         rutenett.add(rute);
+        System.out.println(rute);
       }
     }
 
