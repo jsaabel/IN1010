@@ -85,24 +85,24 @@ class GUI {
     vindu.setVisible(true);
   }
   // draw-Methods
-  public void plasserSlange(IndeksertListe<SlangeSegment> slange){
+  public void plasserSlange(ArrayList<SlangeSegment> slange){
 
-    for (int i = 1; i < slange.stoerrelse(); i++){
-      int[] segmentKoordinater = slange.hent(i).hentKoordinater();
+    for (int i = 1; i < slange.size(); i++){
+      int[] segmentKoordinater = slange.get(i).hentKoordinater();
       gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
     }
 
-    sisteHode = slange.hent(0).hentKoordinater();
+    sisteHode = slange.get(0).hentKoordinater();
     gjoerOmRuteLabel(sisteHode, "SlangeHode");
-    sisteHale = slange.hent(slange.stoerrelse() - 1).hentKoordinater();
+    sisteHale = slange.get(slange.size() - 1).hentKoordinater();
     gjoerOmRuteLabel(sisteHale, "SlangeSegment");
 
   }
 
-  public void tegnNySlange(IndeksertListe<SlangeSegment> slange){
+  public void tegnNySlange(ArrayList<SlangeSegment> slange){
 
-    nyttHode = slange.hent(0).hentKoordinater();
-    nyHale = slange.hent(slange.stoerrelse() - 1).hentKoordinater();
+    nyttHode = slange.get(0).hentKoordinater();
+    nyHale = slange.get(slange.size() - 1).hentKoordinater();
 
     gjoerOmRuteLabel(sisteHale, "TomRute");
     gjoerOmRuteLabel(sisteHode, "SlangeSegment");
