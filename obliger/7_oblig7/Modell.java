@@ -7,15 +7,15 @@ class Modell {
     ruter = new Rute[12][12];
     for(int x = 0; x < 12; x++) {
       for (int y = 0; y < 12; y++){
-        Rute rute = new TomRute();
+        Rute rute = new TomRute(x, y);
         ruter[x][y] = rute;
       }
     }
   }
 
-  public Rute[][] getRuter(){
-    return ruter;
-  }
+  // public Rute[][] getRuter(){
+  //   return ruter;
+  // }
 
 
 }

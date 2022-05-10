@@ -11,7 +11,7 @@ class GUI {
   JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
   // NEW / TEST
-  Rute[][] ruter;
+  RuteLabel[][] ruteLabels;
 
   GUI (Kontroll k){
     
@@ -62,12 +62,12 @@ class GUI {
     rutenett.setLayout(new GridLayout(12, 12));
 
     // Initital draw/assignment (?)
-    ruter = kontroll.getRuter();
+    ruteLabels = new RuteLabel[12][12];
     for(int x = 0; x < 12; x++) {
       for (int y = 0; y < 12; y++){
-        Rute rute = ruter[x][y];
-        rutenett.add(rute);
-        System.out.println(rute);
+        // Rute rute = ruter[x][y];
+        RuteLabel ruteLabel = new RuteLabel();
+        rutenett.add(ruteLabel);
       }
     }
 
@@ -81,29 +81,4 @@ class GUI {
     vindu.setVisible(true);
   }
 
-  public void test(){
-    ruter[3][3].setText("0");
-  }
-
-  public void visSkatt(int x, int y){
-    ruter[x][y].setText("X");
-  }
-
-  // public void tegnRutenett(Rute[][] ruter){
-  //
-  //   rutenett = new JPanel();
-  //   rutenett.setLayout(new GridLayout(12, 12));
-  //   // Rute[][] ruter = new Rute[12][12];
-  //
-  //   // Initital draw/assignment (?)
-  //   for(int x = 0; x < 12; x++) {
-  //     for (int y = 0; y < 12; y++){
-  //       Rute rute = ruter[x][y];
-  //       rutenett.add(rute);
-  //     }
-  //   }
-  //
-  //   grunnflate.add(rutenett, BorderLayout.SOUTH);
-  //
-  // }
 }
