@@ -29,14 +29,29 @@ class Modell {
     SlangeSegment testSegment3 = new SlangeSegment(5, 9);
     slange.add(testSegment3);
 
-    retning = "v";
+    retning = "n";
   }
 
   
 
   public void flyttSlange(){
+    SlangeSegment aktuellSegment = null;
+    int[] nyeKoordinater = null;
+    for (int i=0; i < slange.size(); i++){
+      aktuellSegment = slange.get(i);
+      if (i == 0) {
+        nyeKoordinater = aktuellSegment.hentKoordinater();
+        aktuellSegment.flytt(retning);
+      }
+      else{
+        int[] gamleKoordinaer = aktuellSegment.hentKoordinater();
+        aktuellSegment.settKoordinater(nyeKoordinater);
+        nyeKoordinater = gamleKoordinaer;
+      }
+    }
+    System.out.println("\nSlange: ");
     for (SlangeSegment s:slange){
-      s.flytt(retning);
+      System.out.println(s);
     }
   }
 

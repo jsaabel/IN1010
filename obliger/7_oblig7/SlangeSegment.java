@@ -3,9 +3,9 @@ class SlangeSegment{
   int[] koordinater;
 
   public SlangeSegment(int r, int k){
-    koordinater = new int[2];
-    koordinater[0] = r;
-    koordinater[1] = k;
+    this.koordinater = new int[2];
+    this.koordinater[0] = r;
+    this.koordinater[1] = k;
   }
 
   public void flytt(String retning){
@@ -22,8 +22,10 @@ class SlangeSegment{
     else{
       koordinater[1]++;
     }
-    System.out.println("Segment flyttet " + retning + ":" + hentKoordinater()[0]
-        + hentKoordinater()[1]);
+  }
+
+  public void settKoordinater(int[] nyeKoordinater){
+    this.koordinater = nyeKoordinater;
   }
 
   public int[] hentKoordinater(){
@@ -31,5 +33,10 @@ class SlangeSegment{
     rKoordinater[0] = koordinater[0];
     rKoordinater[1] = koordinater[1];
     return rKoordinater;
+  }
+
+  @Override
+  public String toString(){
+    return "Slangesegment @ " + koordinater[0] + "/" + koordinater[1]; 
   }
 }

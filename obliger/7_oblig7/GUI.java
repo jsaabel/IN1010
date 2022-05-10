@@ -104,12 +104,12 @@ class GUI {
     nyttHode = slange.get(0).hentKoordinater();
     nyHale = slange.get(slange.size() - 1).hentKoordinater();
 
-    gjoerOmRuteLabel(sisteHale, "TomRute");
     gjoerOmRuteLabel(sisteHode, "SlangeSegment");
     gjoerOmRuteLabel(nyttHode, "SlangeHode");
+    gjoerOmRuteLabel(sisteHale, "TomRute");
     gjoerOmRuteLabel(nyHale, "SlangeSegment");
-    sisteHale = nyHale;
     sisteHode = nyttHode;
+    sisteHale = nyHale;
   }
 
   public void gjoerOmRuteLabel(int[] koordinater, String type){
