@@ -17,6 +17,9 @@ class Kontroll{
 
   public void oppdater(){
     modell.flyttSlange();
+    SlangeSegment head = modell.hentSlange().get(0);
+    int[] koordinater = head.hentKoordinater();
+    gui.gjoerOmRuteLabel(koordinater[0], koordinater[1], "SlangeHode");
   }
 
   public boolean spillErAktiv(){
