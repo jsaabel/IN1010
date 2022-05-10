@@ -1,13 +1,12 @@
-import java.awt.*;
-import javax.swing.*;
+/**
+ * ...
+ */
 
-abstract class Rute extends JLabel{
+abstract class Rute{
+  int x, y;
 
-  Rute(){
-    super(" ");
-    setOpaque(true);
-    setBorder(BorderFactory.createLineBorder(Color.BLACK));
-    setHorizontalAlignment(JLabel.CENTER);
+  public Rute(int x, int y){
+    this.x = x;
+    this.y = y;
   }
 }
-

@@ -11,8 +11,9 @@ class GUI {
   JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
   // NEW / TEST
-  Rute[][] ruter;
+  RuteLabel[][] ruteLabels;
 
+  // Konstruktoer
   GUI (Kontroll k){
     
     kontroll = k;
@@ -62,12 +63,14 @@ class GUI {
     rutenett.setLayout(new GridLayout(12, 12));
 
     // Initital draw/assignment (?)
-    ruter = kontroll.getRuter();
+    ruteLabels = new RuteLabel[12][12];
+
     for(int x = 0; x < 12; x++) {
       for (int y = 0; y < 12; y++){
-        Rute rute = ruter[x][y];
-        rutenett.add(rute);
-        System.out.println(rute);
+
+        RuteLabel ruteLabel = new RuteLabel();
+        ruteLabels[x][y] = ruteLabel;
+        rutenett.add(ruteLabel);
       }
     }
 
@@ -80,30 +83,37 @@ class GUI {
     vindu.pack();
     vindu.setVisible(true);
   }
+  // draw-Methods
+  public void gjoerOmRuteLabel(int x, int y, String type){
 
-  public void test(){
-    ruter[3][3].setText("0");
+    RuteLabel r = ruteLabels[x][y];
+
+    if (type.equals("TomRute")){
+      r.setText(" ");
+      r.setBackground(Color.WHITE);
+    }
+
+    else if (type.equals("Skatt")){
+      r.setText("$");
+      r.setBackground(Color.WHITE);
+      r.setForeground(Color.RED);
+    }
+    
+    else if (type.equals("SlangeHode")){
+      r.setText("O");
+      r.setBackground(Color.GREEN);
+      r.setForeground(Color.BLACK);
+    }
+
+    else if (type.equals("SlangeSegment")){
+      r.setText("+");
+      r.setBackground(Color.GREEN);
+      r.setForeground(Color.BLACK);
+    }
+
+    else{
+      return;
+    }
   }
 
-  public void visSkatt(int x, int y){
-    ruter[x][y].setText("X");
-  }
-
-  // public void tegnRutenett(Rute[][] ruter){
-  //
-  //   rutenett = new JPanel();
-  //   rutenett.setLayout(new GridLayout(12, 12));
-  //   // Rute[][] ruter = new Rute[12][12];
-  //
-  //   // Initital draw/assignment (?)
-  //   for(int x = 0; x < 12; x++) {
-  //     for (int y = 0; y < 12; y++){
-  //       Rute rute = ruter[x][y];
-  //       rutenett.add(rute);
-  //     }
-  //   }
-  //
-  //   grunnflate.add(rutenett, BorderLayout.SOUTH);
-  //
-  // }
 }

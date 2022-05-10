@@ -1,11 +1,6 @@
-import java.awt.*;
-import javax.swing.*;
+class Skatt extends Rute{
 
-public class Skatt extends Rute{
-  Skatt(){
-    super();
-    setBackground(Color.WHITE);
-    setText("$");
-    setForeground(Color.RED);
+  public Skatt(int x, int y){
+    super(x, y);
   }
 }

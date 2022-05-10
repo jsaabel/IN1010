@@ -1,9 +1,6 @@
-import java.awt.*;
-import javax.swing.*;
+class TomRute extends Rute{
 
-public class TomRute extends Rute{
-  TomRute(){
-    super();
-    setBackground(Color.WHITE);
+  public TomRute(int x, int y){
+    super(x, y);
   }
 }
