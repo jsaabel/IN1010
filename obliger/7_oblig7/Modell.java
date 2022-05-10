@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Modell {
 
-  ArrayList<SlangeSegment> slange;
+  IndeksertListe<SlangeSegment> slange;
   ArrayList<Tuppel> skatter;
   String retning;
   boolean spillErAktiv;
@@ -19,21 +19,27 @@ class Modell {
 
     spillErAktiv = true; // temp
 
-    slange = new ArrayList<SlangeSegment>();
+    slange = new IndeksertListe<SlangeSegment>();
     // skatter = new ArrayList<Tuppel>();
 
     SlangeSegment testSegment = new SlangeSegment(5, 7);
-    slange.add(testSegment);
+    slange.leggTil(testSegment);
     SlangeSegment testSegment2 = new SlangeSegment(5, 8);
-    slange.add(testSegment2);
+    slange.leggTil(testSegment2);
     SlangeSegment testSegment3 = new SlangeSegment(5, 9);
-    slange.add(testSegment3);
+    slange.leggTil(testSegment3);
+    SlangeSegment testSegment4 = new SlangeSegment(5, 10);
+    slange.leggTil(testSegment4);
 
     retning = "v";
   }
 
   
 
+  // OBS: This is not correct... not all segments move into the same direction!
+  // Head moves in chosen direction, each other segment moves to the previous
+  // location of its predecessor...
+  // might have to look into linkedlist (previous assignments...)
   public void flyttSlange(){
     for (SlangeSegment s:slange){
       s.flytt(retning);
@@ -44,7 +50,7 @@ class Modell {
     return spillErAktiv;
   }
 
-  public ArrayList<SlangeSegment> hentSlange(){
+  public IndeksertListe<SlangeSegment> hentSlange(){
     return slange;
   }
   

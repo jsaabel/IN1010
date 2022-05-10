@@ -18,16 +18,8 @@ class Kontroll{
   }
 
   public void oppdater(){
-    // ArrayList<SlangeSegment> gammelSlange = modell.hentSlange();
-    // SlangeSegment tail = gammelSlange.get(gammelSlange.size() -1);
-    // int[] tailKoordinater = tail.hentKoordinater();
-    // gui.gjoerOmRuteLabel(tailKoordinater, "TomRute");
     modell.flyttSlange(); 
     gui.tegnNySlange(modell.hentSlange());
-    // ArrayList<SlangeSegment> nySlange = modell.hentSlange();
-    // SlangeSegment head = nySlange.get(0);
-    // int[] koordinater = head.hentKoordinater();
-    // gui.gjoerOmRuteLabel(koordinater, "SlangeHode");
   }
 
   public boolean spillErAktiv(){
