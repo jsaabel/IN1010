@@ -21,6 +21,12 @@ class Kontroll{
     modell.flyttSlange(); 
     gui.tegnNySlange(modell.hentSlange());
     gui.visScore(modell.hentScore());
+    int test = modell.trekk(1, 5);
+    if (test == 5){
+      modell.spis();
+    }
+
+    
   }
 
   public boolean spillErAktiv(){
@@ -34,9 +40,4 @@ class Kontroll{
   public void avslutt(){
     System.exit(0);
   }
-
-
-  // public Rute[][] getRuter(){
-  //   return modell.getRuter();
-  // }
 }

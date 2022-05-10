@@ -62,9 +62,16 @@ class Modell {
         nyeKoordinater = gamleKoordinaer;
       }
     }
-    // System.out.println("\nSlange: ");
+    // spis();
+   // System.out.println("\nSlange: ");
     // for (SlangeSegment s:slange){
     //   System.out.println(s);
+  }
+
+  public void spis(){
+    int[] hode = slange.get(0).hentKoordinater();
+    SlangeSegment nyttSlangeSegment = new SlangeSegment(hode[0],hode[1]);
+    slange.add(0, nyttSlangeSegment);
   }
 
   public boolean spillErAktiv(){
@@ -83,7 +90,7 @@ class Modell {
     return slange.size();
   }
 
-  static int trekk(int a, int b){
+  public int trekk(int a, int b){ // static ...
     // Trekk et tilfeldig heltall i intervallet [a..b]
     return (int)(Math.random()*(b-a+1)+a);
 

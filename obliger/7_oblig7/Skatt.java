@@ -1,6 +1,10 @@
-class Skatt extends Rute{
+class Skatt{
+
+  int x, y;
+    
 
   public Skatt(int x, int y){
-    super(x, y);
+    this.x = x;
+    this.y = y;
   }
 }

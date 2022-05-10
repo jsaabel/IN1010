@@ -192,9 +192,7 @@ class GUI {
   }
 
   public void visScore(int score){
-
     labelLengde.setText("Lengde: " + score);
-
   }
 
 }
