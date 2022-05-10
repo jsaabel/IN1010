@@ -130,31 +130,39 @@ class GUI {
     vindu.setVisible(true);
   }
   // draw-Methods
-  public void plasserSlange(ArrayList<SlangeSegment> slange){
+ 
+  // public void plasserSlange(ArrayList<SlangeSegment> slange){
+  //
+  //   for (int i = 1; i < slange.size(); i++){
+  //     int[] segmentKoordinater = slange.get(i).hentKoordinater();
+  //     gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
+  //   }
+  //
+  //   sisteHode = slange.get(0).hentKoordinater();
+  //   gjoerOmRuteLabel(sisteHode, "SlangeHode");
+  //   sisteHale = slange.get(slange.size() - 1).hentKoordinater();
+  //   gjoerOmRuteLabel(sisteHale, "SlangeSegment");
+  //
+  // }
+  //
+  public void tegnSlange(Slange slange){
 
-    for (int i = 1; i < slange.size(); i++){
-      int[] segmentKoordinater = slange.get(i).hentKoordinater();
-      gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
-    }
+    nyttHode = slange.hentHode().hentKoordinater(); // OBS 
+    ArrayList<SlangeSegment> segmenter = slange.hentSegmenter();
 
-    sisteHode = slange.get(0).hentKoordinater();
-    gjoerOmRuteLabel(sisteHode, "SlangeHode");
-    sisteHale = slange.get(slange.size() - 1).hentKoordinater();
-    gjoerOmRuteLabel(sisteHale, "SlangeSegment");
-
-  }
-
-  public void tegnNySlange(ArrayList<SlangeSegment> slange){
-
-    nyttHode = slange.get(0).hentKoordinater();
-    nyHale = slange.get(slange.size() - 1).hentKoordinater();
-
-    gjoerOmRuteLabel(sisteHode, "SlangeSegment");
+    // gjoerOmRuteLabel(sisteHode, "SlangeSegment");
     gjoerOmRuteLabel(nyttHode, "SlangeHode");
-    gjoerOmRuteLabel(sisteHale, "TomRute");
-    gjoerOmRuteLabel(nyHale, "SlangeSegment");
-    sisteHode = nyttHode;
-    sisteHale = nyHale;
+    if (sisteHale != null) {
+      gjoerOmRuteLabel(sisteHale, "TomRute");
+    }
+    for (SlangeSegment ss:segmenter){
+      gjoerOmRuteLabel(ss.hentKoordinater(), "SlangeSegment");
+    }
+    sisteHale = segmenter.get(segmenter.size()-1).hentKoordinater();
+    // gjoerOmRuteLabel(sisteHale, "TomRute");
+    // gjoerOmRuteLabel(nyHale, "SlangeSegment");
+    // sisteHode = nyttHode;
+    // sisteHale = nyHale;
   }
 
   public void gjoerOmRuteLabel(int[] koordinater, String type){

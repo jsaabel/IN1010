@@ -10,7 +10,7 @@ class Kontroll{
 
     modell = new Modell();
     gui = new GUI(this);
-    gui.plasserSlange(modell.hentSlange());
+    // gui.plasserSlange(modell.hentSlange());
     // gui.gjoerOmRuteLabel(5, 5, "SlangeHode");
     // gui.visSkatt(5, 5);
     KlokkeTraad klokkeTraad = new KlokkeTraad(this);
@@ -19,12 +19,12 @@ class Kontroll{
 
   public void oppdater(){
     modell.flyttSlange(); 
-    gui.tegnNySlange(modell.hentSlange());
+    gui.tegnSlange(modell.hentSlange());
     gui.visScore(modell.hentScore());
-    int test = modell.trekk(1, 5);
-    if (test == 5){
-      modell.spis();
-    }
+    // int test = modell.trekk(1, 5);
+    // if (test == 5){
+    //   modell.spis();
+    // }
 
     
   }

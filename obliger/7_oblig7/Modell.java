@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 class Modell {
 
-  ArrayList<SlangeSegment> slange;
+  Slange slange;
   ArrayList<Tuppel> skatter;
   String retning;
   boolean spillErAktiv;
@@ -11,15 +11,8 @@ class Modell {
 
     spillErAktiv = true; // temp
 
-    slange = new ArrayList<SlangeSegment>();
+    slange = new Slange();
     // skatter = new ArrayList<Tuppel>();
-
-    SlangeSegment testSegment = new SlangeSegment(5, 7);
-    slange.add(testSegment);
-    SlangeSegment testSegment2 = new SlangeSegment(5, 8);
-    slange.add(testSegment2);
-    SlangeSegment testSegment3 = new SlangeSegment(5, 9);
-    slange.add(testSegment3);
 
     retning = "n";
   }
@@ -48,37 +41,38 @@ class Modell {
   }
 
   public void flyttSlange(){
-    SlangeSegment aktuellSegment = null;
-    int[] nyeKoordinater = null;
-    for (int i=0; i < slange.size(); i++){
-      aktuellSegment = slange.get(i);
-      if (i == 0) {
-        nyeKoordinater = aktuellSegment.hentKoordinater();
-        aktuellSegment.flytt(retning);
-      }
-      else{
-        int[] gamleKoordinaer = aktuellSegment.hentKoordinater();
-        aktuellSegment.settKoordinater(nyeKoordinater);
-        nyeKoordinater = gamleKoordinaer;
-      }
-    }
-    // spis();
+    slange.flytt(retning);
+    // SlangeSegment aktuellSegment = null;
+    // int[] nyeKoordinater = null;
+    // for (int i=0; i < slange.size(); i++){
+    //   aktuellSegment = slange.get(i);
+    //   if (i == 0) {
+    //     nyeKoordinater = aktuellSegment.hentKoordinater();
+    //     aktuellSegment.flytt(retning);
+    //   }
+    //   else{
+    //     int[] gamleKoordinaer = aktuellSegment.hentKoordinater();
+    //     aktuellSegment.settKoordinater(nyeKoordinater);
+    //     nyeKoordinater = gamleKoordinaer;
+    //   }
+    // }
+    // // spis();
    // System.out.println("\nSlange: ");
     // for (SlangeSegment s:slange){
     //   System.out.println(s);
   }
 
-  public void spis(){
-    int[] hode = slange.get(0).hentKoordinater();
-    SlangeSegment nyttSlangeSegment = new SlangeSegment(hode[0],hode[1]);
-    slange.add(0, nyttSlangeSegment);
-  }
+  // public void spis(){
+  //   int[] hode = slange.get(0).hentKoordinater();
+  //   SlangeSegment nyttSlangeSegment = new SlangeSegment(hode[0],hode[1]);
+  //   slange.add(0, nyttSlangeSegment);
+  // }
 
   public boolean spillErAktiv(){
     return spillErAktiv;
   }
 
-  public ArrayList<SlangeSegment> hentSlange(){
+  public Slange hentSlange(){
     return slange;
   }
   
@@ -87,7 +81,7 @@ class Modell {
   // }
 
   public int hentScore(){
-    return slange.size();
+    return slange.hentScore();
   }
 
   public int trekk(int a, int b){ // static ...
