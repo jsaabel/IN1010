@@ -64,9 +64,10 @@ class GUI {
 
     // Initital draw/assignment (?)
     ruteLabels = new RuteLabel[12][12];
+
     for(int x = 0; x < 12; x++) {
       for (int y = 0; y < 12; y++){
-        // Rute rute = ruter[x][y];
+
         RuteLabel ruteLabel = new RuteLabel();
         ruteLabels[x][y] = ruteLabel;
         rutenett.add(ruteLabel);
