@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.ArrayList;
 
 class GUI {
 
@@ -12,6 +13,7 @@ class GUI {
 
   // NEW / TEST
   RuteLabel[][] ruteLabels;
+  int[] sisteHode, sisteHale, nyttHode, nyHale;
 
   // Konstruktoer
   GUI (Kontroll k){
@@ -79,40 +81,68 @@ class GUI {
     
 
     vindu.add(grunnflate);
-    // ruter[3][3].setText("O"); // this works...
     vindu.pack();
     vindu.setVisible(true);
   }
   // draw-Methods
-  public void gjoerOmRuteLabel(int x, int y, String type){
+  public void plasserSlange(ArrayList<SlangeSegment> slange){
 
-    RuteLabel r = ruteLabels[x][y];
+    for (int i = 1; i < slange.size(); i++){
+      int[] segmentKoordinater = slange.get(i).hentKoordinater();
+      gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
+    }
+
+    sisteHode = slange.get(0).hentKoordinater();
+    gjoerOmRuteLabel(sisteHode, "SlangeHode");
+    sisteHale = slange.get(slange.size() - 1).hentKoordinater();
+    gjoerOmRuteLabel(sisteHale, "SlangeSegment");
+
+  }
+
+  public void tegnNySlange(ArrayList<SlangeSegment> slange){
+
+    nyttHode = slange.get(0).hentKoordinater();
+    nyHale = slange.get(slange.size() - 1).hentKoordinater();
+
+    gjoerOmRuteLabel(sisteHode, "SlangeSegment");
+    gjoerOmRuteLabel(nyttHode, "SlangeHode");
+    gjoerOmRuteLabel(sisteHale, "TomRute");
+    gjoerOmRuteLabel(nyHale, "SlangeSegment");
+    sisteHode = nyttHode;
+    sisteHale = nyHale;
+  }
+
+  public void gjoerOmRuteLabel(int[] koordinater, String type){
+
+    int r = koordinater[0];
+    int k = koordinater[1];
+    RuteLabel rl = ruteLabels[r][k];
 
     if (type.equals("TomRute")){
-      r.setText(" ");
-      r.setBackground(Color.WHITE);
+      rl.setText(" ");
+      rl.setBackground(Color.WHITE);
     }
 
     else if (type.equals("Skatt")){
-      r.setText("$");
-      r.setBackground(Color.WHITE);
-      r.setForeground(Color.RED);
+      rl.setText("$");
+      rl.setBackground(Color.WHITE);
+      rl.setForeground(Color.RED);
     }
     
     else if (type.equals("SlangeHode")){
-      r.setText("O");
-      r.setBackground(Color.GREEN);
-      r.setForeground(Color.BLACK);
+      rl.setText("O");
+      rl.setBackground(Color.GREEN);
+      rl.setForeground(Color.BLACK);
     }
 
     else if (type.equals("SlangeSegment")){
-      r.setText("+");
-      r.setBackground(Color.GREEN);
-      r.setForeground(Color.BLACK);
+      rl.setText("+");
+      rl.setBackground(Color.GREEN);
+      rl.setForeground(Color.BLACK);
     }
 
     else{
-      return;
+      System.out.println("TEMP ERROR"); //  TEMP
     }
   }
 
