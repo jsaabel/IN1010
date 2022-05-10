@@ -27,6 +27,9 @@ class SlangeSegment{
   }
 
   public int[] hentKoordinater(){
-    return koordinater;
+    int[] rKoordinater = new int[2];
+    rKoordinater[0] = koordinater[0];
+    rKoordinater[1] = koordinater[1];
+    return rKoordinater;
   }
 }

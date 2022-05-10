@@ -22,8 +22,12 @@ class Modell {
     slange = new ArrayList<SlangeSegment>();
     // skatter = new ArrayList<Tuppel>();
 
-    SlangeSegment testSegment = new SlangeSegment(5, 5);
+    SlangeSegment testSegment = new SlangeSegment(5, 7);
     slange.add(testSegment);
+    SlangeSegment testSegment2 = new SlangeSegment(5, 8);
+    slange.add(testSegment2);
+    SlangeSegment testSegment3 = new SlangeSegment(5, 9);
+    slange.add(testSegment3);
 
     retning = "v";
   }
