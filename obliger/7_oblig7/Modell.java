@@ -12,8 +12,13 @@ class Modell {
     spillErAktiv = true; // temp
 
     skatter = new ArrayList<Skatt>();
-    Skatt skatt = new Skatt(7, 7);
-    skatter.add(skatt);
+    for (int i =0; i<5; i++){
+      int trekkEn = trekk(0, 11);
+      int trekkTo = trekk(0, 11);
+      skatter.add(new Skatt(trekkEn, trekkTo));
+    }
+    // Skatt skatt = new Skatt(7, 7);
+    // skatter.add(skatt);
     slange = new Slange();
 
     retning = "n";

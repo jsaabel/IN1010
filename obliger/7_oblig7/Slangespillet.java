@@ -1,4 +1,4 @@
-public class Hovedprogram{
+public class Slangespillet{
 
   public static void main(String[] args) {
 
