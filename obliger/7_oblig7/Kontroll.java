@@ -5,9 +5,11 @@ import java.util.ArrayList;
 class Kontroll{
   GUI gui;
   Modell modell;
+  boolean spillErAktiv;
 
   public Kontroll(){
 
+    spillErAktiv = true;
     modell = new Modell();
     gui = new GUI(this);
     // gui.plasserSlange(modell.hentSlange());
@@ -18,7 +20,12 @@ class Kontroll{
   }
 
   public void oppdater(){
+
     modell.flyttSlange(); 
+    if (modell.sjekkKollisjon()){
+      spillErAktiv=false;
+      return;
+    }
     gui.tegnSlange(modell.hentSlange());
     gui.visScore(modell.hentScore());
     // int test = modell.trekk(1, 5);
@@ -27,10 +34,6 @@ class Kontroll{
     // }
 
     
-  }
-
-  public boolean spillErAktiv(){
-    return modell.spillErAktiv();
   }
 
   public void settRetning(String r){

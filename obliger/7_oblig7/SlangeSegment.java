@@ -8,6 +8,10 @@ class SlangeSegment{
     koordinater[1] = k;
   }
 
+  public SlangeSegment(int[] koordinater){
+    this.koordinater = koordinater;
+  }
+
   public void flytt(String retning){
 
     if (retning.equals("o")){

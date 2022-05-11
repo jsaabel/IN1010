@@ -25,8 +25,20 @@ class Slange{
       }
   }
 
+  public void spis(){
+    segmenter.add(new SlangeSegment(hode.hentKoordinater()));
+  }
+
   public boolean sjekkKollisjoner(){
 
+    int[] hodeKoordinater = hode.hentKoordinater();
+    for (SlangeSegment ss: segmenter){
+      int[] segmentKoordinater = ss.hentKoordinater();
+      if (segmentKoordinater[0] == hodeKoordinater[0] && segmentKoordinater[1]
+          == hodeKoordinater[1]){
+        return true;
+      }
+    }
     return false;
   }
 

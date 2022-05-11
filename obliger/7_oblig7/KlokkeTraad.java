@@ -12,7 +12,7 @@
     public void run(){
 
       try{
-        while (kontroll.spillErAktiv()){
+        while (kontroll.spillErAktiv == true){
           Thread.sleep(500);
           kontroll.oppdater();
         }
