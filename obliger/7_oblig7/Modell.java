@@ -3,7 +3,7 @@ import java.util.ArrayList;
 class Modell {
 
   Slange slange;
-  ArrayList<Tuppel> skatter;
+  ArrayList<Skatt> skatter;
   String retning;
   boolean spillErAktiv;
 
@@ -11,14 +11,33 @@ class Modell {
 
     spillErAktiv = true; // temp
 
+    skatter = new ArrayList<Skatt>();
+    Skatt skatt = new Skatt(7, 7);
+    skatter.add(skatt);
     slange = new Slange();
-    // skatter = new ArrayList<Tuppel>();
 
     retning = "n";
   }
 
   
 
+  public void oppdater(){
+
+    flyttSlange();
+    opprettSkatt();
+  }
+
+  public void opprettSkatt(){
+
+    int test = trekk(1, 15);
+    if (test == 10){
+      int r = trekk(0, 11);
+      int k = trekk(0, 11);
+      Skatt s = new Skatt(r, k);
+      skatter.add(s);
+    }
+
+  }
   public void settRetning(String r){
 
     if (r.equals(retning)){
@@ -41,13 +60,28 @@ class Modell {
   }
 
   public void flyttSlange(){
-    int test = trekk(1, 7);
-    if (test==7){
+    // int test = trekk(1, 7);
+    // if (test==7){
+    //   slange.spis();
+    // }
+    if (skattFunnet(slange.hentHode().hentKoordinater())){
       slange.spis();
     }
     slange.flytt(retning);
   }
 
+  // should have function: sjekk kollisjon (Element 1, Element 2)
+  public boolean skattFunnet(int[] koordinater){
+    for (Skatt s:skatter){
+      int[] skattKoordinater = s.hentKoordinater();
+      if (skattKoordinater[0] == koordinater[0] && skattKoordinater[1] == 
+          koordinater[1]){
+        skatter.remove(s);
+        return true;
+      };
+    }
+    return false;
+  }
   public boolean sjekkKollisjon(){
 
     if (slange.sjekkKollisjoner()){
@@ -70,9 +104,9 @@ class Modell {
     return slange;
   }
   
-  // public ArrayList<Tuppel> getSkatter(){
-  //   return skatter;
-  // }
+  public ArrayList<Skatt> hentSkatter(){
+    return skatter;
+  }
 
   public int hentScore(){
     return slange.hentScore();
