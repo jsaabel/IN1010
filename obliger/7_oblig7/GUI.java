@@ -130,6 +130,13 @@ class GUI {
     vindu.setVisible(true);
   }
 
+  public void tegnSkatter(ArrayList<Skatt> skatter){
+
+    for (Skatt s: skatter){
+      gjoerOmRuteLabel(s.hentKoordinater(), "Skatt");
+    }
+
+  }
   public void tegnSlange(Slange slange){
 
     nyttHode = slange.hentHode().hentKoordinater(); // OBS 
