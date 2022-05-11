@@ -24,8 +24,20 @@ class Modell {
   public void oppdater(){
 
     flyttSlange();
+    opprettSkatt();
   }
 
+  public void opprettSkatt(){
+
+    int test = trekk(1, 15);
+    if (test == 10){
+      int r = trekk(0, 11);
+      int k = trekk(0, 11);
+      Skatt s = new Skatt(r, k);
+      skatter.add(s);
+    }
+
+  }
   public void settRetning(String r){
 
     if (r.equals(retning)){
@@ -52,6 +64,9 @@ class Modell {
     // if (test==7){
     //   slange.spis();
     // }
+    if (skattFunnet(slange.hentHode().hentKoordinater())){
+      slange.spis();
+    }
     slange.flytt(retning);
   }
 
