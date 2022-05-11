@@ -24,6 +24,7 @@ class Kontroll{
     modell.flyttSlange(); 
     if (modell.sjekkKollisjon()){
       spillErAktiv=false;
+      gui.roedSlange(modell.hentSlange());
       return;
     }
     gui.tegnSlange(modell.hentSlange());

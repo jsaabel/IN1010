@@ -146,6 +146,15 @@ class GUI {
     sisteHale = segmenter.get(segmenter.size()-1).hentKoordinater();
   }
 
+  public void roedSlange(Slange slange){
+
+    // gjoerOmRuteLabel(slange.hentHode().hentKoordinater(), "Feil");
+    for (SlangeSegment ss:slange.hentSegmenter()){
+      gjoerOmRuteLabel(ss.hentKoordinater(), "Feil");
+    }
+    gjoerOmRuteLabel(sisteHale, "Feil");
+  }
+
   public void gjoerOmRuteLabel(int[] koordinater, String type){
 
     int r = koordinater[0];
@@ -173,6 +182,10 @@ class GUI {
       rl.setText("+");
       rl.setBackground(Color.GREEN);
       rl.setForeground(Color.BLACK);
+    }
+
+    else if (type.equals("Feil")){
+      rl.setBackground(Color.RED);
     }
 
     else{
