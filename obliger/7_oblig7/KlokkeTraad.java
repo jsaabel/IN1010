@@ -12,8 +12,8 @@
     public void run(){
 
       try{
-        while (kontroll.spillErAktiv()){
-          Thread.sleep(2000);
+        while (kontroll.spillErAktiv == true){
+          Thread.sleep(500);
           kontroll.oppdater();
         }
       }

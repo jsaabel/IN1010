@@ -2,81 +2,121 @@ import java.util.ArrayList;
 
 class Modell {
 
-  ArrayList<SlangeSegment> slange;
-  ArrayList<Tuppel> skatter;
+  Slange slange;
+  ArrayList<Skatt> skatter;
   String retning;
   boolean spillErAktiv;
 
   public Modell(){
 
-    // ruter = new Rute[12][12];
-    // for(int x = 0; x < 12; x++) {
-    //   for (int y = 0; y < 12; y++){
-    //     Rute rute = new TomRute(x, y);
-    //     ruter[x][y] = rute;
-    //   }
-    // }
-
     spillErAktiv = true; // temp
 
-    slange = new ArrayList<SlangeSegment>();
-    // skatter = new ArrayList<Tuppel>();
-
-    SlangeSegment testSegment = new SlangeSegment(5, 7);
-    slange.add(testSegment);
-    SlangeSegment testSegment2 = new SlangeSegment(5, 8);
-    slange.add(testSegment2);
-    SlangeSegment testSegment3 = new SlangeSegment(5, 9);
-    slange.add(testSegment3);
+    skatter = new ArrayList<Skatt>();
+    Skatt skatt = new Skatt(7, 7);
+    skatter.add(skatt);
+    slange = new Slange();
 
     retning = "n";
   }
 
   
 
+  public void oppdater(){
+
+    flyttSlange();
+    opprettSkatt();
+  }
+
+  public void opprettSkatt(){
+
+    int test = trekk(1, 15);
+    if (test == 10){
+      int r = trekk(0, 11);
+      int k = trekk(0, 11);
+      Skatt s = new Skatt(r, k);
+      skatter.add(s);
+    }
+
+  }
+  public void settRetning(String r){
+
+    if (r.equals(retning)){
+      return;
+    }
+
+    else if ((r.equals("v") && retning.equals("r")) || (r.equals("r") && 
+          retning.equals("v"))){
+      return;
+    }
+
+    else if ((r.equals("o") && retning.equals("n")) || (r.equals("n") && 
+          retning.equals("o"))){
+      return;
+    }
+
+    else{
+      retning = r;
+    }
+  }
+
   public void flyttSlange(){
-    SlangeSegment aktuellSegment = null;
-    int[] nyeKoordinater = null;
-    for (int i=0; i < slange.size(); i++){
-      aktuellSegment = slange.get(i);
-      if (i == 0) {
-        nyeKoordinater = aktuellSegment.hentKoordinater();
-        aktuellSegment.flytt(retning);
-      }
-      else{
-        int[] gamleKoordinaer = aktuellSegment.hentKoordinater();
-        aktuellSegment.settKoordinater(nyeKoordinater);
-        nyeKoordinater = gamleKoordinaer;
-      }
+    // int test = trekk(1, 7);
+    // if (test==7){
+    //   slange.spis();
+    // }
+    if (skattFunnet(slange.hentHode().hentKoordinater())){
+      slange.spis();
     }
-    System.out.println("\nSlange: ");
-    for (SlangeSegment s:slange){
-      System.out.println(s);
-    }
+    slange.flytt(retning);
   }
 
-  public boolean spillErAktiv(){
-    return spillErAktiv;
+  // should have function: sjekk kollisjon (Element 1, Element 2)
+  public boolean skattFunnet(int[] koordinater){
+    for (Skatt s:skatter){
+      int[] skattKoordinater = s.hentKoordinater();
+      if (skattKoordinater[0] == koordinater[0] && skattKoordinater[1] == 
+          koordinater[1]){
+        skatter.remove(s);
+        return true;
+      };
+    }
+    return false;
+  }
+  public boolean sjekkKollisjon(){
+
+    if (slange.sjekkKollisjoner()){
+      return true;
+    }
+
+    int[]hodeKoordinater = slange.hentHode().hentKoordinater();
+    if(hodeKoordinater[0] <0 || hodeKoordinater[0] > 11){
+      return true;
+    }
+    if(hodeKoordinater[1] <0 || hodeKoordinater[1] > 11){
+      return true;
+    }
+    return false;
   }
 
-  public ArrayList<SlangeSegment> hentSlange(){
+
+
+  public Slange hentSlange(){
     return slange;
   }
   
-  public ArrayList<Tuppel> getSkatter(){
+  public ArrayList<Skatt> hentSkatter(){
     return skatter;
   }
 
-  static int trekk(int a, int b){
+  public int hentScore(){
+    return slange.hentScore();
+  }
+
+  public int trekk(int a, int b){ // static ...
     // Trekk et tilfeldig heltall i intervallet [a..b]
     return (int)(Math.random()*(b-a+1)+a);
 
   }
   
-
-  // public Rute[][] getRuter(){
-  //   return ruter;
-  // }
-
 
 }

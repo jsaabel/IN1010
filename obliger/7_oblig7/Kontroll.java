@@ -5,37 +5,41 @@ import java.util.ArrayList;
 class Kontroll{
   GUI gui;
   Modell modell;
+  boolean spillErAktiv;
 
   public Kontroll(){
 
+    spillErAktiv = true;
     modell = new Modell();
     gui = new GUI(this);
-    gui.plasserSlange(modell.hentSlange());
-    // gui.gjoerOmRuteLabel(5, 5, "SlangeHode");
-    // gui.visSkatt(5, 5);
     KlokkeTraad klokkeTraad = new KlokkeTraad(this);
     new Thread(klokkeTraad).start();
   }
 
   public void oppdater(){
-    // ArrayList<SlangeSegment> gammelSlange = modell.hentSlange();
-    // SlangeSegment tail = gammelSlange.get(gammelSlange.size() -1);
-    // int[] tailKoordinater = tail.hentKoordinater();
-    // gui.gjoerOmRuteLabel(tailKoordinater, "TomRute");
-    modell.flyttSlange(); 
-    gui.tegnNySlange(modell.hentSlange());
-    // ArrayList<SlangeSegment> nySlange = modell.hentSlange();
-    // SlangeSegment head = nySlange.get(0);
-    // int[] koordinater = head.hentKoordinater();
-    // gui.gjoerOmRuteLabel(koordinater, "SlangeHode");
+
+    modell.oppdater(); 
+    if (modell.sjekkKollisjon()){
+      spillErAktiv=false;
+      gui.roedSlange(modell.hentSlange());
+      return;
+    }
+    gui.tegnSkatter(modell.hentSkatter());
+    gui.tegnSlange(modell.hentSlange());
+    gui.visScore(modell.hentScore());
+    // int test = modell.trekk(1, 5);
+    // if (test == 5){
+    //   modell.spis();
+    // }
+
+    
   }
 
-  public boolean spillErAktiv(){
-    return modell.spillErAktiv();
+  public void settRetning(String r){
+    modell.settRetning(r);
   }
 
-
-  // public Rute[][] getRuter(){
-  //   return modell.getRuter();
-  // }
+  public void avslutt(){
+    System.exit(0);
+  }
 }

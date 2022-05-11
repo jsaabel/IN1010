@@ -45,19 +45,64 @@ class GUI {
     kontrollpanel.add(styring);
 
     knappOpp = new JButton("Opp");
+    
+    class KnappOpp implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("o");
+      }
+    }
+
+    knappOpp.addActionListener(new KnappOpp());
     styring.add(knappOpp, BorderLayout.NORTH);
 
     knappVenstre = new JButton("Venstre");
+
+    class KnappVenstre implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("v");
+      }
+    }
+
+    knappVenstre.addActionListener(new KnappVenstre());
     styring.add(knappVenstre, BorderLayout.WEST);
 
     knappHoyre = new JButton("Hoyre");
+    class KnappHoyre implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("h");
+      }
+    }
+
+    knappHoyre.addActionListener(new KnappHoyre());
     styring.add(knappHoyre, BorderLayout.EAST);
 
     knappNed = new JButton("Ned");
+    class KnappNed implements ActionListener{
+
+      @Override
+      public void actionPerformed(ActionEvent e){
+        kontroll.settRetning("n");
+      }
+    }
+
+    knappNed.addActionListener(new KnappNed());
     styring.add(knappNed, BorderLayout.SOUTH);
 
     // Slutt-knapp
     knappSlutt = new JButton("Slutt");
+    class KnappSlutt implements ActionListener{
+      @Override
+      public void actionPerformed(ActionEvent E){
+        kontroll.avslutt();
+      }
+    }
+    knappSlutt.addActionListener(new KnappSlutt());
     kontrollpanel.add(knappSlutt);
 
     // Temp rutenett
@@ -84,32 +129,37 @@ class GUI {
     vindu.pack();
     vindu.setVisible(true);
   }
-  // draw-Methods
-  public void plasserSlange(ArrayList<SlangeSegment> slange){
 
-    for (int i = 1; i < slange.size(); i++){
-      int[] segmentKoordinater = slange.get(i).hentKoordinater();
-      gjoerOmRuteLabel(segmentKoordinater, "SlangeSegment");
+  public void tegnSkatter(ArrayList<Skatt> skatter){
+
+    for (Skatt s: skatter){
+      gjoerOmRuteLabel(s.hentKoordinater(), "Skatt");
     }
 
-    sisteHode = slange.get(0).hentKoordinater();
-    gjoerOmRuteLabel(sisteHode, "SlangeHode");
-    sisteHale = slange.get(slange.size() - 1).hentKoordinater();
-    gjoerOmRuteLabel(sisteHale, "SlangeSegment");
+  }
+  public void tegnSlange(Slange slange){
 
+    nyttHode = slange.hentHode().hentKoordinater(); // OBS 
+    ArrayList<SlangeSegment> segmenter = slange.hentSegmenter();
+
+    // gjoerOmRuteLabel(sisteHode, "SlangeSegment");
+    gjoerOmRuteLabel(nyttHode, "SlangeHode");
+    if (sisteHale != null) {
+      gjoerOmRuteLabel(sisteHale, "TomRute");
+    }
+    for (SlangeSegment ss:segmenter){
+      gjoerOmRuteLabel(ss.hentKoordinater(), "SlangeSegment");
+    }
+    sisteHale = segmenter.get(segmenter.size()-1).hentKoordinater();
   }
 
-  public void tegnNySlange(ArrayList<SlangeSegment> slange){
+  public void roedSlange(Slange slange){
 
-    nyttHode = slange.get(0).hentKoordinater();
-    nyHale = slange.get(slange.size() - 1).hentKoordinater();
-
-    gjoerOmRuteLabel(sisteHode, "SlangeSegment");
-    gjoerOmRuteLabel(nyttHode, "SlangeHode");
-    gjoerOmRuteLabel(sisteHale, "TomRute");
-    gjoerOmRuteLabel(nyHale, "SlangeSegment");
-    sisteHode = nyttHode;
-    sisteHale = nyHale;
+    // gjoerOmRuteLabel(slange.hentHode().hentKoordinater(), "Feil");
+    for (SlangeSegment ss:slange.hentSegmenter()){
+      gjoerOmRuteLabel(ss.hentKoordinater(), "Feil");
+    }
+    gjoerOmRuteLabel(sisteHale, "Feil");
   }
 
   public void gjoerOmRuteLabel(int[] koordinater, String type){
@@ -141,9 +191,17 @@ class GUI {
       rl.setForeground(Color.BLACK);
     }
 
+    else if (type.equals("Feil")){
+      rl.setBackground(Color.RED);
+    }
+
     else{
       System.out.println("TEMP ERROR"); //  TEMP
     }
+  }
+
+  public void visScore(int score){
+    labelLengde.setText("Lengde: " + score);
   }
 
 }
