@@ -12,16 +12,31 @@ class SlangeSegment extends Element{
   public void flytt(String retning){
 
     if (retning.equals("o")){
-      koordinater[0]--; }
+      koordinater[0]--;
+      if (koordinater[0] == -1){
+        koordinater[0] = 11;
+      }
+    }
 
     else if (retning.equals("n")){
-      koordinater[0]++; }
+      koordinater[0]++; 
+      if (koordinater[0] == 12){
+        koordinater[0] = 0;
+      }
+    }
 
     else if (retning.equals("v")){
-      koordinater[1]--; }
+      koordinater[1]--; 
+      if (koordinater[1] == -1){
+        koordinater[1] = 11;
+      }
+    }
 
     else{
       koordinater[1]++;
+      if (koordinater[1] == 12){
+        koordinater[1] = 0;
+      }
     }
   }
 

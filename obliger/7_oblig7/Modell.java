@@ -90,13 +90,14 @@ class Modell {
       return true;
     }
 
-    int[]hodeKoordinater = slange.hentHode().hentKoordinater();
-    if(hodeKoordinater[0] <0 || hodeKoordinater[0] > 11){
-      return true;
-    }
-    if(hodeKoordinater[1] <0 || hodeKoordinater[1] > 11){
-      return true;
-    }
+    // comment this in for walls
+    // int[]hodeKoordinater = slange.hentHode().hentKoordinater();
+    // if(hodeKoordinater[0] <0 || hodeKoordinater[0] > 11){
+    //   return true;
+    // }
+    // if(hodeKoordinater[1] <0 || hodeKoordinater[1] > 11){
+    //   return true;
+    // }
     return false;
   }
 
