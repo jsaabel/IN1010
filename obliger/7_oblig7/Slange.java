@@ -8,9 +8,8 @@ class Slange{
   public Slange(){
     this.segmenter = new ArrayList<SlangeSegment>();
     hode = new SlangeSegment(5, 5);
-    SlangeSegment to = new SlangeSegment(5, 6);
-    SlangeSegment tre = new SlangeSegment(5, 7);
-    segmenter.add(to); segmenter.add(tre);
+    segmenter.add(new SlangeSegment(5, 6)); 
+    segmenter.add(new SlangeSegment(5, 7)); 
   }
 
   public void flytt(String retning){

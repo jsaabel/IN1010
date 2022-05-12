@@ -65,17 +65,14 @@ class Modell {
   }
 
   public void flyttSlange(){
-    // int test = trekk(1, 7);
-    // if (test==7){
-    //   slange.spis();
-    // }
+    // Denne burde ligge et annet sted...
     if (skattFunnet(slange.hentHode().hentKoordinater())){
       slange.spis();
     }
     slange.flytt(retning);
   }
 
-  // should have function: sjekk kollisjon (Element 1, Element 2)
+  // should have function: sjekk kollisjon (Element 1, Element 2)?
   public boolean skattFunnet(int[] koordinater){
     for (Skatt s:skatter){
       int[] skattKoordinater = s.hentKoordinater();
