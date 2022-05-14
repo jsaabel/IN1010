@@ -26,7 +26,7 @@ public abstract class Resept{
         this.pasientId = pasientId;
         this.reit = reit;
 
-        this.id = sisteId;
+        this.id = sisteId; // ++sisteID
     }
 
     /**

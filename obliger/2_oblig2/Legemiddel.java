@@ -57,7 +57,7 @@ public abstract class Legemiddel{
         this.navn = navn;
         this.pris = pris;
         this.virkestoff = virkestoff;
-        this.id = sisteId;
+        this.id = sisteId; // !! 05/22: Mer elegant: ++sisteId
     }
 }    
 

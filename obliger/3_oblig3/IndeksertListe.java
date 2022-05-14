@@ -11,7 +11,7 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
 
         // Sjekker om pos er en gyldig indeks.
         if (!super.gyldigIndeks(pos, "leggTil")){
-        throw new UgyldigListeindeks(pos);
+            throw new UgyldigListeindeks(pos);
         }
 
         // Hvis ja: Oppretter nyNode
@@ -23,6 +23,8 @@ public class IndeksertListe<T> extends Lenkeliste<T> {
             this.start = nyNode;
         }
 
+        // !! 05/22: Better/more elegant to add return statement to previous
+        // block in order to reduce indentation level?
         else{
             
             // pos = 0 (ingen noder foran ny node)

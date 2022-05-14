@@ -32,6 +32,8 @@ public class Dataklynge {
         }
 
         // legg inn noden
+        // !! 05/22: should this not break when lagtInn? Are all loop iterations
+        // performed?
         boolean lagtInn = false;
         while (!lagtInn) {
             for (Rack r : racks) {
@@ -73,3 +75,4 @@ public class Dataklynge {
 
 }
 
+€ý,€ý.€ý,€ý.€ý,€ý.jjjjjjjjjjjkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkKLLjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjkkjkHHkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkjjjj:e Dat		jjjjjjjjjjjjjjjjjjjjjjkkkjjjjjjjjjjjjjjjjjjkjkkjjjjjjjjjjjjkkkkkkkkkjgit statuskkkkkkkjjO// 14.05.22: €kb€kb€kb€kb€kb€kb€kb€kb€kb€kb!! 05/22: should this not break when @€kblagtInn? are€kb€kb€kbAre all loop iterations[erf€kb€kb€kb€kr€kb€kbperformed?jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj:wa:q!
