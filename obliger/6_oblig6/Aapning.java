@@ -16,3 +16,4 @@ public class Aapning extends HvitRute{
 
   
 }
+KLjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjkkkkkkkkkkkkkkkkkkkkjjjjjjjjjkkjjkj:qa

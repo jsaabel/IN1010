@@ -32,6 +32,7 @@ public class Legesystem{
 
             // Linjen begynner med #
             // --> setter innlesningsModus
+            // !! 05/22: Better to use 'continue?' (ikke pensum?)
             if (linje.charAt(0) == '#'){
                 String[] biter = linje.split(" ");
                 innlesningsModus = biter[1];
@@ -44,13 +45,10 @@ public class Legesystem{
                 if (innlesningsModus.equals("Pasienter")){
 
                     try{
-
                         lesInnPasient(linje);
-
                     }
 
                     catch (Exception e){
-
                         skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
@@ -61,13 +59,10 @@ public class Legesystem{
                 else if (innlesningsModus.equals("Legemidler")){
 
                     try{
-
                         lesInnLegemiddel(linje);
-
                     }
 
                     catch (Exception e){
-
                         skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
@@ -78,13 +73,10 @@ public class Legesystem{
                 else if (innlesningsModus.equals("Leger")){
 
                     try{
-
                         lesInnLege(linje);
-
                     }
 
                     catch (Exception e){
-
                         skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }
@@ -95,13 +87,10 @@ public class Legesystem{
                 else if (innlesningsModus.equals("Resepter")){
 
                     try{
-
                         lesInnResept(linje);
-
                     }
 
                     catch (Exception e){
-
                         skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
                                 linje);
                     }

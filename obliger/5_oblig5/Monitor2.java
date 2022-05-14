@@ -106,6 +106,7 @@ public class Monitor2{
             laas.unlock();
         }
 
+        // !! 05/22: Should this be inside the try block??
         return register.taUt(); // foerste element
 
     }
