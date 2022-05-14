@@ -1,0 +1,19 @@
+Foerste innlevering
+
+Programmet kompilerer ikke pga. feil i Lenkeliste. Merk at den indre klassen Node skal ikke implemente interfacet Comparable. Eneste stedet vi skal bry oss om dette interfacet er i Prioritetskoe (og det gjør du allerede) og da skal man sammenligne objektene ved hjelp av compareTo(). Klassen Node skal altså være veldig enkel; det holder f.eks. med en neste-peker (og en forrige dersom ønsket) og data.
+
+I Prioritetskoe skal du, etter å ha fikset klassen Node, ikke kalle på aktuellNode.compareTo(nyNode), men heller aktuellNode.data.compareTo(x), altså sammenligne det objektet noden holder på med det objektet som er sendt inn (de kommer til å ha samme type og være sammenlignbare siden vi har deklarert klassen som class Prioritetskoe<T extends Comparable<T>>...).
+
+Klassehierarkiet er helt riktig 👍
+Datastrukturtegningen din er nesten riktig. Hva gjør egentlig liste.sett(1, "D");? Vil det faktisk være 3 noder i lista?
+
+Håper dette hjelper med å forbedre besvarelsen :) Skulle det være noe er det bare å sende en mail til majidj@ifi.uio.no.
+Lykke til!
+
+Andre innlevering
+
+Nå passerer programmet alle testene og både koden og tegningene ser bra ut :)
+
+En ting jeg har lyst å kommentere på er at du kun trenger å overskrive metoden leggTil (T x) i klassen Prioritetskoe siden definisjonen av de andre metodene i superklassen vil holde :)
+
+Veldig bra jobba👏 Lykke til med neste innlevering!

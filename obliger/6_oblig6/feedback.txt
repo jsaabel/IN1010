@@ -1,0 +1,16 @@
+Hei Jonas,
+
+Koden din ser bra ut 👍 Veldig fint at du har fått den til å fungere med sykliske labyrinter også 🙌
+
+En forbedring her kunne vært å fortsette rekursjonen når man kommer til en åpning. Dette fordi en åpning kan ha en annen åpning som nabo og da kan man skrive ut færre åpninger/utveier enn det faktisk er, f.eks.:
+
+// Her er (0, 1) og (0, 2) begge åpninger. Dersom man starter på (1, 1)
+// og rekursjonen avsluttes på (0, 1) vil ikke (0, 2) skrives ut.
+
+# . . # #
+# . # . #
+. . # # #
+# # # . .
+# . # # #
+Godt jobbet 👏 Send meg gjerne en mail dersom det skulle være noe.
+Lykke til med neste innlevering :)

@@ -1,0 +1,5 @@
+I datastrukturtegningen skal ArrayListen i Dataklynge peke på en ArrayList som peker på to Rack-objekter: en med 2 som antNoder hvor dets array peker på to noder og en med 1 som antNoder hvor det array peker på én node.
+Jeg skjønner at datastrukturtegning kan virke litt tidskrevende, men det er en viktig del av pensumet og det legges derfor stor vekt på at man skjønner det (ihvertfall i starten av kurset). Når det gjelder vektøy så står man helt fritt til å velge et selv, men jeg synes https://app.diagrams.net/ er veldig fint:)
+
+Bra jobba👏 Skulle det være noe så er det bare å sende en mail til majidj@ifi.uio.no.
+Lykke til!
