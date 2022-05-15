@@ -49,13 +49,15 @@ class Modell {
       return;
     }
 
-    else if ((r.equals("v") && retning.equals("r")) || (r.equals("r") && 
+    else if ((r.equals("v") && retning.equals("h")) || (r.equals("h") && 
           retning.equals("v"))){
+      System.out.println("oi");
       return;
     }
 
     else if ((r.equals("o") && retning.equals("n")) || (r.equals("n") && 
           retning.equals("o"))){
+      System.out.println("oi");
       return;
     }
 

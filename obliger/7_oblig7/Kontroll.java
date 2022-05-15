@@ -19,18 +19,16 @@ class Kontroll{
   public void oppdater(){
 
     modell.oppdater(); 
+
     if (modell.sjekkKollisjon()){
       spillErAktiv=false;
       gui.roedSlange(modell.hentSlange());
       return;
     }
+
     gui.tegnSkatter(modell.hentSkatter());
     gui.tegnSlange(modell.hentSlange());
     gui.visScore(modell.hentScore());
-    // int test = modell.trekk(1, 5);
-    // if (test == 5){
-    //   modell.spis();
-    // }
 
     
   }

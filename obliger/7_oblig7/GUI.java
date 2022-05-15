@@ -57,6 +57,38 @@ class GUI {
     knappOpp.addActionListener(new KnappOpp());
     styring.add(knappOpp, BorderLayout.NORTH);
 
+    class Test extends Frame implements KeyListener{
+      @Override
+      public void keyPressed(KeyEvent e){
+
+        int keyCode = e.getKeyCode();
+
+        if (keyCode == 38){
+          kontroll.settRetning("o");
+        }
+        else if (keyCode == 40){
+          kontroll.settRetning("n");
+        }
+        else if (keyCode == 37){
+          kontroll.settRetning("v");
+        }
+        else if (keyCode == 39){
+          kontroll.settRetning("h");
+        }
+      }
+      @Override
+      public void keyReleased(KeyEvent e){
+        ;
+      }
+      @Override
+      public void keyTyped(KeyEvent e){
+        ;
+      }
+
+    }
+
+    knappOpp.addKeyListener(new Test());
+
     knappVenstre = new JButton("Venstre");
 
     class KnappVenstre implements ActionListener{
