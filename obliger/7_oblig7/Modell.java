@@ -4,7 +4,7 @@ class Modell {
 
   Slange slange;
   ArrayList<Skatt> skatter;
-  String retning;
+  String retning, nyRetning;
   boolean spillErAktiv;
 
   public Modell(){
@@ -17,25 +17,25 @@ class Modell {
       int trekkTo = trekk(0, 11);
       skatter.add(new Skatt(trekkEn, trekkTo));
     }
-    // Skatt skatt = new Skatt(7, 7);
-    // skatter.add(skatt);
     slange = new Slange();
 
     retning = "n";
+    nyRetning = "n";
   }
 
   
 
   public void oppdater(){
 
+    retning = nyRetning;
     flyttSlange();
     opprettSkatt();
   }
 
   public void opprettSkatt(){
 
-    int test = trekk(1, 15);
-    if (test == 10){
+    int test = trekk(1, 13);
+    if (test == 1){
       int r = trekk(0, 11);
       int k = trekk(0, 11);
       Skatt s = new Skatt(r, k);
@@ -51,18 +51,16 @@ class Modell {
 
     else if ((r.equals("v") && retning.equals("h")) || (r.equals("h") && 
           retning.equals("v"))){
-      System.out.println("oi");
       return;
     }
 
     else if ((r.equals("o") && retning.equals("n")) || (r.equals("n") && 
           retning.equals("o"))){
-      System.out.println("oi");
       return;
     }
 
     else{
-      retning = r;
+      nyRetning = r;
     }
   }
 
@@ -74,7 +72,6 @@ class Modell {
     slange.flytt(retning);
   }
 
-  // should have function: sjekk kollisjon (Element 1, Element 2)?
   public boolean skattFunnet(int[] koordinater){
     for (Skatt s:skatter){
       int[] skattKoordinater = s.hentKoordinater();
@@ -103,8 +100,6 @@ class Modell {
     return false;
   }
 
-
-
   public Slange hentSlange(){
     return slange;
   }
@@ -123,5 +118,4 @@ class Modell {
 
   }
   
-
 }

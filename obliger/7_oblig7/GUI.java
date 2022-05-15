@@ -11,7 +11,6 @@ class GUI {
   JPanel grunnflate, kontrollpanel, styring, rutenett;
   JButton knappOpp, knappVenstre, knappHoyre, knappNed, knappSlutt;
 
-  // NEW / TEST
   RuteLabel[][] ruteLabels;
   int[] sisteHode, sisteHale, nyttHode, nyHale;
 
@@ -57,7 +56,8 @@ class GUI {
     knappOpp.addActionListener(new KnappOpp());
     styring.add(knappOpp, BorderLayout.NORTH);
 
-    class Test extends Frame implements KeyListener{
+    // Keyboardkontroller
+    class KeyboardKontroll extends Frame implements KeyListener{
       @Override
       public void keyPressed(KeyEvent e){
 
@@ -87,7 +87,7 @@ class GUI {
 
     }
 
-    knappOpp.addKeyListener(new Test());
+    knappOpp.addKeyListener(new KeyboardKontroll());
 
     knappVenstre = new JButton("Venstre");
 
@@ -100,6 +100,7 @@ class GUI {
     }
 
     knappVenstre.addActionListener(new KnappVenstre());
+    knappVenstre.addKeyListener(new KeyboardKontroll());
     styring.add(knappVenstre, BorderLayout.WEST);
 
     knappHoyre = new JButton("Hoyre");
@@ -112,6 +113,7 @@ class GUI {
     }
 
     knappHoyre.addActionListener(new KnappHoyre());
+    knappHoyre.addKeyListener(new KeyboardKontroll());
     styring.add(knappHoyre, BorderLayout.EAST);
 
     knappNed = new JButton("Ned");
@@ -124,6 +126,7 @@ class GUI {
     }
 
     knappNed.addActionListener(new KnappNed());
+    knappNed.addKeyListener(new KeyboardKontroll());
     styring.add(knappNed, BorderLayout.SOUTH);
 
     // Slutt-knapp
@@ -137,11 +140,9 @@ class GUI {
     knappSlutt.addActionListener(new KnappSlutt());
     kontrollpanel.add(knappSlutt);
 
-    // Temp rutenett
+    // Rutenett
     rutenett = new JPanel();
     rutenett.setLayout(new GridLayout(12, 12));
-
-    // Initital draw/assignment (?)
     ruteLabels = new RuteLabel[12][12];
 
     for(int x = 0; x < 12; x++) {
@@ -153,10 +154,8 @@ class GUI {
       }
     }
 
-
     grunnflate.add(rutenett, BorderLayout.SOUTH);
     
-
     vindu.add(grunnflate);
     vindu.pack();
     vindu.setVisible(true);
