@@ -40,6 +40,7 @@ abstract class Lenkeliste<T> implements Liste<T> {
         return new LenkelisteIterator();
     }
 
+    // (22.05: implisit konstruktoer?)
     public Node start = null;
 
     public int antallNoder = 0;
