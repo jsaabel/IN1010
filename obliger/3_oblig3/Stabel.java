@@ -5,16 +5,12 @@ public class Stabel<T> extends Lenkeliste<T> {
         
         Node nyNode = new Node(x);
 
-        // Hvis listen er tom ...
-        if (this.start == null){
-            start = nyNode;
+        // Hvis ikke listen er tom ...
+        if (this.start != null){
+            nyNode.neste = start;
         }
 
-        // Hvis listen ikke er tom ...
-        else{
-            nyNode.neste = start;
-            start = nyNode;
-        }
+        start = nyNode;
 
         super.antallNoder ++;
     }
