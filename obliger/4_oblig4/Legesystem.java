@@ -36,70 +36,67 @@ public class Legesystem{
             if (linje.charAt(0) == '#'){
                 String[] biter = linje.split(" ");
                 innlesningsModus = biter[1];
+                continue;
             }
 
             // Linjen begynner ikke med #
-            else{
 
-                // Pasienter ...
-                if (innlesningsModus.equals("Pasienter")){
+            // Pasienter ...
+            if (innlesningsModus.equals("Pasienter")){
 
-                    try{
-                        lesInnPasient(linje);
-                    }
-
-                    catch (Exception e){
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
-                                linje);
-                    }
-
+                try{
+                    lesInnPasient(linje);
                 }
 
-                // Legemidler ...
-                else if (innlesningsModus.equals("Legemidler")){
-
-                    try{
-                        lesInnLegemiddel(linje);
-                    }
-
-                    catch (Exception e){
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
-                                linje);
-                    }
-
-                }
-
-                // Leger ...
-                else if (innlesningsModus.equals("Leger")){
-
-                    try{
-                        lesInnLege(linje);
-                    }
-
-                    catch (Exception e){
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
-                                linje);
-                    }
-
-                }
-
-                // Skriv resept
-                else if (innlesningsModus.equals("Resepter")){
-
-                    try{
-                        lesInnResept(linje);
-                    }
-
-                    catch (Exception e){
-                        skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
-                                linje);
-                    }
+                catch (Exception e){
+                    skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
+                            linje);
                 }
 
             }
 
-        }
+            // Legemidler ...
+            else if (innlesningsModus.equals("Legemidler")){
 
+                try{
+                    lesInnLegemiddel(linje);
+                }
+
+                catch (Exception e){
+                    skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
+                            linje);
+                }
+
+            }
+
+            // Leger ...
+            else if (innlesningsModus.equals("Leger")){
+
+                try{
+                    lesInnLege(linje);
+                }
+
+                catch (Exception e){
+                    skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
+                            linje);
+                }
+
+            }
+
+            // Skriv resept
+            else if (innlesningsModus.equals("Resepter")){
+
+                try{
+                    lesInnResept(linje);
+                }
+
+                catch (Exception e){
+                    skrivUtFeilmelding(linjeNummer, e, innlesningsModus,
+                            linje);
+                }
+            }
+
+        }
 
     }
 
