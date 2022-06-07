@@ -1,5 +1,7 @@
 public class TestLegemiddel{
+    
     public static void main(String[] args){
+
         Vanlig aspirin = new Vanlig("Aspirin", 10, 5);
         String test = aspirin.toString();
         System.out.println(test);

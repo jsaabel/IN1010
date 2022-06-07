@@ -1,0 +1,3 @@
+class Sirkel{
+  int test;
+}

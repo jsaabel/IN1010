@@ -17,12 +17,13 @@ public class Hovedprogram {
         String navnPaaInputFile = new String();
 
         if (args.length > 0) {
-        navnPaaInputFile = args[0];
+            navnPaaInputFile = args[0];
         }
+
         else {
-        System.out.print("Oppgi filnavn: ");
-        Scanner userInput = new Scanner(System.in);
-        navnPaaInputFile = userInput.nextLine();
+            System.out.print("Oppgi filnavn: ");
+            Scanner userInput = new Scanner(System.in);
+            navnPaaInputFile = userInput.nextLine();
         }
 
         File inputFile = new File(navnPaaInputFile);
